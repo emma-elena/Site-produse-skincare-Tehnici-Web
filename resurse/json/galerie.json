@@ -4,57 +4,57 @@
 		{
 			"fisier":"micellar-water.png",
 			"descriere":"Apa micelara",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 		},{
 			"fisier":"cleanser.png",
 			"descriere":"Cleanser",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 		},
 		{
 			"fisier":"toner.png",
 			"descriere":"Toner",
-			"timp":["08:00-20:00"]			
+			"timp":["08:00-23:00"]			
 		},
 		{ 
 			"fisier":"exfoliant.png",
 			"descriere":"Exfoliant",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 			
 		},
 		{
 			"fisier":"eye-cream.png",
 			"descriere":"Eye cream",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 			
 		},
 		{
 			"fisier":"ser.png",
 			"descriere":"Ser",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 			
 		},
 		{
 			"fisier":"eye-patch.png",
 			"descriere":"Eye patch",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 			
 		},
 		{
 			"fisier":"cream.png",
 			"descriere":"Crema",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 			
 		},
 		{
 			"fisier":"facemask.png",
 			"descriere":"Facemask",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 			
 		},
 		{
 			"fisier":"SPF.png",
 			"descriere":"SPF",
-			"timp":["08:00-20:00"]
+			"timp":["08:00-23:00"]
 			
 		}
 	]
