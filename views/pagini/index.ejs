@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+   <title>Pagina principala a site-ului</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+       
+    <meta name="keywords" content="skincare, ingrijire, produs, skincare routine"><!--cuvintele cheie ale paginii; majoritatea motoarelor de căutare ignoră keywords -->
+    <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate."><!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->  
+    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" />
+
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <%- include("../fragmente/head.ejs") %>
+  </head>
+
+  <body>
+   <%- include("../fragmente/header.ejs") %>
+    <main>
+      <div id="grid-pagina">
+      <section id="despre">
+        <h2><span class="fas fa-regular fa-heart"></span></i>Despre noi</h2>
+        <%
+
+        %>
+        <p>Ip: <%-locals.ip%></p>
+        <!-- <p>De la index.js : <%-locals.ceva%> + <%-locals.altceva%> = <%-locals.ceva + locals.altceva%> </p>-->
+        <p>
+          Subiectul de <b>skincare</b> este foarte dezbatut in ultimii ani, iar scopul nostru, pe langa
+          livrarea celor mai bune <b>produse</b> pentru clientii nostri, este sa aducem la cunostinta 
+          importanta <b>ingrijirii</b> pielii, a corpului, dar mai ales a propriei persoane.
+        </p>
+
+        <figure style="width: 15%;">
+          <picture>
+              <source srcset="resurse/imagini/skincare-image.png" media="(max-width:700px)">
+              <source srcset="resurse/imagini/skincare-image-products.png" media="(max-width:1500px)">
+              <img src="resurse/imagini/skincare-image.png" alt="skin">
+          </picture>
+          <figcaption style="text-align: center; color:green">Skincare</figcaption>
+      </figure>
+
+      <div class="mathml">
+      <math>
+        <mrow>
+           <mi>cleanser</mi>
+           <mo>+</mo>
+       
+           <mi>cream</mi>
+           <mo>+</mo>
+
+           <mi>SPF</mi><mn>50</mn>
+           <mo> = </mo>
+       
+           <mi>Healty skin</mi>
+        </mrow>
+     </math>
+    </div>
+      <section id="promotii">
+        <h2>Promotii</h2>
+          <p>
+           
+          </p>
+  
+        </section>
+        
+      </section>
+
+      <section id="recomandari">
+        <h3>Recomadari</h3>
+      <p>Mai jos aveti recenzie pentru cele mai bune SPF-uri din ultimii ani, <b>produsul</b> esential unei <b>rutine de skincare</b></p>
+      <br>
+
+
+      <container class="yt">
+        <iframe name="ifr-video"  width="560" height="315" src="https://www.youtube.com/embed/ubz7_PbJAM0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      
+        <div class="taburi-iframe">
+          <a target="ifr-video" href="https://www.youtube.com/embed/ubz7_PbJAM0">Best sunscreens of 2020</a> 
+          <a target="ifr-video" href="https://www.youtube.com/embed/oUem-LYnKf4">Best sunscreens of 2021</a> 
+          <a target="ifr-video" href="https://www.youtube.com/embed/AUiMA1LnoPE">Best sunscreens of 2022</a><br>
+        </div>
+
+      </container>
+    <p>Aici aveti un mic ghid de formarea unei rutine: 
+          <a href="SkinCareRoutine.pdf" download="file.pdf">
+            <b>download</b>
+          </a>
+    </p>
+
+  <p>
+    Iar aici aveti un link catre Skincare Bible, o carte relevanta, pentru toti: 
+  
+  <a href="https://www.amazon.co.uk/Skincare-Bible-No-Nonsense-Guide-Great/dp/0241309107" target="_blank">Catre Amazon!</a>
+</p>
+        </section>
+
+      <section id="orar">
+        <h2>Orar</h2>
+        <div id="tabel-orar">
+        <table id="tab-orar">
+          <thead>
+            <tr>
+                <th>Zi</th>
+                <th>Interval dimineata</th>
+                <th>Pauza de masa</th>
+                <th>Interval seară</th>
+            </tr>
+          </thead>
+
+        <tbody>
+            <tr class="rand">
+                <td>Luni</td>
+                <td>10-12</td>
+                <td>12-14</td>
+                <td>14-20</td>
+            </tr>
+
+            <tr>
+                <td>Marti</td>
+                <td>9-12</td>
+                <td>12-14</td>
+                <td>14-21</td>
+            </tr>
+
+            <tr>
+                <td>Miercuri</td>
+                <td>9-11</td>
+                <td>11-13</td>
+                <td>14-21</td>
+            </tr>
+
+            <tr>
+                <td>Joi</td>
+                <td>9-11</td>
+                <td>11-13</td>
+                <td>14-21</td>
+            </tr>
+
+            <tr>
+                <td>Vineri</td>
+                <td>9-12</td>
+                <td>12-14</td>
+                <td>14-19</td>
+            </tr>
+
+            <tr>
+                <td>Sambata</td>
+                <td>10-12</td>
+                <td>12-13</td>
+                <td>13-16</td>
+            </tr>
+
+            <tr>
+                <td>Duminica</td>
+                <td>10-14</td>
+                <td>-</td>
+                <td>Inchis</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <th colspan="5">Programul poate varia de sarbatori</th>
+        </tr>
+        </tfoot>
+        <caption class="caption-table">
+          <p>In ciuda programului, primim apeluri 24/7</p>
+        </caption>
+      </table>
+    </div>
+
+      </section>
+
+      <section id="anunturi">
+        <h2>Anunturi</h2>
+         <strong>La minim 2 produse cumparate, primiti o mostra gratuita!</strong>
+         <p>Transport gratuit la comenzi de minim  100 lei</p>
+       
+
+      </section>
+
+
+      <section id="galerie-statica">
+        <h2>Galerie poze</h2>
+        <div id="grid-galerie">
+          <% for (let imag of locals.imagini) {  //iteram prin toate imaginile din vectorul de imagini json
+             var d=new Date(); //afisam doar imaginile care corespund datei curente, aici iau data curenta 
+             var v_timp = ["08:00-20:00"]; //vector cu orele
+             var timp_r = v_timp[d.getHours()]; //ia ora curenta, apoi ia indicele 
+
+             //verificam daca are proprietatea si daca vectorul include acea ora
+             if(imag.timp && imag.timp.includes(timp_r))  { %> 
+                <figure>
+                    <picture> 
+                      <source srcset="<%- imag.fisier_mediu%>" media="(max-width:1200px)"/>
+                      <source srcset="<%- imag.fisier_mic%>" media="(max-width:700px)"/>
+                      <img src="<%- imag.fisier%>" alt="imagine">
+                    </picture>
+                      <figcaption><%- imag.descriere%></figcaption>
+                </figure>
+              <% } %> 
+            <% } %> 
+        </div>
+      </section>
+
+      <section id="placeholder5">
+        <h2>Placeholder5</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut pellentesque odio. 
+          Phasellus eu arcu sit amet nulla facilisis mollis. 
+          Integer tempus velit magna, eu malesuada ipsum sodales et. 
+          </section>
+
+      <section id="placeholder6">
+        <h2>Placeholder6</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut pellentesque odio. 
+          Phasellus eu arcu sit amet nulla facilisis mollis. 
+          Integer tempus velit magna, eu malesuada ipsum sodales et. 
+          </section>
+
+      <section id="placeholder7">
+        <h2>Placeholder7</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut pellentesque odio. 
+          Phasellus eu arcu sit amet nulla facilisis mollis. 
+          Integer tempus velit magna, eu malesuada ipsum sodales et. 
+          </section>
+    </div>
+    </main>
+
+    <div id="galerie-animata" class="galerie-a">
+        <% for (let imag of locals.imagini) { 
+                     %>
+                        <figure>
+                            <picture>
+                                <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
+                                <img src="<%- imag.fisier %>" alt="imagine">
+                            </picture>
+                            <figcaption><%- imag.descriere %></figcaption>
+                        </figure>
+                <% }  %>
+    </div>
+
+    <%- include("../fragmente/footer.ejs") %>
+  </body>
+</html> 

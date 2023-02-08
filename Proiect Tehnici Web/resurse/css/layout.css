@@ -1,0 +1,99 @@
+
+body{
+    --margine-main:7%;
+    --background-pagina:pink;
+    --culoare-text:black;
+    --main-background:antiquewhite;
+
+    background-color: var(--background-pagina);
+    color: var(--culoare-text);
+}
+
+body.dark{
+    --background-pagina:black;
+    --culoare-text: white;
+    --main-background:grey;
+}
+.c1{
+    background-color: red;
+}
+
+#h1{
+    background-color: yellow;
+}
+
+header{
+    background-color: aqua;
+}
+main{
+    background-color: var(--main-background);
+    margin-left:var(--margine-main);
+    margin-right:var(--margine-main);
+}
+
+footer{
+    background-color: lightgray;
+}
+
+#grid-pagina{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "z-welcome    z-welcome z-welcome"
+                         "z-promotii   z-promotii z-anunturi"
+                         "z-orar       z-orar z-orar"
+                         "z-fig1       z-produse z-produse"
+                         "z-fig2       z-produse z-produse"
+                         "z-fig3       z-produse z-produse"
+                         "z-intrebari  z-intrebari z-intrebari"
+                         ;
+}
+
+#grid-pagina > *{
+    border: 2px solid black;
+    margin:0;
+    padding:0;
+}
+
+
+#welcome{
+    grid-area:z-welcome;
+}
+
+#promotii{
+    grid-area:z-promotii;
+}
+
+#produse{
+    grid-area:z-produse;
+}
+
+#orar{
+    grid-area:z-orar;
+}
+#fig1{
+    grid-area:z-fig1;
+}
+#fig2{
+    grid-area:z-fig2;
+}
+#fig3{
+    grid-area:z-fig3;
+}
+
+#anunturi{
+    grid-area: z-anunturi;
+}
+
+#index-intrebari{
+    grid-area: z-intrebari;
+}
+
+@media screen and (max-width:1200px){
+    
+}
+@media screen and (max-width:700px){
+    #grid-pagina{
+        display: block;
+    }
+}
+

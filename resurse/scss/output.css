@@ -1,0 +1,160 @@
+body {
+  --inaltime-meniu:25px;
+  --latime-buton:150px;
+  --culoare-meniu: #6AE2F7;
+  --culoare-meniu-selectat: #567175;
+  --latime-bord-meniu:1px ;
+}
+
+nav {
+  height: var(--inaltime-meniu);
+  background-color: var(--culoare-meniu);
+  overflow: visible;
+  position: relative;
+  width: 100vw;
+  position: sticky;
+  top: 0;
+}
+
+ul.meniu > li, ul.meniu ul li {
+  height: var(--inaltime-meniu);
+  border: var(--latime-bord-meniu) solid black;
+  width: var(--latime-buton);
+}
+
+ul.meniu div, ul.meniu a {
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+ul.meniu {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+ul.meniu ul {
+  list-style-type: none;
+  z-index: 10px; /*z-index nu se aplica pe elemente pozitionate static*/
+  position: relative;
+  left: -1px;
+  padding: 0;
+  margin: 0;
+  transform: scale(0.5, 0);
+  display: none;
+}
+ul.meniu li {
+  cursor: pointer;
+  background-color: var(--culoare-meniu);
+  transition: all 0.7s linear;
+}
+ul.meniu li:hover {
+  display: block;
+}
+ul.meniu li div {
+  transition: font-size 0.7s linear;
+}
+ul.meniu li div:hover {
+  font-size: 20px;
+}
+ul.meniu li a {
+  display: block;
+  height: 100%;
+}
+ul.meniu li:hover ul {
+  animation-name: animatie_submeniu;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  transform: scale(1, 0);
+  transform-origin: 50% 0;
+  opacity: 0;
+  display: block;
+}
+ul.meniu > li {
+  overflow: hidden; /*overflow: se ocupa de ce iese din continutul elementului*/
+  line-height: var(--inaltime-meniu); /*impinge ce e jos in overflow*/
+  vertical-align: middle; /*aliniez la mijlocul liniei de text, acesta este doar pe linia de text*/
+  text-align: center;
+}
+ul.meniu > li:hover {
+  overflow: visible;
+}
+@keyframes animatie_submeniu {
+  50% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+#hamburger, #ch-menu {
+  display: none;
+}
+
+@media print {
+  #nav {
+    visibility: hidden;
+  }
+}
+/*
+@keyframes animatie_grad {
+
+    0%{
+        opacity: 0;
+        height: 0;
+    }
+    100%{
+        opacity: 1;        
+        height: 100%;
+    }
+}
+
+
+ul.meniu li a:hover{
+  transition: animatie_grad 2s;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  background-color: blue;
+}
+
+@keyframes animatie_grad {
+
+    0%{
+        opacity: 0;
+        height: 0;
+    }
+    100%{
+        opacity: 1;        
+        height: 100%;
+    }
+}
+
+#gradleft {
+    display: block;
+    background-image: linear-gradient(white, black);
+  }
+
+#gradright{
+     display: block;
+    background-image: linear-gradient(black, white);
+}
+
+ul.meniu li a::before{
+    display: block;
+    position: absolute;
+}
+
+ul.meniu li a::after{
+    display: block;
+    position: absolute;
+}
+*/
+
+/*# sourceMappingURL=output.css.map */

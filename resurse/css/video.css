@@ -1,0 +1,12 @@
+.video{
+    display: block;
+    margin: 0 auto;
+    height: auto;
+}
+
+::cue{
+    background:transparent;
+    color:white;
+    text-shadow: 2px 2px black;
+   }
+   

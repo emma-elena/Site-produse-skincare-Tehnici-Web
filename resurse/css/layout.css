@@ -1,0 +1,332 @@
+body {
+    --culoare-background: #B3EBF5;
+    --culoare-sectiuni: #8DBAC2;
+    --c1: #aceaf3;
+    --c2: #465a5d;
+    --culoare-footer-si-header: #326B75;
+    --culoare-meniu: #6AE2F7;
+    --culoare-pagina: #D3F4F8;
+    --culoare-border: black;
+    --culoare-border-linktop: grey;
+    --culoare-background-butoane-iframe: lightblue;
+    background-color: var(--culoare-pagina);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+    transition: all 0.3s linear;
+    
+}
+header {
+    font-family: 'Tahoma', sans-serif;
+    background-color: var(--culoare-footer-si-header);
+}
+main {
+    background-color: var(--culoare-sectiuni);
+}
+footer {
+    background-color: var(--culoare-footer-si-header);
+}
+#grid-pagina {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "despre despre despre despre"
+                         "despre despre despre despre"
+                         "orar  orar recomandari recomandari"
+                         "orar  orar    anunturi anunturi"
+                         "placeholder5 placeholder6 placeholder6 placeholder7"
+                         "galerie-statica galerie-statica galerie-statica galerie-statica"
+                         "galerie-statica galerie-statica galerie-statica galerie-statica"
+    ;
+
+}
+#grid-pagina>* {
+    border: 2px solid var(--culoare-border);
+    margin: 0;
+    padding: 0;
+}
+#despre {
+    grid-area: despre;
+}
+#galerie-statica {
+    grid-area: galerie-statica;
+}
+#placeholder5 {
+    grid-area: placeholder5;
+}
+#placeholder6 {
+    grid-area: placeholder6;
+}
+#placeholder7 {
+    grid-area: placeholder7;
+}
+#promotii {
+    grid-area: promotii;
+}
+#orar {
+    grid-area: orar;
+    text-align: center;
+}
+#anunturi {
+    grid-area: anunturi;
+}
+#recomandari {
+    grid-area: recomandari;
+}
+table {
+    border: 5px solid;
+    border-spacing: 0ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+td, th {
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 300px;
+}
+tr:hover {
+    outline: 8px;
+    outline-color: transparent;
+    opacity: 0.7;
+    transition-duration: 0.5s;
+}
+#tab-orar tr:nth-child(odd) td{
+    border: 1px solid var(--c2);
+}
+#tab-orar tr:nth-child(even) td{
+    border: 1px solid var(--c1);
+}
+.linktop {
+    float: right;
+    bottom: 0.5em;
+    left: 0.5em;
+    width: 2.5rem;
+    box-sizing: border-box;
+    height: 2rem;
+    line-height: 3rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 3rem;
+
+    border: 3px solid var(--culoare-border-linktop);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+}
+#triunghi {
+    height: 1px;
+    width: 0;
+    display: inline-block;
+    border-bottom: 0.5rem solid pink;
+    border-left: 0.7rem solid transparent;
+    border-right: 0.7rem solid transparent;
+    vertical-align: top;
+    transform: translateY(150%);
+    opacity: 0.5;
+    
+}
+#triunghi:hover{
+    animation-name: animatie_triunghi;
+    animation-duration: 700ms;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes animatie_triunghi {
+    0% {
+        opacity: 0.5;
+        transform: translateY(150%);
+        border-bottom: 0.5rem solid pink;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(30%);
+        border-bottom: 0.5rem solid var(--culoare-background);
+    }
+  }
+.mathml mo {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+.caption-table {
+    font-family: Arial, sans-serif;
+    caption-side: bottom;
+}
+.yt {
+    display: flex;
+}
+.taburi-iframe a {
+    text-decoration: none;
+    padding: 5px;
+    text-align: right;
+    display: block;
+    width: 100px;
+    height: 60px;
+    border: 2px solid var(--culoare-border);
+    background-color: var(--culoare-background-butoane-iframe);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 0.7s linear;
+}
+.taburi-iframe a:hover {
+    width: 150px;
+    background-color: var(--culoare-pagina);
+}
+@media screen and (min-width:1201px) {
+    #fas {
+        display: none;
+    }
+   
+}
+@media screen and (max-width:1200px) {
+    #grid-pagina {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "despre despre"
+                             "despre despre"
+                             "recomandari recomandari"
+                             "orar anunturi"
+                             "orar  anunturi"
+                             "placeholder5 placeholder6"
+                             "placeholder7 placeholder6"
+                             "galerie-statica galerie-statica"
+        ;
+
+    }
+
+    #acasa {
+        display: none;
+    }
+
+    html {
+        font-size: 16px;
+        transition: all 0.3s linear;
+    }
+    #galerie-animata{
+        display: none;
+    }
+}
+
+
+
+@media screen and (max-width:700px) {
+    #grid-pagina {
+        display: block;
+
+    }
+
+    #galerie-animata{
+        display: none;
+    }
+
+    #acasa {
+        display: none;
+    }
+
+    html {
+        animation: none;
+        font-size: 14px;
+        transition: all 0.3s linear;
+    }
+
+    #tabel-orar {
+        width: 200px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+@media print {
+    h1 {
+        page-break-after: always;
+        margin-top: 50%;
+        text-align: center;
+        margin-left: 1cm;
+        text-decoration: underline;
+        font-size: 2.5rem;
+    }
+
+    .linktop,
+    .taburi-iframe,
+    .yt, img {
+        display: none;
+    }
+
+
+    #absolut {
+        position: absolute;
+        display: inline-block;
+        top: 100%;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        overflow: visible;
+    }
+
+    #absolut::after {
+        content: "Element poziționat absolut pe a doua pagină.Pentru a vedea stilul de printare apăsați Ctrl+P.";
+        position: absolute;
+        font-size: 10px;
+        right: 0;
+        border: 5px double black;
+        width: 200px;
+        height: 35px;
+        display: inline-block;
+    }
+
+    #watermark {
+        display: block;
+        position: fixed;
+        /*apare pe toate paginile*/
+        bottom: 0;
+        color: rgba(0, 0, 0, 0.4);
+        right: 0;
+    }
+
+    #watermark::after {
+        width: 100px;
+        height: 2cm;
+        opacity: 0.65;
+        padding: 5px;
+        display: block;
+        background: white;
+        border: 2px solid black;
+        border-style: double;
+        border-right: none;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        content: "Copyright Cobzariu Emma";
+    }
+
+    #end {
+        page-break-before: always;
+    }
+}
+
+@page {
+    size: A4 portrait;
+    margin-bottom: 2cm;
+    margin-top: 2cm;
+    counter-increment: page;
+
+}
+
+@page: left {
+
+    margin-left: 2.5cm;
+    margin-right: 0.5cm;
+}
+
+@page: right {
+
+    margin-right: 2.5cm;
+    margin-left: 0.5cm;
+}
+

@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "sass": "^1.58.0",
+    "sharp": "^0.31.3"
+  },
+  "name": "skincare-skema",
+  "version": "1.0.0",
+  "description": "site pentru produse de skincare",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "skincare",
+    "ingrijire",
+    "produs",
+    "routine"
+  ],
+  "author": "Emma-Elena Cobzariu",
+  "license": "ISC"
+}

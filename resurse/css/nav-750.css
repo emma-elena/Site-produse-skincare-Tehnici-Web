@@ -1,0 +1,46 @@
+#hamburger{
+        display: block;
+        height: var(--inaltime-meniu);
+    }  
+
+#hamburger img{
+    height: 100%;
+    width: auto;
+}
+
+
+ul.meniu{
+    display: none;
+    animation: animatie-meniu;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    transform-origin: 0 50%;
+}
+
+#ch-menu:checked~ul,.meniu{
+    display: block;
+}
+
+ul.meniu li{
+    width: 100% !important; /*important spune ca acea linie de cod
+    este mai importanta decat celelalte, ii da o prioritate mai mare fata de prioritatea
+    data de selector*/
+}
+
+ul.meniu ul li{
+    width: 100%;
+ }
+
+ 
+
+@keyframes animatie-meniu {
+    0%{
+   transform: scaleX(0);
+    }
+
+    100%{
+        transform: scaleX(1);
+    }
+} 

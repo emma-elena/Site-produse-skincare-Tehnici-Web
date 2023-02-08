@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+   <title>Pagina principala a site-ului</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+       
+    <meta name="keywords" content="skincare, ingrijire, produs, skincare routine"><!--cuvintele cheie ale paginii; majoritatea motoarelor de căutare ignoră keywords -->
+    <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate."><!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->  
+    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="resurse/css/video.css">
+
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <%- include("../fragmente/head.ejs") %>
+  </head>
+
+  <body>
+   <%- include("../fragmente/header.ejs") %>
+    <main>
+        <p>
+      Aici avem tipuri de ten, informarii despre acestea si tipuri de produse pe care putem sa le folosim.
+        </p>
+
+        <video width="420" height="340" controls="controls" class="video">
+          <source src="resurse/video/videoclip.mp4" type="video/mp4">
+          <source src="resurse/video/videoclip.ogv" type="video/ogv">
+          <track default src="resurse/video/tracks/captions-video-ro.vtt" kind="captions" srclang="ro" label="romana"/>
+          <track  src="resurse/video/tracks/captions-video-en.vtt" kind="captions" srclang="en" label="engleza" />
+         </video>
+    </main>
+
+    <%- include("../fragmente/footer.ejs") %>
+  </body>
+</html> 
