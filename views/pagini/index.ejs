@@ -188,13 +188,8 @@
       <section id="galerie-statica">
         <h2>Galerie poze</h2>
         <div id="grid-galerie">
-          <% for (let imag of locals.imagini) {  //iteram prin toate imaginile din vectorul de imagini json
-             var d=new Date(); //afisam doar imaginile care corespund datei curente, aici iau data curenta 
-             var v_timp = ["08:00-23:00"]; //vector cu orele
-             var timp_r = v_timp[d.getHours()]; //ia ora curenta, apoi ia indicele 
-
-             //verificam daca are proprietatea si daca vectorul include acea ora
-             if(imag.timp && imag.timp.includes(timp_r))  { %> 
+        <!--iteram prin toate imaginile din vectorul de imagini json-->
+          <%   for (let imag of locals.imagini) {   %> 
                 <figure>
                     <picture> 
                       <source srcset="<%- imag.fisier_mediu%>" media="(max-width:1200px)"/>
@@ -203,8 +198,7 @@
                     </picture>
                       <figcaption><%- imag.descriere%></figcaption>
                 </figure>
-              <% } %> 
-            <% } %> 
+                <%    } %> 
         </div>
       </section>
 
@@ -219,7 +213,7 @@
         <h2>Placeholder6</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut pellentesque odio. 
           Phasellus eu arcu sit amet nulla facilisis mollis. 
-          Integer tempus velit magna, eu malesuada ipsum sodales et. 
+          Integer tempus velit magna, eu malesuada ipsum sodales et.
           </section>
 
       <section id="placeholder7">

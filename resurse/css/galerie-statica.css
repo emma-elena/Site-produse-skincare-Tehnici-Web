@@ -16,9 +16,16 @@
 }
 */
 #grid-galerie > figure:nth-child(2) { 
-  grid-area: 3/2/1/3;
-
+  grid-area: 
+        3/2/1/3;  
 }
+
+#grid-galerie > figure:nth-child(3) { 
+  grid-area: 
+        3/3/1/3;  
+}
+
+
 
 #grid-galerie img{
   width: 100%;
@@ -35,7 +42,7 @@
 @media screen and (max-width:1200px){
   #grid-galerie {
     display:grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-row-gap:0.5em;
     grid-column-gap:0.5em;
     counter-reset: nrimag;  /* nrimag=3 */
