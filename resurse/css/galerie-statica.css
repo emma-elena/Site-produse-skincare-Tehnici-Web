@@ -30,9 +30,15 @@
 #grid-galerie img{
   width: 100%;
 }
+
 #grid-galerie figcaption{
   text-align:center;
   counter-increment: nrimag; /* nrimag+=2 */   /*numar elementele de tip figcaption, counter e un fel de variabila*/
+}
+#grid-galerie > figure:hover{
+  background-color: rgb(104, 136, 233);
+  color: aliceblue;
+  transition-duration: 1.15s;
 }
 
 #grid-galerie figcaption::before{
