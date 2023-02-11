@@ -10,11 +10,6 @@
  grid-column-gap:0.5em;
  counter-reset: nrimag;  /* nrimag=3     numarul e de la cat sa porneasca*/
 }/*counter-reset il initializeaza*/
-/*
-#grid-galerie > figure:nth-child(3) { /*din elementul cu id="grid-galerie", luam fiul al doilea direct de tip figure
-     grid-area: 3/2/1/3;
-}
-*/
 #grid-galerie > figure:nth-child(2) { 
   grid-area: 
         3/2/1/3;  
@@ -63,4 +58,6 @@
     grid-area: 
           2/1/2/1;  
   }
+
+  
 }
