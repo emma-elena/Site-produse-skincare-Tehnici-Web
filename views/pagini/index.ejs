@@ -185,22 +185,9 @@
       </section>
 
 
-      <section id="galerie-statica">
-        <h2>Galerie poze</h2>
-        <div id="grid-galerie">
-        <!--iteram prin toate imaginile din vectorul de imagini json-->
-          <%   for (let imag of locals.imagini) {   %> 
-                <figure>
-                    <picture> 
-                      <source srcset="<%- imag.fisier_mediu%>" media="(max-width:1200px)"/>
-                      <source srcset="<%- imag.fisier_mic%>" media="(max-width:700px)"/>
-                      <img src="<%- imag.fisier%>" alt="imagine">
-                    </picture>
-                      <figcaption><%- imag.descriere%></figcaption>
-                </figure>
-                <%    } %> 
-        </div>
-      </section>
+      
+          <%- include("../fragmente/galerie-statica.ejs") %>
+        
 
       <section id="placeholder5">
         <h2>Placeholder5</h2>
