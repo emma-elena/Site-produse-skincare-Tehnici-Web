@@ -12,7 +12,7 @@ input,
 button,
 textarea,
 select {
-  font: inherit;
+  font: inherit;  /*mosteneste de la parinte*/
 }
 
 html:focus-within {
@@ -25,5 +25,5 @@ h1{
 
 ul[role='list'],
 ol[role='list'] {
-  list-style: none;
+  list-style: none;  /*listele nu continul niciun fel de element ca sa le arate ordinea in fata elementelor*/
 } 
