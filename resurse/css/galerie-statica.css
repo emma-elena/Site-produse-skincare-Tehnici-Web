@@ -53,4 +53,14 @@
     grid-column-gap:0.5em;
     counter-reset: nrimag;  /* nrimag=3 */
    }
+
+   #grid-galerie > figure:nth-child(2) { 
+    grid-area: 
+          1/2/1/2;  
+  }
+  
+  #grid-galerie > figure:nth-child(3) { 
+    grid-area: 
+          2/1/2/1;  
+  }
 }

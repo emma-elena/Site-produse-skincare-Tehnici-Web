@@ -46,9 +46,6 @@ function createImages(){
         sharp(__dirname+"/"+elem.fisier).resize(dim_mediu).toFile(__dirname+"/"+elem.fisier_mediu);
         sharp(__dirname+"/"+elem.fisier).resize(dim_mic).toFile(__dirname+"/"+elem.fisier_mic);
     });
-
-
-
     console.log(obGlobal.imagini);
 }
 createImages();
