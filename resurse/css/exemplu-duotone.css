@@ -1,0 +1,37 @@
+#imagine{
+	position:relative;
+	background-image:url("http://localhost:8080/resurse/imagini/skincare-image-products.png");
+	background-size:cover;
+	width:500px; 
+	height: 500px;
+	filter:brightness(200%) grayscale(0) ;
+	transition:all 2s linear;
+}
+
+#imagine:after, #imagine:before{
+	content:" ";
+	position:absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	transition:all 1s linear;
+}
+
+#imagine:after{
+	background-color:rgb(0,0,255);
+	mix-blend-mode:lighten;
+}
+
+#imagine:before{
+	background-color:rgb(205,0,255);
+	mix-blend-mode:darken;
+}
+
+#imagine:hover:before{
+    background-color: azure;
+}
+
+#imagine:hover:after{
+    background-color: black;
+}
