@@ -6,7 +6,7 @@
 .galerie-a {
   width: 400px;
   height: 300px;
-  border: 4px inset black;
+  border: 4px inset grey;
   position: relative;
   overflow: hidden;
   margin-bottom: 5rem;
