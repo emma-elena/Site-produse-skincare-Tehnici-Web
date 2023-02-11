@@ -11,7 +11,20 @@ body {
     --culoare-background-butoane-iframe: lightblue;
     background-color: var(--culoare-pagina);
 }
-
+.dark-mode {
+    --culoare-background: #2c3435;
+    --culoare-sectiuni: #2c3c3e;
+    --c1: #2c4346;
+    --c2: #80b5bb;
+    --culoare-footer-si-header: #213538;
+    --culoare-meniu: #20484f;
+    --culoare-pagina: #374041;
+    --culoare-border: black;
+    --culoare-border-linktop: grey;
+    --culoare-background-butoane-iframe: rgb(49, 61, 65);
+    background-color: var(--culoare-pagina);
+    color:white;
+  }
 html {
     scroll-behavior: smooth;
     font-size: 18px;
