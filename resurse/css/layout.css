@@ -11,10 +11,24 @@ body {
     --culoare-background-butoane-iframe: lightblue;
     background-color: var(--culoare-pagina);
 }
-.dark-mode {
-    --culoare-background: #2c3435;
-    --culoare-sectiuni: #2c3c3e;
-    --c1: #2c4346;
+.medium {
+    --culoare-background: #6b8184;
+    --culoare-sectiuni: #638589;
+    --c1: #61959c;
+    --c2: #2c3d3f;
+    --culoare-footer-si-header: #67a9b4;
+    --culoare-meniu: #3a8693;
+    --culoare-pagina: #859b9d;
+    --culoare-border: black;
+    --culoare-border-linktop: grey;
+    --culoare-background-butoane-iframe: rgb(104, 130, 139);
+    background-color: var(--culoare-pagina);
+    color:white;
+  }
+.dark {
+    --culoare-background: #202526;
+    --culoare-sectiuni: #1f292b;
+    --c1: #243638;
     --c2: #80b5bb;
     --culoare-footer-si-header: #213538;
     --culoare-meniu: #20484f;
