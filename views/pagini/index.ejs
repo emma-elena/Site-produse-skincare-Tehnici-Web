@@ -213,29 +213,10 @@
     </div>
     </main>
 
-    <div id="galerie-animata" class="galerie-a">
-        <% for (let imag of locals.imagini) { 
-                     %>
-                        <figure>
-                            <picture>
-                                <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
-                                <img src="<%- imag.fisier %>" alt="imagine">
-                            </picture>
-                            <figcaption><%- imag.descriere %></figcaption>
-                        </figure>
-                <% }  %>
-    </div>
-
-    <div id="container">
-			<div id="text">
-				Un text
-				<div id="text-reflectat">
-					Un text
-				</div>
-			</div>
+    
 
 		</div>
-    <div id="imagine"></div>
+    
     <%- include("../fragmente/footer.ejs") %>
               
   </body>
