@@ -7,7 +7,6 @@ body{
   margin: 10 ;
 }
 
-
 input,
 button,
 textarea,
@@ -22,6 +21,11 @@ html:focus-within {
 h1{
   font-size: 2em;
 }
+
+html{
+  font-size: 20px;
+}
+
 
 ul[role='list'],
 ol[role='list'] {
