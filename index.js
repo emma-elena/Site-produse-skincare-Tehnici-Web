@@ -92,6 +92,10 @@ app.get(["/","/index","/home"], function(req, res){
 });
 
 
+app.get('/favicon.ico' , function(req , res)
+{
+
+});
 
 
 app.get("/*.ejs", function(req, res){
