@@ -30,11 +30,14 @@
   text-align:center;
   counter-increment: nrimag; /* nrimag+=2 */   /*numar elementele de tip figcaption, counter e un fel de variabila*/
 }
+
+/*
 #grid-galerie > figure:hover{
   background-color: rgb(104, 136, 233);
   color: aliceblue;
   transition-duration: 1.15s;
 }
+*/
 
 #grid-galerie figcaption::before{
   content: counter(nrimag, lower-alpha) ") "; /*lui counter pot sa ii dau 2 parametri, numele counter-ului si tipul de afisare*/
