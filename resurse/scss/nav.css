@@ -1,6 +1,6 @@
 body {
   --inaltime-meniu:25px;
-  --latime-buton:150px;
+  --latime-buton:200px;
   --culoare-meniu: #6AE2F7;
   --culoare-meniu-selectat: #567175;
   --latime-bord-meniu:1px ;
@@ -57,7 +57,7 @@ ul.meniu li div {
   transition: font-size 0.7s linear;
 }
 ul.meniu li div:hover {
-  font-size: 20px;
+  font-size: 24px;
 }
 ul.meniu li > a{
   display: block;
