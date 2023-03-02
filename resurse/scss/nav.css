@@ -11,7 +11,7 @@ nav {
   background-color: var(--culoare-meniu);
   overflow: visible;
   position: relative;
-  width: 100vw;
+  width: auto;
   position: sticky;
   top: 0;
 }
