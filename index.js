@@ -120,6 +120,19 @@ app.get(["/produse"], function(req, res){
 });
 
 
+//pentru produs
+app.get(["/produs/:id"], function(req, res){
+    client.query("select * from  prajituri where id="+req.params.id, function(err, rez){
+        if(err){
+            console.log(err);
+            renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
+        }
+        else
+            res.render("pagini/produs", {prod:rez.rows[0]});
+    });                                                                                           
+});
+
+
 
 
 app.get('/favicon.ico' , function(req , res)
