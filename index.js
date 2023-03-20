@@ -4,7 +4,7 @@ const fs=require("fs"); //acest pachet vine la pachet cand am instalat node
 const sharp=require("sharp"); //pentru redimensionarea imaginilor din cod
 const ejs = require("ejs");
 const sass = require("sass");
-
+const {Client} = require("pg");  //{nume de variabila} 
 
 app=express(); //cream server
 
@@ -15,6 +15,21 @@ app.use("/resurse", express.static(__dirname+"/resurse")); //numai caile care in
 //al doilea e folderul 
 
 
+//conexiunea la baza de date
+var client =  new Client({
+    database:"site",
+    user:"emma_cobzariu",
+    password:"parola_1234_5678",
+    host:"localhost",
+    port:5432});
+client.connect();
+
+client.query("select * from tabel_test", function(err, rez){
+    if(err)
+        console.log(err);
+    else
+        console.log(rez);
+});
 obGlobal={
     erori:null,
     imagini:null
@@ -90,6 +105,21 @@ app.get(["/","/index","/home"], function(req, res){
     res.render("pagini/index", {ip: req.ip, ceva:30, altceva:20, imagini:obGlobal.imagini}); //object literal 
                                                                                              //obGlobal.imagini = vector
 });
+
+
+//pentru produse
+app.get(["/produse"], function(req, res){
+    client.query("select * from  prajituri", function(err, rez){
+        if(err){
+            console.log(err);
+            renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
+        }
+        else
+            res.render("pagini/produse", {produse:rez.rows, optiuni:[]});
+    });                                                                                           
+});
+
+
 
 
 app.get('/favicon.ico' , function(req , res)
