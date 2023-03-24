@@ -24,7 +24,7 @@ var client =  new Client({
     port:5432});
 client.connect();
 
-client.query("select * from tabel_test", function(err, rez){
+client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rez){
     if(err)
         console.log(err);
     else
@@ -109,20 +109,22 @@ app.get(["/","/index","/home"], function(req, res){
 
 //pentru produse
 app.get(["/produse"], function(req, res){
-    client.query("select * from  prajituri", function(err, rez){
-        if(err){
-            console.log(err);
-            renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
-        }
-        else
-            res.render("pagini/produse", {produse:rez.rows, optiuni:[]});
-    });                                                                                           
+    client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezCategorie){
+        client.query("select * from  prajituri", function(err, rez){
+            if(err){
+                console.log(err);
+                renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
+            }
+            else
+                res.render("pagini/produse", {produse:rez.rows, optiuni:rezCategorie.rows});
+        });  
+    });                                                                              
 });
 
 
 //pentru produs
 app.get(["/produs/:id"], function(req, res){
-    client.query("select * from  prajituri where id="+req.params.id, function(err, rez){
+    client.query("select * from prajituri where id="+req.params.id, function(err, rez){
         if(err){
             console.log(err);
             renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
