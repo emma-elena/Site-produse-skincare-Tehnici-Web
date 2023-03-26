@@ -109,8 +109,15 @@ app.get(["/","/index","/home"], function(req, res){
 
 //pentru produse
 app.get(["/produse"], function(req, res){
-    client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezCategorie){
-        client.query("select * from  prajituri", function(err, rez){
+    console.log(req.query);
+    client.query("select * from unnest(enum_range(null::categorie_produs))", function(err, rezCategorie){
+
+        //verificam daca exista proprietatea sau nu 
+        continuareQuery=""
+        if (req.query.tip)
+        continuareQuery+=`and tip='${req.query.tip}'`;  //"tip='"+req.query.tip+"'"
+
+        client.query("select * from  produse where 1=1 " + continuareQuery, function(err, rez){
             if(err){
                 console.log(err);
                 renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
@@ -124,7 +131,7 @@ app.get(["/produse"], function(req, res){
 
 //pentru produs
 app.get(["/produs/:id"], function(req, res){
-    client.query("select * from prajituri where id="+req.params.id, function(err, rez){
+    client.query("select * from produse where id="+req.params.id, function(err, rez){
         if(err){
             console.log(err);
             renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
