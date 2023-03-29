@@ -65,20 +65,37 @@ window.onload = function(){
     }
     
 
+    function sorteaza(semn){
+        var produse = document.getElementsByClassName("produs");
+        var vector_produse = Array.from(produse);
+        
+        vector_produse.sort(function(a,b){
+             var pret_a = parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
+             var pret_b = parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
+ 
+             if(pret_a == pret_b){
+               var nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
+               var nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
+ 
+               return semn*nume_a.localeCompare(nume_b);
+             }
+             return (pret_a - pret_b)*semn;
+        }) 
+        
+        for (let produs of vector_produse){
+             produs.parentNode.appendChild(produs);
+         } 
+     }
+
+
     //sortare
     document.getElementById("sortCrescNume").onclick=function(){
-       var produse = document.getElementsByClassName("produs");
-       var vector_produse = Array.from(produse);
-       
-       vector_produse.sort(function(a,b){
-            var pret_a = parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
-            var pret_b = parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
-
-            return pret_a - pret_b;
-       }) 
-       
-       for (let produs of vector_produse){
-            produs.parentNode.appendChild(produs);
-        } 
+        sorteaza(1);
     }
+
+    document.getElementById("sortDescrescNume").onclick=function(){
+        sorteaza(-1);
+    }
+
+
 }

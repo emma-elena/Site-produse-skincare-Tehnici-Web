@@ -14,20 +14,7 @@
     <main>
         <label> Nume: <input type="text" id="inp-nume"></label>
         <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-        <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <p><label>Dietetic (calorii &lt; 350)
-                <input id="i_rad1"  name="gr_rad" value="0:350" type="radio"/>
-            </label></p>
-            <p><label>Mediu (350 &le; calorii &lt; 700)
-                <input id="i_rad2"  name="gr_rad" value="350:750" type="radio"/>
-            </label>
-            <p><label>Ridicat caloric (700 &le; calorii)
-                <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/>
-            </label>
-            <p><label>Toate
-                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
-            </label>
-        </div>
+        
 
 
         <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0"  max="70"> <span id="infoRange">(0)</span></label>
@@ -43,11 +30,12 @@
         <button id="filtrare">Filtreaza</button> 
         <button id="resetare">Reseteaza</button><br/>
         <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-        
+        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>  
         </p>
         
+        <!--
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+        -->
         <section id="produse">
             <h2>Produse</h2>
             <div class="grid-produse">
