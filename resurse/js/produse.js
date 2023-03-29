@@ -99,12 +99,6 @@ window.onload = function(){
              var pret_a = parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
              var pret_b = parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
  
-             if(pret_a == pret_b){
-               var nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
-               var nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
- 
-               return nume_a.localeCompare(nume_b);
-             }
              return pret_a - pret_b;
         }) 
         
@@ -120,13 +114,7 @@ window.onload = function(){
         vector_produse.sort(function(a,b){
              var pret_a = parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
              var pret_b = parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
- 
-             if(pret_a == pret_b){
-               var nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
-               var nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
- 
-               return nume_a.localeCompare(nume_b);
-             }
+  
              return pret_b - pret_a;
         }) 
         
@@ -135,5 +123,40 @@ window.onload = function(){
          } 
      }
 
+
+
+
+     document.getElementById("sortCrescNume").onclick=function(){
+        var produse = document.getElementsByClassName("produs");
+        var vector_produse = Array.from(produse);
+        
+        vector_produse.sort(function(a,b){
+            var nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
+               var nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
+ 
+               return nume_a.localeCompare(nume_b);
+        }) 
+        
+        for (let produs of vector_produse){
+             produs.parentNode.appendChild(produs);
+         } 
+     }
+
+
+     document.getElementById("sortDescrescNume").onclick=function(){
+        var produse = document.getElementsByClassName("produs");
+        var vector_produse = Array.from(produse);
+        
+        vector_produse.sort(function(a,b){
+            var nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
+            var nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
+ 
+               return nume_b.localeCompare(nume_a);
+        }) 
+        
+        for (let produs of vector_produse){
+             produs.parentNode.appendChild(produs);
+         } 
+     }
 
 }
