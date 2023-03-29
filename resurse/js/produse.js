@@ -40,4 +40,45 @@ window.onload = function(){
             }
         }   
     }
+
+
+
+    document.getElementById("resetare").onclick=function(){
+        //resetare produse
+        
+        //le selectam dupa clasa
+        var produse = document.getElementsByClassName("produs");
+
+        for (let produs of produse){
+            var conditieNume = false, conditieCategorie = false; 
+            produs.style.display = "block";        
+        } 
+        //
+
+
+
+        //resetare filtre
+        document.getElementById("inp-nume").value = "";
+
+        //aici selectez optuiunea pe care vreau sa o bifez
+        document.getElementById("sel-toate").value.selected = true;
+    }
+    
+
+    //sortare
+    document.getElementById("sortCrescNume").onclick=function(){
+       var produse = document.getElementsByClassName("produs");
+       var vector_produse = Array.from(produse);
+       
+       vector_produse.sort(function(a,b){
+            var pret_a = parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
+            var pret_b = parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
+
+            return pret_a - pret_b;
+       }) 
+       
+       for (let produs of vector_produse){
+            produs.parentNode.appendChild(produs);
+        } 
+    }
 }
