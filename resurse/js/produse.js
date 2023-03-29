@@ -65,6 +65,7 @@ window.onload = function(){
     }
     
 
+    /* 
     function sorteaza(semn){
         var produse = document.getElementsByClassName("produs");
         var vector_produse = Array.from(produse);
@@ -86,16 +87,53 @@ window.onload = function(){
              produs.parentNode.appendChild(produs);
          } 
      }
+     */
 
 
     //sortare
-    document.getElementById("sortCrescNume").onclick=function(){
-        sorteaza(1);
-    }
+    document.getElementById("sortCrescPret").onclick=function(){
+        var produse = document.getElementsByClassName("produs");
+        var vector_produse = Array.from(produse);
+        
+        vector_produse.sort(function(a,b){
+             var pret_a = parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
+             var pret_b = parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
+ 
+             if(pret_a == pret_b){
+               var nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
+               var nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
+ 
+               return nume_a.localeCompare(nume_b);
+             }
+             return pret_a - pret_b;
+        }) 
+        
+        for (let produs of vector_produse){
+             produs.parentNode.appendChild(produs);
+         } 
+     }
 
-    document.getElementById("sortDescrescNume").onclick=function(){
-        sorteaza(-1);
-    }
+     document.getElementById("sortDescrescPret").onclick=function(){
+        var produse = document.getElementsByClassName("produs");
+        var vector_produse = Array.from(produse);
+        
+        vector_produse.sort(function(a,b){
+             var pret_a = parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML);
+             var pret_b = parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML);
+ 
+             if(pret_a == pret_b){
+               var nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
+               var nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
+ 
+               return nume_a.localeCompare(nume_b);
+             }
+             return pret_b - pret_a;
+        }) 
+        
+        for (let produs of vector_produse){
+             produs.parentNode.appendChild(produs);
+         } 
+     }
 
 
 }

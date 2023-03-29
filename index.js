@@ -15,6 +15,17 @@ app.use("/resurse", express.static(__dirname+"/resurse")); //numai caile care in
 //al doilea e folderul 
 
 
+app.use("node_modules", express.static(__dirname+"/node_modules"));
+
+
+var optiuniPentruMeniu="ceva!";
+
+app.use("/*", function(req, res, next){
+     res.locals.optiuniMeniu = optiuniPentruMeniu; 
+     next();
+});
+
+
 //conexiunea la baza de date
 var client =  new Client({
     database:"site",
@@ -32,7 +43,8 @@ client.query("select * from unnest(enum_range(null::categ_prajitura))", function
 });
 obGlobal={
     erori:null,
-    imagini:null
+    imagini:null,
+    optiuniPentruMeniu:null 
 }
 
 
@@ -115,7 +127,7 @@ app.get(["/produse"], function(req, res){
         //verificam daca exista proprietatea sau nu 
         continuareQuery=""
         if (req.query.tip)
-        continuareQuery+=`and tip='${req.query.tip}'`;  //"tip='"+req.query.tip+"'"
+        continuareQuery+=`and tip_produs='${req.query.tip}'`;  //"tip='"+req.query.tip+"'"
 
         client.query("select * from  produse where 1=1 " + continuareQuery, function(err, rez){
             if(err){
