@@ -3,7 +3,7 @@ body {
     --culoare-sectiuni: #a7d2da;
     --c1: #aceaf3;
     --c2: #465a5d;
-    --culoare-footer-si-header: #326B75;
+    --culoare-footer-si-header: #558892;
     --culoare-meniu: #6AE2F7;
     --culoare-pagina: #D3F4F8;
     --culoare-border: black;
@@ -121,6 +121,7 @@ tr:hover {
     text-align: center;
     text-decoration: none;
     font-size: 3rem;
+    position: sticky;
 
     border: 3px solid var(--culoare-border-linktop);
     border-top-left-radius: 15px;

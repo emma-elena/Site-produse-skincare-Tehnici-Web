@@ -1,0 +1,18 @@
+#span{
+    font-size: 60px;
+}
+
+#contact{
+    text-align: center;
+}
+
+#grid-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+a:link { text-decoration: none; 
+          color: black;}
+
+a:visited, a:active { text-decoration: none; 
+                      color: inherit;}
