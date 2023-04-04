@@ -1,8 +1,18 @@
 window.onload = function(){
     
     document.getElementById("filtrare").onclick = function(){
+        conditieValidare = true;
+
         //selectam input-ul dupa id, vrem valoarea din el, continutul input-ului il accesam cu value
         var inputNume = document.getElementById("inp-nume").value.toLowerCase().trim();
+        
+        //verificare inputuri  
+        conditieValidare = conditieValidare && inputNume.match(new RegExp("^[a-zA-Z]*$"));
+
+        if(!conditieValidare){
+            alert("Inputuri gresite");
+            return;
+        }
 
         var inputCategorie = document.getElementById("inp-categorie").value;
 
