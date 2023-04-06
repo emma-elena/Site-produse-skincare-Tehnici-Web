@@ -33,9 +33,9 @@ var client =  new Client({
     password:"parola_1234_5678",
     host:"localhost",
     port:5432});
-client.connect();
+    client.connect();
 
-client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rez){
+client.query("select * from unnest(enum_range(null::categorie_produs))", function(err, rez){
     if(err)
         console.log(err);
     else

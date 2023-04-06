@@ -1,5 +1,10 @@
 window.addEventListener("load", function(){
     
+    document.getElementById("inp-pret").onchange=function(){
+        document.getElementById("infoRange").innerHTML = `(${this.value}) lei`
+    }
+
+
     document.getElementById("filtrare").onclick = function(){
         conditieValidare = true;
 
