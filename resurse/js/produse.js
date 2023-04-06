@@ -1,4 +1,4 @@
-window.onload = function(){
+window.addEventListener("load", function(){
     
     document.getElementById("filtrare").onclick = function(){
         conditieValidare = true;
@@ -147,4 +147,4 @@ window.onload = function(){
          } 
      }
 
-}
+});
