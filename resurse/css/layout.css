@@ -273,6 +273,9 @@ tr:hover {
         display: none;
     }
 
+    #cookie, #video-background{
+        display: none;
+    }
 
     #absolut {
         position: absolute;
