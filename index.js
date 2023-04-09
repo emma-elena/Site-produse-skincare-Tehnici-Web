@@ -5,6 +5,9 @@ const sharp=require("sharp"); //pentru redimensionarea imaginilor din cod
 const ejs = require("ejs");
 const sass = require("sass");
 const {Client} = require("pg");  //{nume de variabila} 
+const formidable = require("formidable");
+
+const {Utilizator} = require("./module/utilizator.js")
 
 app=express(); //cream server
 
@@ -139,6 +142,65 @@ app.get(["/produse"], function(req, res){
         });  
     });                                                                              
 });
+
+
+
+app.post("/inregistrare",function(req, res){
+    var username;
+    var formular= new formidable.IncomingForm()
+    formular.parse(req, function(err, campuriText, campuriFisier ){//4
+        console.log(campuriText);
+
+        var eroare="";
+
+        var utilizNou=new Utilizator();
+        try{
+            utilizNou.setareNume=campuriText.nume;
+            utilizNou.setareUsername=campuriText.username;
+            utilizNou.email=campuriText.email
+            utilizNou.prenume=campuriText.prenume
+            
+            utilizNou.parola=campuriText.parola;
+            utilizNou.culoare_chat=campuriText.culoare_chat
+            utilizNou.salvareUtilizator();
+
+        }
+        catch(e){ eroare+=e.message;
+            console.log(eroare);
+        }
+
+
+        if(!eroare){
+
+            
+        }
+        else
+            res.render("pagini/inregistrare", {err: "Eroare: "+eroare});
+    });
+    formular.on("field", function(nume,val){  // 1 
+	
+        console.log(`--- ${nume}=${val}`);
+		
+        if(nume=="username")
+            username=val;
+    }) 
+    formular.on("fileBegin", function(nume,fisier){ //2
+        console.log("fileBegin");
+		
+        console.log(nume,fisier);
+		//TO DO in folderul poze_uploadate facem folder cu numele utilizatorului
+
+    })    
+    formular.on("file", function(nume,fisier){//3
+        console.log("file");
+        console.log(nume,fisier);
+    }); 
+});
+
+
+
+
+
 
 
 //pentru produs
