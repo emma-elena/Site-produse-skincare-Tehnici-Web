@@ -123,7 +123,7 @@ tr:hover {
     font-size: 3rem;
     position: sticky;
 
-    border: 3px solid var(--culoare-border-linktop);
+    border: 3px solid pink;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -135,12 +135,11 @@ tr:hover {
     height: 1px;
     width: 0;
     display: inline-block;
-    border-bottom: 0.5rem solid pink;
-    border-left: 0.7rem solid transparent;
-    border-right: 0.7rem solid transparent;
+    border-bottom: 0.6rem solid pink;
+    border-left: 0.8rem solid transparent;
+    border-right: 0.8rem solid transparent;
     vertical-align: top;
     transform: translateY(150%);
-    opacity: 0.5;
     
 }
 #triunghi:hover{
@@ -149,17 +148,17 @@ tr:hover {
     animation-iteration-count: 1;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
+   
 }
 @keyframes animatie_triunghi {
     0% {
-        opacity: 0.5;
         transform: translateY(150%);
-        border-bottom: 0.5rem solid pink;
+        border-bottom: 0.6rem solid pink;
     }
     100% {
         opacity: 1;
         transform: translateY(30%);
-        border-bottom: 0.5rem solid var(--culoare-background);
+        border-bottom: 0.6rem solid rgb(59, 202, 202);
     }
   }
 .mathml mo {
