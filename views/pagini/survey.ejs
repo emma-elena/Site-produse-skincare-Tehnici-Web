@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+   <title>Pagina principala a site-ului</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+       
+    <meta name="keywords" content="skincare, ingrijire, produs, skincare routine"><!--cuvintele cheie ale paginii; majoritatea motoarelor de căutare ignoră keywords -->
+    <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate."><!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->  
+    
+    <link rel="stylesheet" type="text/css" href="resurse/css/video.css">
+
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <%- include("../fragmente/head.ejs") %>
+  </head>
+
+<body>
+    <%- include("../fragmente/header.ejs") %>
+    <main>
+        <h1>Find Your Skin Type Quiz</h1>
+
+        <form id="skin-type-quiz">
+
+            <h2>Question 1:</h2>
+            <p>How does your skin typically feel a few hours after you wash it?</p>
+            <input type="radio" name="q1" value="oily"> Oily<br>
+            <input type="radio" name="q1" value="dry"> Dry<br>
+            <input type="radio" name="q1" value="normal"> Normal<br>
+            <input type="radio" name="q1" value="combination"> Combination<br>
+    
+            <h2>Question 2:</h2>
+            <p>How does your skin react to new skincare products?</p>
+            <input type="radio" name="q2" value="breakout"> It breaks out easily<br>
+            <input type="radio" name="q2" value="irritation"> It becomes irritated easily<br>
+            <input type="radio" name="q2" value="nothing"> It doesn't react strongly<br>
+    
+            <h2>Question 3:</h2>
+            <p>How visible are your pores?</p>
+            <input type="radio" name="q3" value="large"> They're large and noticeable<br>
+            <input type="radio" name="q3" value="small"> They're small and not very noticeable<br>
+            <input type="radio" name="q3" value="medium"> They're somewhere in between<br>
+    
+            <h2>Question 4:</h2>
+            <p>How prone is your skin to sunburn?</p>
+            <input type="radio" name="q4" value="very"> It burns easily<br>
+            <input type="radio" name="q4" value="not"> It doesn't burn easily<br>
+            <input type="radio" name="q4" value="sometimes"> It burns sometimes<br>
+    
+            <input type="submit" value="Submit">
+        </form>
+    
+
+        <div id="results" style="display:none;">
+            <h2>Your skin type is: <span id="skin-type"></span></h2>
+            <p>Here are some skincare tips for your skin type:</p>
+            <ul id="skincare-tips"></ul>
+        </div>
+
+          
+    
+        <script>
+            const quizForm = document.getElementById('skin-type-quiz');
+            const quizResults = document.getElementById('results');
+            const skinTypeResult = document.getElementById('skin-type');
+            const skincareTips = document.getElementById('skincare-tips');
+    
+            quizForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // prevent default form submission behavior
+    
+                // collect user answers from the form
+                const q1Answer = quizForm.q1.value;
+                const q2Answer = quizForm.q2.value;
+                const q3Answer = quizForm.q3.value;
+                const q4Answer = quizForm.q4.value;
+    
+                // determine skin type based on user answers
+                let skinType = '';
+                if (q1Answer === 'oily' && q2Answer === 'breakout' && q3Answer === 'large' && (q4Answer === 'very' || q4Answer === 'sometimes'))
+                 {
+                    skinType = 'Oily';
+                } 
+                else if (q1Answer === 'dry' && (q2Answer === 'irritation' && q3Answer === 'small' && q4Answer === 'not')) {
+                    skinType = 'Dry';
+                    } 
+                else if (q1Answer === 'normal' && q2Answer === 'nothing' && q3Answer === 'medium' && q4Answer === 'not') {
+                    skinType = 'Normal';
+                    } 
+                else if (q1Answer === 'combination' && q2Answer === 'breakout' && q3Answer === 'medium' && q4Answer === 'sometimes') {
+                    skinType = 'Combination';
+                    } 
+                else {
+                    skinType = 'Unknown';
+}
+		// display quiz results
+		skinTypeResult.textContent = skinType;
+		skincareTips.innerHTML = getSkincareTips(skinType);
+		quizResults.style.display = 'block';
+	});
+
+	     // returns an array of skincare tips for the given skin type
+         function getSkincareTips(skinType) {
+            switch (skinType) {
+                case 'Oily':
+                    return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Avoid heavy makeup'];
+                case 'Dry':
+                    return ['Use a gentle, creamy cleanser', 'Use a rich, hydrating moisturizer', 'Apply moisturizer while skin is still damp'];
+                case 'Normal':
+                    return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Apply sunscreen daily'];
+                case 'Combination':
+                    return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Apply moisturizer only to dry areas', 'Use blotting papers to control oiliness'];
+                default:
+                    return ['No skincare tips available for unknown skin type'];
+            }
+        }
+</script>
+
+</main>
+        <%- include("../fragmente/footer.ejs") %>
+    </body>
+    </html> 
