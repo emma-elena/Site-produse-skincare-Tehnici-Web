@@ -1,0 +1,48 @@
+.quiz-grid {
+    display: grid;
+    gap: 20px;
+  }
+  
+  
+  .intrebare {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+  }
+
+  input{
+    vertical-align: left;
+  }
+  
+  .navigation {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+
+  .submit-button {
+    padding: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #28a745;
+  }
+  
+  #results {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "detalii poza";
+    border: 2px solid black;
+  }
+
+  h3{
+    margin-left: 20px;
+  }
+
+  label{
+    
+  }

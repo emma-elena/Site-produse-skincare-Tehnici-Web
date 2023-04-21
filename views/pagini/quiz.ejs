@@ -10,7 +10,7 @@
     <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate."><!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->  
     
     <link rel="stylesheet" type="text/css" href="resurse/css/video.css">
-
+    <link rel="stylesheet" type="text/css" href="resurse/css/quiz.css">
 
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
@@ -23,41 +23,69 @@
     <main>
         <h1>Afla tipul de ten pe care il ai!</h1>
 
-        <form id="skin-type-quiz">
+        <div class="quiz-grid"></div>
+            <form id="skin-type-quiz">
 
-            <h2>Intrebarea 1:</h2>
-            <p>How does your skin typically feel a few hours after you wash it?</p>
-            <input type="radio" name="q1" value="oily"> Oily<br>
-            <input type="radio" name="q1" value="dry"> Dry<br>
-            <input type="radio" name="q1" value="normal"> Normal<br>
-            <input type="radio" name="q1" value="combination"> Combination<br>
-    
-            <h2>Intrebarea 2:</h2>
-            <p>How does your skin react to new skincare products?</p>
-            <input type="radio" name="q2" value="breakout"> It breaks out easily<br>
-            <input type="radio" name="q2" value="irritation"> It becomes irritated easily<br>
-            <input type="radio" name="q2" value="nothing"> It doesn't react strongly<br>
-    
-            <h2>Intrebarea 3:</h2>
-            <p>How visible are your pores?</p>
-            <input type="radio" name="q3" value="large"> They're large and noticeable<br>
-            <input type="radio" name="q3" value="small"> They're small and not very noticeable<br>
-            <input type="radio" name="q3" value="medium"> They're somewhere in between<br>
-    
-            <h2>Intrebarea 4:</h2>
-            <p>How prone is your skin to sunburn?</p>
-            <input type="radio" name="q4" value="very"> It burns easily<br>
-            <input type="radio" name="q4" value="not"> It doesn't burn easily<br>
-            <input type="radio" name="q4" value="sometimes"> It burns sometimes<br>
-    
-            <input type="submit" value="Submit">
-        </form>
+                <div class="intrebare">
+                <h2>Intrebarea 1</h2>
+                <h3>Cum va simtiti tenul dupa cateva ore dupa ce l-ati spalat?</h3>
+                    <label for="radioButton1"><input type="radio" id="radioButton1" name="q1" value="oily"> Gras<br></label>
+                    <label for="radioButton2"><input type="radio" id="radioButton2" name="q1" value="dry"> Uscat<br></label>
+                    <label for="radioButton3"><input type="radio" id="radioButton3" name="q1" value="normal"> Normal<br></label>
+                    <label for="radioButton4"><input type="radio" id="radioButton4" name="q1" value="combination"> Mixt(gras in zona T)<br></label>
+            
+            </div>
+
+                <div class="intrebare">
+                <h2>Intrebarea 2</h2>
+                <h3>Cum reactioneaza pielea cand incepeti sa folositi un produs nou?</h3>
+                <label for="radioButton5"><input type="radio" id="radioButton5" name="q2" value="breakout"> Imi apar cosuri repede<br></label>
+                <label for="radioButton6"><input type="radio" id="radioButton6" name="q2" value="irritation"> Se irita usor<br></label>
+                <label for="radioButton7"><input type="radio" id="radioButton7" name="q2" value="nothing"> Nu reactioneaza<br></label>
+            </div>
+
+                <div class="intrebare">
+                <h2>Intrebarea 3</h2>
+                <h3>Cat de vizibili sunt porii??</h3>
+                <label for="radioButton8"><input type="radio" id="radioButton8" name="q3" value="large"> Sunt foarte vizibili si mari<br></label>
+                <label for="radioButton9"><input type="radio" id="radioButton9" name="q3" value="small"> Nu se observa<br></label>
+                <label for="radioButton10"><input type="radio" id="radioButton10" name="q3" value="medium"> Intre <br></label>
+            </div>
+
+                <div class="intrebare">
+                <h2>Intrebarea 4</h2>
+                <h3>Cat de repede va ardeti de la soare?</h3>
+                <label for="radioButton11"><input type="radio" id="radioButton11" name="q4" value="very">Ma ard foarte repede<br></label>
+                <label for="radioButton12"><input type="radio" id="radioButton12" name="q4" value="not">Nu ma ard foarte repede<br></label>
+                <label for="radioButton13"><input type="radio" id="radioButton13" name="q4" value="sometimes"> Ma ard uneori<br></label>
+                </div>  
+
+                <div class="intrebare">
+                    <h2>Intrebarea 5</h2>
+                    <h3>Cum reactioneaza tenul dupa folosirea unui produs cu alcool in compozitia acestuia?</h3>
+                    <label for="radioButton14"><input type="radio" id="radioButton14" name="q5" value="very">Se irita repede<br></label>
+                    <label for="radioButton15"><input type="radio" id="radioButton15" name="q5" value="not">Nu reactioneaza in niciun fel<br></label>
+            </div>
+
+                <div class="navigation">
+                    <!-- <button type="button" class="prev-button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" class="next-button" onclick="nextQuestion()">Next</button> -->
+                    <button type="submit" class="submit-button" onclick="submitQuiz()">Submit</button>
+                </div>
+            </form>
+        </div> 
     
 
         <div id="results" style="display:none;">
-            <h2>Ai un ten: <span id="skin-type"></span></h2>
-            <p>Cateva sfaturi pentru a avea grija de tenul tau:</p>
+            <section id="detalii">
+            <h3>Ai un ten: <span id="skin-type"></span></h3>
+            <h3>Cateva sfaturi pentru a avea grija de tenul tau:</h3>
             <ul id="skincare-tips"></ul>
+            </section>
+
+            <section id="poza">
+                <img src="resurse/imagini/galerie/skincare-image.png" alt="skin">
+            </section>
         </div>
 
           
@@ -76,24 +104,28 @@
                 const q2Answer = quizForm.q2.value;
                 const q3Answer = quizForm.q3.value;
                 const q4Answer = quizForm.q4.value;
+                const q5Answer = quizForm.q5.value;
     
                 // determine skin type based on user answers
                 let skinType = '';
-                if (q1Answer === 'oily' && q2Answer === 'breakout' && q3Answer === 'large' && (q4Answer === 'very' || q4Answer === 'sometimes'))
+                if (q1Answer === 'oily' && q2Answer === 'breakout' && q3Answer === 'large' && (q4Answer === 'not' || q4Answer === 'sometimes') && q5Answer === 'not')
                  {
-                    skinType = 'Oily';
+                    skinType = 'Gras';
                 } 
-                else if (q1Answer === 'dry' && (q2Answer === 'irritation' && q3Answer === 'small' && q4Answer === 'not')) {
-                    skinType = 'Dry';
+                else if (q1Answer === 'dry' && q2Answer === 'irritation' && q3Answer === 'small' && (q4Answer === 'very' || q4Answer === 'sometimes') && (q5Answer === 'very' || q5Answer === 'not')) {
+                    skinType = 'Uscat';
                     } 
-                else if (q1Answer === 'normal' && q2Answer === 'nothing' && q3Answer === 'medium' && q4Answer === 'not') {
+                else if (q1Answer === 'normal' && q2Answer === 'nothing' && q3Answer === 'medium'  && (q4Answer === 'not' || q4Answer === 'sometimes') && q5Answer === 'not') {
                     skinType = 'Normal';
                     } 
-                else if (q1Answer === 'combination' && q2Answer === 'breakout' && q3Answer === 'medium' && q4Answer === 'sometimes') {
-                    skinType = 'Combination';
+                else if (q1Answer === 'combination' && (q2Answer === 'breakout' || q2Answer === 'nothing') && q3Answer === 'medium' && (q4Answer === 'sometimes'|| q4Answer === 'not') && (q5Answer === 'very' || q5Answer === 'not')) {
+                    skinType = 'Mixt';
+                    } 
+                else if (q1Answer === 'normal' && (q2Answer === 'irritation' || q2Answer === 'breakout') && q3Answer === 'medium' && (q4Answer === 'sometimes'|| q4Answer === 'very') && q5Answer === 'very') {
+                    skinType = 'Sensibil';
                     } 
                 else {
-                    skinType = 'Unknown';
+                    skinType = 'Eroare';
 }
 		// display quiz results
 		skinTypeResult.textContent = skinType;
@@ -104,16 +136,18 @@
 	     // returns an array of skincare tips for the given skin type
          function getSkincareTips(skinType) {
             switch (skinType) {
-                case 'Oily':
-                    return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Avoid heavy makeup'];
-                case 'Dry':
-                    return ['Use a gentle, creamy cleanser', 'Use a rich, hydrating moisturizer', 'Apply moisturizer while skin is still damp'];
+                case 'Gras':
+                    return ['Folositi un cleanser bland', 'Folositi o crema nu foarte grasa', 'Incercati sa evitati machiajul strident si greu'];
+                case 'Uscat':
+                    return ['Folositi un cleanser bland si hidratant', 'Folositi o crema grasa si hranitoare', 'Aplicati creama pe tenul putin umed'];
                 case 'Normal':
                     return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Apply sunscreen daily'];
-                case 'Combination':
+                case 'Mixt':
                     return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Apply moisturizer only to dry areas', 'Use blotting papers to control oiliness'];
+                case 'Sensibil':
+                    return ['Folositi un cleanser bland', 'Use a lightweight moisturizer', 'Apply moisturizer only to dry areas', 'Use blotting papers to control oiliness'];
                 default:
-                    return ['No skincare tips available for unknown skin type'];
+                    return ['Din pacate alegerile facute nu au dus la un rezultat :( Verificati daca ati completat toate campurile, daca ati completat corect si daca nici asa, nu toate tipurile de ten au aceleasi caracteristici intotdeauna :)'];
             }
         }
 </script>
