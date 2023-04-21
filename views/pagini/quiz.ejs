@@ -21,30 +21,30 @@
 <body>
     <%- include("../fragmente/header.ejs") %>
     <main>
-        <h1>Find Your Skin Type Quiz</h1>
+        <h1>Afla tipul de ten pe care il ai!</h1>
 
         <form id="skin-type-quiz">
 
-            <h2>Question 1:</h2>
+            <h2>Intrebarea 1:</h2>
             <p>How does your skin typically feel a few hours after you wash it?</p>
             <input type="radio" name="q1" value="oily"> Oily<br>
             <input type="radio" name="q1" value="dry"> Dry<br>
             <input type="radio" name="q1" value="normal"> Normal<br>
             <input type="radio" name="q1" value="combination"> Combination<br>
     
-            <h2>Question 2:</h2>
+            <h2>Intrebarea 2:</h2>
             <p>How does your skin react to new skincare products?</p>
             <input type="radio" name="q2" value="breakout"> It breaks out easily<br>
             <input type="radio" name="q2" value="irritation"> It becomes irritated easily<br>
             <input type="radio" name="q2" value="nothing"> It doesn't react strongly<br>
     
-            <h2>Question 3:</h2>
+            <h2>Intrebarea 3:</h2>
             <p>How visible are your pores?</p>
             <input type="radio" name="q3" value="large"> They're large and noticeable<br>
             <input type="radio" name="q3" value="small"> They're small and not very noticeable<br>
             <input type="radio" name="q3" value="medium"> They're somewhere in between<br>
     
-            <h2>Question 4:</h2>
+            <h2>Intrebarea 4:</h2>
             <p>How prone is your skin to sunburn?</p>
             <input type="radio" name="q4" value="very"> It burns easily<br>
             <input type="radio" name="q4" value="not"> It doesn't burn easily<br>
@@ -55,8 +55,8 @@
     
 
         <div id="results" style="display:none;">
-            <h2>Your skin type is: <span id="skin-type"></span></h2>
-            <p>Here are some skincare tips for your skin type:</p>
+            <h2>Ai un ten: <span id="skin-type"></span></h2>
+            <p>Cateva sfaturi pentru a avea grija de tenul tau:</p>
             <ul id="skincare-tips"></ul>
         </div>
 

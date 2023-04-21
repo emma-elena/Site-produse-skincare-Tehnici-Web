@@ -40,7 +40,7 @@ class AccesBD{
 
         return this.#instanta;
     }
-
+ 
     select({tabel="",campuri=[],conditiiAnd=[]} = {}, callback){
         let conditieWhere="";
         if(conditiiAnd.length>0)
