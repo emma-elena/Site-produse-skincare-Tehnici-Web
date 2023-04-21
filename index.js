@@ -8,6 +8,10 @@ const {Client} = require("pg");  //{nume de variabila}
 const formidable = require("formidable");
 
 const {Utilizator} = require("./module/utilizator.js")
+const AccesBD=require("./module/accesbd.js")
+
+var instantaBD=AccesBD.getInstanta({init:"local"});
+var client=instantaBD.getClient();
 
 app=express(); //cream server
 
@@ -29,6 +33,17 @@ app.use("/*", function(req, res, next){
 });
 
 
+
+
+// instantaBD.select({campuri:["nume","pret"],tabel:"prajituri", conditiiAnd:["pret>10", "pret<20"]}, function(err, rez){
+    
+//     console.log("====================================");
+//     if(err)
+//         console.log("Eroare:" ,err);
+//     else
+//         console.log(rez);
+// })
+
 //conexiunea la baza de date
 var client =  new Client({
     database:"site",
@@ -37,13 +52,16 @@ var client =  new Client({
     host:"localhost",
     port:5432});
     client.connect();
+/*
 
-client.query("select * from unnest(enum_range(null::categorie_produs))", function(err, rez){
-    if(err)
-        console.log(err);
-    else
-        console.log(rez);
-});
+
+// client.query("select * from unnest(enum_range(null::categorie_produs))", function(err, rez){
+//     if(err)
+//         console.log(err);
+//     else
+//         console.log(rez);
+// });
+*/
 obGlobal={
     erori:null,
     imagini:null,
@@ -163,7 +181,6 @@ app.post("/inregistrare",function(req, res){
             utilizNou.parola=campuriText.parola;
             utilizNou.culoare_chat=campuriText.culoare_chat
             utilizNou.salvareUtilizator();
-
         }
         catch(e){ eroare+=e.message;
             console.log(eroare);
