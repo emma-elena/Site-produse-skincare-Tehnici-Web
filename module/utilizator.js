@@ -1,10 +1,14 @@
 const AccesBD=require('./accesbd.js');
 const crypto=require("crypto");
+const nodemailer=require("nodemailer");
 
 class Utilizator{
     static tipConexiune="local";
     static tabel="utilizatori";
     static parolaCriptare="prlCript";
+    static lungimeCod = 64;
+    static emailServer = "emma.elena.cobzariu2023@gmail.com";
+    static numeDomeniu="localhost";
     #eroare;
 
     constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={}) {
@@ -54,24 +58,26 @@ class Utilizator{
     }
 
     salvareUtilizator(){
-        let parolaCriptata=crypto.scryptSync(this.parola,Utilizator.parolaCriptare,64).toString("hex");
-     
+        let parolaCriptata=crypto.scryptSync(this.parola,Utilizator.parolaCriptare, Utilizator.lungimeCod).toString("hex");
+        let utiliz=this;
         AccesBD.getInstanta(Utilizator.tipConexiune).insert({tabel:Utilizator.tabel,campuri:["username","nume","prenume","parola","email","culoare_chat","cod"],valori:[`'${this.username}'`,`'${this.nume}'`,`'${this.prenume}'`,`'${parolaCriptata}'`,`'${this.email}'`,`'${this.culoare_chat}'`,`''`]}, function(err, rez){
             if(err)
                 console.log(err);
+                let token="abcd";
+            utiliz.trimiteMail("Gata! Te-ai inregistrat cu succes","Username-ul este "+utiliz.username,
+            `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${utiliz.username}.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`,
+            )
         });
     }
-   // utiliz.trimiteMail("Te-ai inregistrat cu succes","Username-ul tau este "+utiliz.username,
-            // `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${utiliz.username}.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`,
-            // )
-/*
+   
+
     async trimiteMail(subiect, mesajText, mesajHtml, atasamente=[]){
         var transp= nodemailer.createTransport({
             service: "gmail",
             secure: false,
             auth:{//date login 
-                user:obGlobal.emailServer,
-                pass:"rwgmgkldxnarxrgu"
+                user:Utilizator.emailServer,
+                pass:"lmghgmepfokpzhrp"
             },
             tls:{
                 rejectUnauthorized:false
@@ -79,8 +85,8 @@ class Utilizator{
         });
         //genereaza html
         await transp.sendMail({
-            from:obGlobal.emailServer,
-            to:email, //TO DO
+            from:Utilizator.emailServer,
+            to:this.email, //TO DO
             subject:subiect,//"Te-ai inregistrat cu succes",
             text:mesajText, //"Username-ul tau este "+username
             html: mesajHtml,// `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${username}.</p> <p><a href='http://${numeDomeniu}/cod/${username}/${token}'>Click aici pentru confirmare</a></p>`,
@@ -88,6 +94,5 @@ class Utilizator{
         })
         console.log("trimis mail");
     }
-   */ 
 }
 module.exports={Utilizator:Utilizator}
