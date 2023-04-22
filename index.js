@@ -188,9 +188,8 @@ app.post("/inregistrare", function (req, res) {
             console.log(eroare);
         }
 
-
-        if (!eroare) {
-
+        if (!eroare) {   
+                res.render("pagini/inregistrare", {raspuns:"Felicitari! Inregistrare cu succes!"});  
 
         }
         else
