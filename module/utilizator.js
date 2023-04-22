@@ -55,7 +55,7 @@ class Utilizator{
 
     salvareUtilizator(){
         let parolaCriptata=crypto.scryptSync(this.parola,Utilizator.parolaCriptare,64).toString("hex");
-
+     
         AccesBD.getInstanta(Utilizator.tipConexiune).insert({tabel:Utilizator.tabel,campuri:["username","nume","prenume","parola","email","culoare_chat","cod"],valori:[`'${this.username}'`,`'${this.nume}'`,`'${this.prenume}'`,`'${parolaCriptata}'`,`'${this.email}'`,`'${this.culoare_chat}'`,`''`]}, function(err, rez){
             if(err)
                 console.log(err);
