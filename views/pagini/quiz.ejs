@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ro">
   <head>
-   <title>Pagina principala a site-ului</title>
+   <title>Quiz</title>
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
@@ -74,18 +74,15 @@
         </div> 
     
 
-        <div id="results" style="display:none;">
-            <div class="detalii">
-            <h2>Au venit rezultatele!</h2>
-            <h3>Aveti un ten: <span id="skin-type"></span></h3>
-            <h3>Cateva sfaturi pentru a avea grija de tenul dumneavoastra:</h3>
-            <ul id="skincare-tips"></ul>
+        
+            <div id="results" style="display:none;">
+                    <div id="detalii">
+                        <h2>Au venit rezultatele!</h2>
+                        <h3>Aveti un ten: <span id="skin-type"></span></h3>
+                        <h3>Cateva informatii si sfaturi pentru a avea grija de tenul dumneavoastra:</h3>
+                        <ul id="skincare-tips"></ul>
+                    </div>
             </div>
-
-            <div class="poza">
-                <img src="resurse/imagini/skincare-image.png" alt="skin">
-            </div>
-        </div>
 
           
     
@@ -107,20 +104,20 @@
     
                 // determine skin type based on user answers
                 let skinType = '';
-                if (q1Answer === 'oily' && q2Answer === 'breakout' && q3Answer === 'large' && (q4Answer === 'not' || q4Answer === 'sometimes') && q5Answer === 'not')
+                if ((q1Answer === 'oily') && (q2Answer === 'breakout' || q2Answer === 'nothing' || q2Answer === 'irritation') && (q3Answer === 'large' || q3Answer === 'medium') && (q4Answer === 'not' || q4Answer === 'sometimes') && q5Answer === 'not')
                  {
                     skinType = 'Gras';
                 } 
-                else if (q1Answer === 'dry' && q2Answer === 'irritation' && q3Answer === 'small' && (q4Answer === 'very' || q4Answer === 'sometimes') && (q5Answer === 'very' || q5Answer === 'not')) {
+                else if ((q1Answer === 'dry')  && (q2Answer === 'breakout' || q2Answer === 'nothing' || q2Answer === 'irritation') && (q3Answer === 'small' || q3Answer === 'medium') && (q4Answer === 'very' || q4Answer === 'sometimes' || q4Answer === 'not') && (q5Answer === 'not' || q5Answer === 'very')) {
                     skinType = 'Uscat';
                     } 
-                else if (q1Answer === 'normal' && q2Answer === 'nothing' && q3Answer === 'medium'  && (q4Answer === 'not' || q4Answer === 'sometimes') && q5Answer === 'not') {
+                else if ((q1Answer === 'normal' || q1Answer === 'combination') && q2Answer === 'nothing' && (q3Answer === 'medium' || q3Answer === 'small')  && (q4Answer === 'not' || q4Answer === 'sometimes') && q5Answer === 'not') {
                     skinType = 'Normal';
                     } 
-                else if (q1Answer === 'combination' && (q2Answer === 'breakout' || q2Answer === 'nothing') && q3Answer === 'medium' && (q4Answer === 'sometimes'|| q4Answer === 'not') && (q5Answer === 'very' || q5Answer === 'not')) {
+                else if ((q1Answer === 'combination') && (q2Answer === 'breakout' || q2Answer === 'nothing') && (q3Answer === 'medium' || q3Answer === 'large') && (q4Answer === 'not' || q4Answer === 'sometimes') && (q5Answer === 'very' || q5Answer === 'not')) {
                     skinType = 'Mixt';
                     } 
-                else if (q1Answer === 'normal' && (q2Answer === 'irritation' || q2Answer === 'breakout') && q3Answer === 'medium' && (q4Answer === 'sometimes'|| q4Answer === 'very') && q5Answer === 'very') {
+                else if ((q1Answer === 'normal') && (q2Answer === 'irritation' || q2Answer === 'breakout') && (q3Answer === 'large' || q3Answer === 'medium' || q3Answer === 'small') && (q4Answer === 'sometimes'|| q4Answer === 'very') && q5Answer === 'very') {
                     skinType = 'Sensibil';
                     } 
                 else {
@@ -136,17 +133,17 @@
          function getSkincareTips(skinType) {
             switch (skinType) {
                 case 'Gras':
-                    return ['Folositi un cleanser bland', 'Folositi o crema nu foarte grasa', 'Incercati sa evitati machiajul strident si greu'];
+                    return ["Sebumul poate înfunda porii și poate duce la creșterea frecvenței erupțiilor de acnee. Totuși, persoanele care au un astfel de ten se bucură de câteva părți bune, printre care se numără faptul că au pielea mai groasă și mai puține riduri. Toate aceste beneficii se datorează uleiului care ajută la conservarea pielii. Folositi un cleanser bland, o crema nu foarte grasa si incercati sa evitati machiajul strident si greu. Nu uitati de SPF, cel mai important pas!"];
                 case 'Uscat':
-                    return ['Folositi un cleanser bland si hidratant', 'Folositi o crema grasa si hranitoare', 'Aplicati creama pe tenul putin umed'];
+                    return ["Tenul uscat este o problemă cu care foarte multe persoane se confruntă în ziua de astăzi și care poate fi destul de dificil de gestionat. O piele uscată poate fi cauzată de o varietate de factori, precum vremea de afară, produsele de îngrijire neadecvate sau chiar dieta și stilul de viață nesănătos. Indiferent de cauze însă, tenul uscat poate fi frustrant și inconfortabil pentru majoritatea persoanelor, întrucât, pe lângă aspectul inestetic pe care îl oferă, acesta vine la pachet și cu mai multe simptome neplăcute, precum mâncărimea. Incercati sa folositi un cleanser bland si hidratant, folositi o crema grasa si hranitoare si aplicati-o  pe tenul putin umed. Nu uitati de SPF, cel mai important pas!"];
                 case 'Normal':
-                    return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Apply sunscreen daily'];
+                    return ["Principala caracteristică a tenului normal este echilibrul. Acest tip de ten are o circulație bună, pielea nu este nici prea grasă și nici prea uscată, nu prezintă pete, puncte negre. Este prezent în principal la persoanele tinere, cu un metabolism echilibrat. Nu uitati de SPF, cel mai important pas!"];
                 case 'Mixt':
-                    return ['Use a gentle cleanser', 'Use a lightweight moisturizer', 'Apply moisturizer only to dry areas', 'Use blotting papers to control oiliness'];
+                    return ["Specialiștii consideră că tenul mixt sau combinat este cel mai des întâlnit tip de ten. Tenul gras, care este caracteristic perioadei adolescenței, va deveni mixt odată cu înaintarea în vârstă a fiecărei persoane. Tenul mixt, așa cum indică și denumirea sa, este o îmbinare sau un mix între anumite tipuri de ten pe care le întâlnim în mod frecvent. Folositi o crema nu foarte grasa, hartii matifiante in zonele unde simtiti nevoia. Nu uitati de SPF, cel mai important pas!"];
                 case 'Sensibil':
-                    return ['Folositi un cleanser bland', 'Use a lightweight moisturizer', 'Apply moisturizer only to dry areas', 'Use blotting papers to control oiliness'];
+                    return ["Tenul sensibil este o afecțiune a pielii care poate fi caracterizată prin simptome precum roșeață, iritație, senzație de arsură, uscăciune, mâncărime sau senzație de strângere a pielii. Acest tip de ten poate fi cauzat de o varietate de factori, cum ar fi expunerea la agenți iritanți, utilizarea produselor cosmetice dure sau sensibilitatea crescută a pielii. Oamenii cu ten sensibil trebuie să acorde o atenție specială îngrijirii pielii și să utilizeze produse care sunt formulate special pentru a ajuta la calmarea și hidratarea pielii. În caz contrar, aceștia riscă să agraveze simptomele și să provoace apariția unor probleme de sănătate ale pielii, cum ar fi eczema sau dermatita. Pentru a preveni problemele de sănătate ale pielii și pentru a menține tenul sensibil sănătos, este important să se evite produsele cosmetice care conțin ingrediente iritante sau prea puternice. În schimb, este recomandat să se utilizeze produse de îngrijire a tenului care conțin ingrediente calmante, potrivite pentru nevoile acestui tip de ten.  Nu uitati de SPF, cel mai important pas!"];
                 default:
-                    return ['Din pacate alegerile facute nu au dus la un rezultat :( Verificati daca ati completat toate campurile, daca ati completat corect si daca nici asa, nu toate tipurile de ten au aceleasi caracteristici intotdeauna :)'];
+                    return ['Din pacate alegerile facute nu au dus la un rezultat :( Verificati daca ati completat toate campurile, daca ati completat corect si daca nici asa, nu toate tipurile de ten au aceleasi caracteristici intotdeauna :) Opinia medicului dermatolog este cea mai importanta'];
             }
         }
 </script>
