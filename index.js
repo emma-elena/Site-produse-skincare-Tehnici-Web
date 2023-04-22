@@ -217,8 +217,12 @@ app.post("/inregistrare", function (req, res) {
 
 
 
+//http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'
 
-
+app.get("/cod:username/:token", function (req, res){
+    console.log(req.params);   
+    let u= new Utilizator()
+});
 
 
 //pentru produs
