@@ -9,7 +9,7 @@ class Utilizator{
     static parolaCriptare="prlCript";
     static lungimeCod = 64;
     static emailServer = "emma.elena.cobzariu2023@gmail.com";
-    static numeDomeniu="localhost";
+    static numeDomeniu="localhost:8080";
     #eroare;
 
     constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={}) {
@@ -98,12 +98,19 @@ class Utilizator{
         console.log("trimis mail");
     }
 
-    static getUtilizDupaUsername(username){ //selecteaza doar dupa username utilizatorul din BD si returneaza toate proprietatile, inclusiv parola aia criptata pe care o sa o folosim in mom in care vrem sa verificam ca e acel utilizator
-        AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"Utilizator", campuri:["*"], conditiiAnd:[`username=${username}`]}, function(err, rezSelect){
-                if(err || rez.rows.length)
-                throw new Error();
 
-                let u = new Utilizator({id:rezSelect.rows[0].id, 
+    //trimit username ca sa imi creeze acel u, trimit proceseazaUtiliz adica callback ca sa il apelez cu u-ul creat de el si cu eventualii parametrii pe care ii mai pun in obparam
+    static getUtilizDupaUsername(username, obparam, proceseazaUtiliz){ //selecteaza doar dupa username utilizatorul din BD si returneaza toate proprietatile, inclusiv parola aia criptata pe care o sa o folosim in mom in care vrem sa verificam ca e acel utilizator
+        AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori", 
+        campuri:["*"], 
+        conditiiAnd:[`username='${username}'`]}, 
+        function(err, rezSelect){ //utilizatorul se creaza aici si se apeleaza mult dupa ce s-a creat functia asta de mai sus cu getUtilizatorDupaUsername
+                if(err){
+                    console.error("Utilizator:", err);
+                    console.log("Utilizator", rezSelect.rows.length);
+                throw new Error();
+                }
+                let u = new Utilizator({id:rezSelect.rows[0].id,   //u il creez in functia callback => rezolvam tot cu o functie callback, singura metoda prin care ii spunem ce sa faca cu utilizatorul
                     username:rezSelect.rows[0].username, 
                     nume:rezSelect.rows[0].nume, 
                     prenume:rezSelect.rows[0].prenume, 
@@ -111,7 +118,10 @@ class Utilizator{
                     rol:rezSelect.rows[0].rol, 
                     culoare_chat:rezSelect.rows[0].culoare_chat,
                     poza:rezSelect.rows[0].poza})
+                    proceseazaUtiliz(u, obparam)
         });
     }   
 }
+
+//getUtilizDupaUsername apeleaza o metoda select, in AccesBD este cu un client.query care este async, nu este sincrona functia pentru ca ea are apelul asta catre baza de date si eu nu pot sa returnez utilizatorul pt ca in primul rand il calculez intr-o alta functie
 module.exports={Utilizator:Utilizator}

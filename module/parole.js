@@ -1,4 +1,4 @@
-obGlobal="";
+sirAlphaNum="";
 
 v_intervale=[[48,57],[65,90],[97,122]] //coduri ASCII; cifre, litere mari si litere mici; vector de obiecte de tip vector cu 2 elemente, capatul de inceput si capatul de final 
 for(let interval of v_intervale){ //luam pe rand fiecare subinterval

@@ -29,13 +29,23 @@
             "imagine":"interzis.png"
         },
         
-        {
+        { 
             "identificator":2,
             "status":false,
             "titlu":"Eroare baza date",
             "text": "Reveniti mai tarziu!",
             "imagine":"interzis.png"
+        },
+        
+        {
+            "identificator":3,
+            "status":false,
+            "titlu":"Date gresite",
+            "text": "Verificati datele",
+            "imagine":"interzis.png"
         }
+
+
     ]
 }
   

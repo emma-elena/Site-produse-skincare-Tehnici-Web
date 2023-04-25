@@ -8,7 +8,8 @@ const { Client } = require("pg");  //{nume de variabila}
 const formidable = require("formidable");
 
 const { Utilizator } = require("./module/utilizator.js")
-const AccesBD = require("./module/accesbd.js")
+const AccesBD = require("./module/accesbd.js");
+const utilizator = require("./module/utilizator.js");
 
 var instantaBD = AccesBD.getInstanta({ init: "local" });
 var client = instantaBD.getClient();
@@ -219,9 +220,31 @@ app.post("/inregistrare", function (req, res) {
 
 //http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'
 
-app.get("/cod:username/:token", function (req, res){
-    console.log(req.params);   
-    let u= new Utilizator()
+app.get("/cod/:username/:token", function (req, res){
+    console.log(req.params);
+    try{
+    Utilizator.getUtilizDupaUsername(req.params.username, {res:res, token:req.params.token}, function(u, obparam){
+    AccesBD.getInstanta().update(
+        {tabel : "utilizatori", 
+        campuri: ['confirmat_mail'], 
+        valori:['true'], 
+        conditiiAnd : [`cod='${obparam.token}'`]}, 
+        function(err, rezUpdate){
+            if(err || rezUpdate.rowCount==0){
+               console.log("Cod:", err);
+                renderError(res,3); //il trimite pe pagina de eroare daca nu e corect
+            }
+            
+            else{
+                res.render("pagini/confirmare.ejs"); //intra pe confirmare.ejs
+            }
+        })
+    })
+    }
+    catch(e){
+        console.log(e);
+        renderError(res,2); 
+    }
 });
 
 
@@ -241,7 +264,7 @@ app.get(["/produs/:id"], function (req, res) {
 
 
 app.get('/favicon.ico', function (req, res) {
-
+ res.sendFile(__dirname+"/resurse/ico/favicon.ico")
 });
 
 

@@ -3,8 +3,8 @@
     <head>
         <meta name="keywords" content="skincare, ingrijire, produs, skincare routine"><!--cuvintele cheie ale paginii; majoritatea motoarelor de căutare ignoră keywords -->
         <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate."><!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->  
-       <!-- <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />-->
-        <title>Skincare Skema - pagina produse</title>
+       <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+        <title>Skincare Skema - produse</title>
         
         <script type="text/javascript" src=/resurse/js/produse.js></script>
         <%- include("../fragmente/head") %>  
@@ -16,8 +16,6 @@
         <label> Nume: <input type="text" id="inp-nume"></label>
         <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
         
-
-
         <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0"  max="70"> <span id="infoRange">(0) lei</span></label>
         <label>Select simplu:
             <select id="inp-categorie">
@@ -27,33 +25,38 @@
                 <% } %>
             </select>
         </label>
-        <p>
-        <button id="filtrare">Filtreaza</button> 
-        <button id="resetare">Reseteaza</button><br/>
-        <button id="sortCrescPret">Sorteaza crescator dupa pret</button>
-        <button id="sortDescrescPret">Sorteaza descrescator dupa pret</button>  
+    
+        <div class="button-grid"> 
+            <button class="button" id="filtrare">Filtreaza</button> 
+            <button class="button" id="resetare">Reseteaza</button><br/>
+        </div>
 
-        <button id="sortCrescNume">Sorteaza crescator dupa nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa nume</button>  
-        </p>
+       
         
         <!--
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
         -->
         <section id="produse">
             <h2>Produse</h2>
+            <div class="button-grid"> 
+                <button class="button" id="sortCrescPret">Sorteaza crescator dupa pret</button>
+                <button class="button" id="sortDescrescPret">Sorteaza descrescator dupa pret</button>  
+    
+                <button class="button" id="sortCrescNume">Sorteaza crescator dupa nume</button>
+                <button class="button" id="sortDescrescNume">Sorteaza descrescator dupa nume</button>  
+            </div>
             <div class="grid-produse">
                 <% for( let prod of locals.produse) { %>
                     <article class="produs" >
-                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
+                        <h3 class="nume"><a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
                         <div class="info-prod">
                             <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii%></span></p>
                             <p class="gramaj">Gramaj: <span class="val-gramaj"><%- prod.gramaj%></span></p>
+                            <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
                         </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
-                        <figure>
-                            <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:500px;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+                        
+                        <figure id="poza">
+                            <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>"  alt="[imagine <%- prod.nume %>]" /></a>
                         </figure>
                         <label class="selecteaza-cos">
                             Selectează:<br/>
