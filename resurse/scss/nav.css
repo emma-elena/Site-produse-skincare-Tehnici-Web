@@ -48,13 +48,13 @@ ul.meniu ul {
 ul.meniu li {
   cursor: pointer;
   background-color: var(--culoare-meniu);
-  transition: all 0.7s linear;
+  transition: all 0.3s linear;
 }
 ul.meniu li:hover {
   display: block;
 }
 ul.meniu li div {
-  transition: font-size 0.7s linear;
+  transition: font-size 0.3s linear;
 }
 ul.meniu li div:hover {
   font-size: 24px;
@@ -73,7 +73,7 @@ ul.meniu li > a::before{
   height: 0;
   content: " ";
   opacity: 0;
-  transition: all 0.7s linear;
+  transition: all 0.3s linear;
   background-image: linear-gradient(to right, rgb(47, 168, 199), rgb(197, 231, 235));
 }
 ul.meniu li > a:hover::before{
@@ -89,7 +89,7 @@ ul.meniu li > a::after{
   height: 0;
   content: " ";
   opacity: 0;
-  transition: all 0.7s linear;
+  transition: all 0.3s linear;
   background-image: linear-gradient(to right, rgb(197, 231, 235), rgb(47, 168, 199));
 }
 ul.meniu li > a:hover::after{
@@ -98,7 +98,7 @@ ul.meniu li > a:hover::after{
 }
 ul.meniu li:hover ul {
   animation-name: animatie_submeniu;
-  animation-duration: 1s;
+  animation-duration: 0.3s;
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
