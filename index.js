@@ -266,6 +266,11 @@ app.post("/login", function (req, res) {
 });
 
 
+app.get("/logout", function(req, res){
+    req.session.destroy(); //distruge obiectul cu sesiunea, adica cu datele utilizatorului salvate; la fiecare cerere luam utilizatorul din sesiune si il punem in locals 
+    res.locals.utilizator=null; //seteaza utilizatorul din locals sa fie nul
+    res.render("pagini/logout"); // ma trimite catre o pagina care ma anunta ca m-am delogat
+});
 
 
 //http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'
