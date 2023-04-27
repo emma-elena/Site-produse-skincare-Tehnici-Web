@@ -6,6 +6,10 @@ const ejs = require("ejs");
 const sass = require("sass");
 const { Client } = require("pg");  //{nume de variabila} 
 const formidable = require("formidable");
+const session = require('express-session');
+
+
+
 
 const { Utilizator } = require("./module/utilizator.js")
 const AccesBD = require("./module/accesbd.js");
@@ -15,6 +19,15 @@ var instantaBD = AccesBD.getInstanta({ init: "local" });
 var client = instantaBD.getClient();
 
 app = express(); //cream server
+
+
+//apeleaza session pe care il exporta modulul si primeste un obiect cu configuratii si aici ii spun cum sa imi creeze aceasta sesiune
+app.use(session({ // aici se creeaza proprietatea session a requestului (pot folosi req.session)
+    //un fel de parola de sesiune cu care cripteaza datele sesiunii
+    secret: 'abcdefg',//folosit de express session pentru criptarea id-ului de sesiune
+    resave: true,
+    saveUninitialized: false
+  }));
 
 app.set("view engine", "ejs"); //ca sa putem folosi ejs, ejs pentru template, restul de pagini ca sa nu facem copy-paste pentru meniu
 console.log("Cale proiect: ", __dirname);  //__dirname este folderul proiectului
@@ -28,9 +41,16 @@ app.use("node_modules", express.static(__dirname + "/node_modules"));
 
 var optiuniPentruMeniu = "ceva!";
 
+
+//    /* se aplica pentru orice query
 app.use("/*", function (req, res, next) {
     res.locals.optiuniMeniu = optiuniPentruMeniu;
-    next();
+
+    //aici in res.locals.utilizator il pun pe ala din sesiune => acum o sa se transmita catre toate paginile
+    res.locals.utilizator=req.session.utilizator;
+
+
+    next(); //trece mai departe cu res.locals imbogatit mai sus
 });
 
 
@@ -132,7 +152,7 @@ function renderError(res, identificator, titlu, text, imagine) {
     }
 }
 
-app.get(["/", "/index", "/home"], function (req, res) {
+app.get(["/", "/index", "/home", "/login"], function (req, res) {
     console.log("ceva");
     //res.sendFile(__dirname+ "/index.html");
     //res.write("nu stiu");
@@ -215,6 +235,36 @@ app.post("/inregistrare", function (req, res) {
         console.log(nume, fisier);
     });
 });
+
+
+
+app.post("/login", function (req, res) {
+    var username;
+    var formular = new formidable.IncomingForm()
+    formular.parse(req, function (err, campuriText, campuriFisier) {
+        Utilizator.getUtilizDupaUsername(campuriText.username,{
+            //acesti parametrii sunt din obparam pe care pot sa il mai imbogatesc dupa   
+            req:req,
+            res:res,
+            parola:campuriText.parola}, 
+                function(u, obparam){
+                    //obtin parola criptata iar acum utilizatorul este setat la username-ul cerut
+                    let parolaCriptata=Utilizator.criptareParola(obparam.parola);
+
+                    //aici verificam daca utilizatorul are acceasi parola cu cea criptata
+                    if(u.parola==parolaCriptata){ //daca parolele(cea introdusa la login cu cea la inregistrare) sunt egale vreau sa imi salvez utilizatorul in request session
+                        obparam.req.session.utilizator = u; //l-am salvat pe utilizator in sesiune
+                        obparam.res.redirect("/index");
+                        //obparam.res.redirect("/login");
+                    }
+                    //daca nu se logheaza bine trimit mesajul asta de eroare si nu salvez nimic
+                    else{
+                        obparam.res.render("pagini/index", {eroareLogin:"Date logare incorecte!"})
+                    }
+                })
+    })
+});
+
 
 
 

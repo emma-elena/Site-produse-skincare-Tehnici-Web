@@ -13,6 +13,8 @@
     <p id="watermark"></p>
     <p id="absolut"></p>
     <!-- <button id="tema"><span class="fas fa-regular fa-sun"></span><span class="fas fa-regular fa-moon"></span></button> -->
+   
+   
 
   
       <nav> 
@@ -65,8 +67,28 @@
               <li><div><a href="/quiz">Quiz</a></div></li>
 
               <li><div><a href="/galerie">Galerie</a></div></li>
+
+
+<!-- if(locals.utilizator    adica daca utilizatorul e logat -->
+
+
+              <% if(locals.utilizator && locals.utilizator.rol=="admin") { %>
+                <!-- daca e admin afisez pagina de useri -->
+                <li><a href="/useri">Useri</a></li>
+              <% } %>
+
+              <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
                 
+                <li><div><%- locals.utilizator.username %></div>  <!-- ii facem un buton cu username-ul lui -->
+                      <ul>  <!--  si in buton ii fac un submeniu cu profil si logout-->
+                        <li><a href="/profil">Profil</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+              <% } %>
               
           </ul>
       </nav>
+
+
     </header>

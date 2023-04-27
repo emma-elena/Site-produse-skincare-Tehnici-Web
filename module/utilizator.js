@@ -12,7 +12,7 @@ class Utilizator{
     static numeDomeniu="localhost:8080";
     #eroare;
 
-    constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={}) {
+    constructor({id, username, nume, prenume, email, parola, rol, culoare_chat="black", poza}={}) {
         this.id=id;
         try{
             if(this.checkUsername(username))
@@ -26,6 +26,7 @@ class Utilizator{
                 catch(e){ this.#eroare=e.message}
         this.prenume = prenume;
         this.email = email;
+        this.parola = parola;
         this.rol=rol; //TO DO clasa Rol
         this.culoare_chat=culoare_chat;
         this.poza=poza;
@@ -58,8 +59,13 @@ class Utilizator{
         }
     }
 
+    //aici practic export functia ca sa o folosesc si in alte locuri
+    static criptareParola(parola){
+       return crypto.scryptSync(parola,Utilizator.parolaCriptare, Utilizator.lungimeCod).toString("hex");
+    }
+
     salvareUtilizator(){
-        let parolaCriptata=crypto.scryptSync(this.parola,Utilizator.parolaCriptare, Utilizator.lungimeCod).toString("hex");
+        let parolaCriptata=Utilizator.criptareParola(this.parola);
         let utiliz=this;
         let token=parole.genereazaToken(100);
 
@@ -105,8 +111,8 @@ class Utilizator{
         campuri:["*"], 
         conditiiAnd:[`username='${username}'`]}, 
         function(err, rezSelect){ //utilizatorul se creaza aici si se apeleaza mult dupa ce s-a creat functia asta de mai sus cu getUtilizatorDupaUsername
-                if(err){
-                    console.error("Utilizator:", err);
+                if(err || rezSelect.rowCount==0){
+                    console.error("Utilizator:", err);  
                     console.log("Utilizator", rezSelect.rows.length);
                 throw new Error();
                 }
@@ -115,6 +121,7 @@ class Utilizator{
                     nume:rezSelect.rows[0].nume, 
                     prenume:rezSelect.rows[0].prenume, 
                     email:rezSelect.rows[0].email, 
+                    parola:rezSelect.rows[0].parola, 
                     rol:rezSelect.rows[0].rol, 
                     culoare_chat:rezSelect.rows[0].culoare_chat,
                     poza:rezSelect.rows[0].poza})
