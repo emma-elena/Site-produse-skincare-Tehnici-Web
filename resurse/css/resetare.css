@@ -1,10 +1,13 @@
 p,
 figure {
   margin: 0;
+  padding: 5px;
 }
 
+
 body{
-  margin: 10 ;
+  margin: 10px;
+  padding: 20px;
 }
 
 
@@ -21,15 +24,14 @@ html:focus-within {
 
 h1{
   font-size: 2em;
+  padding: 5px;
 }
 
 html{
   font-size: 18px;
 }
 
-body{
-  margin: 10px;
-}
+
 
 
 ul[role='list'],

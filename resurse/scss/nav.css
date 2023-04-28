@@ -10,9 +10,8 @@ nav {
   height: var(--inaltime-meniu);
   background-color: var(--culoare-meniu);
   overflow: visible;
-  position: relative;
-  width: auto;
   position: sticky;
+  width: auto;
   top: 0;
 }
 
