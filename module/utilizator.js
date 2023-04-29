@@ -14,6 +14,7 @@ class Utilizator{
 
     constructor({id, username, nume, prenume, email, parola, rol, culoare_chat="black", poza}={}) {
         this.id=id;
+        //optional acest try catch in constructor
         try{
             if(this.checkUsername(username))
                 this.username = username;
@@ -24,12 +25,19 @@ class Utilizator{
                     this.nume = nume;
                 }
                 catch(e){ this.#eroare=e.message}
-        this.prenume = prenume;
-        this.email = email;
-        this.parola = parola;
-        this.rol=rol; //TO DO clasa Rol
-        this.culoare_chat=culoare_chat;
-        this.poza=poza;
+
+                //ia toate proprietatile la rand din {} de la constructor si o sa le puna in this
+        for(let prop in arguments[0]){
+            this[prop]=arguments[0][prop] //cu valorile lor ca zic arguments[0] adica obiectul primit ca parametru de [prop]
+        }
+
+        //astea dispar pentru ca am for-ul de mai sus
+        // this.prenume = prenume;
+        // this.email = email;
+        // this.parola = parola;
+        // this.rol=rol; //TO DO clasa Rol
+        // this.culoare_chat=culoare_chat;
+        // this.poza=poza;
 
         this.#eroare="";
     }
@@ -70,7 +78,7 @@ class Utilizator{
         let token=parole.genereazaToken(100);
 
         AccesBD.getInstanta(Utilizator.tipConexiune).insert({tabel:Utilizator.tabel,campuri:["username","nume","prenume","parola","email","culoare_chat","cod"],valori:[`'${this.username}'`,`'${this.nume}'`,`'${this.prenume}'`,`'${parolaCriptata}'`,`'${this.email}'`,`'${this.culoare_chat}'`,`'${token}'`]}, function(err, rez){
-            if(err)
+            if(err) 
                 console.log(err);
                 
             utiliz.trimiteMail("Gata! Te-ai inregistrat cu succes","Username-ul este "+utiliz.username,
@@ -116,16 +124,20 @@ class Utilizator{
                     console.log("Utilizator", rezSelect.rows.length);
                 throw new Error();
                 }
-                let u = new Utilizator({id:rezSelect.rows[0].id,   //u il creez in functia callback => rezolvam tot cu o functie callback, singura metoda prin care ii spunem ce sa faca cu utilizatorul
-                    username:rezSelect.rows[0].username, 
-                    nume:rezSelect.rows[0].nume, 
-                    prenume:rezSelect.rows[0].prenume, 
-                    email:rezSelect.rows[0].email, 
-                    parola:rezSelect.rows[0].parola, 
-                    rol:rezSelect.rows[0].rol, 
-                    culoare_chat:rezSelect.rows[0].culoare_chat,
-                    poza:rezSelect.rows[0].poza})
-                    proceseazaUtiliz(u, obparam)
+                let u = new Utilizator(rezSelect.rows[0])
+                // ({
+                    
+                //     //dupa for-ul de la inceput care itereaza prin toate elementele constructorului, poate sa nu ne mai intereseze fiecare camp in parte pentru ca el oricum o sa faca asocierea chiar daca nu le dau in aceeasi ordine 
+                //     id:rezSelect.rows[0].id,   //u il creez in functia callback => rezolvam tot cu o functie callback, singura metoda prin care ii spunem ce sa faca cu utilizatorul
+                //     username:rezSelect.rows[0].username, 
+                //     nume:rezSelect.rows[0].nume, 
+                //     prenume:rezSelect.rows[0].prenume, 
+                //     email:rezSelect.rows[0].email, 
+                //     parola:rezSelect.rows[0].parola, 
+                //     rol:rezSelect.rows[0].rol, 
+                //     culoare_chat:rezSelect.rows[0].culoare_chat,
+                //     poza:rezSelect.rows[0].poza})
+                    proceseazaUtiliz(u, obparam);  
         });
     }   
 }

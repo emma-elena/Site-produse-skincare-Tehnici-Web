@@ -76,13 +76,13 @@ class AccesBD {
             throw new Error("Numarul de campuri difera de nr de valori")
         let campuriActualizate = [];
         for (let i = 0; i < campuri.length; i++)
-            campuriActualizate.push(`${campuri[i]}='${valori[i]}'`);
+            campuriActualizate.push(`${campuri[i]}='${valori[i]}'`); //string-urile de forma camp=valoare, iau pe rand toate campurile si de pe exact aceeasi pozitie (i) valorile coresp.
         let conditieWhere = "";
-        if (conditiiAnd.length > 0)
-            conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        if (conditiiAnd.length > 0) //la conditiiWhere (asa am facut si la select), daca chiar am conditii ca poate e vectorul vid, si daca am atunci pun un where in conditieWhere si fac un join dupa el: ${conditiiAnd.join(" and ")} pentru ca asa cum am facut query builder, pot sa am doar conditii legate cu and (dar nu e obligatoriu, mai exista o varianta: video1 9:00)
+            conditieWhere = `where ${conditiiAnd.join(" and ")}`;  //virgula pentru string pentru camp-valoare la join
         let comanda = `update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
         console.log(comanda);
-        this.client.query(comanda, callback)
+        this.client.query(comanda, callback) //aici apelez normal cu client query, clientul fiind ala de SQL din AccesBD(unde definim la inceput database, user, password etc)
     }
 
     delete({ tabel = "", conditiiAnd = [] } = {}, callback) {

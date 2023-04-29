@@ -13,6 +13,7 @@ nav {
   position: sticky;
   width: auto;
   top: 0;
+  z-index: 9998;
 }
 
 ul.meniu > li, ul.meniu ul li {
