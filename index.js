@@ -157,8 +157,11 @@ app.get(["/", "/index", "/home", "/login"], function (req, res) {
     //res.sendFile(__dirname+ "/index.html");
     //res.write("nu stiu");
     //res.end();
-    res.render("pagini/index", { ip: req.ip, ceva: 30, altceva: 20, imagini: obGlobal.imagini }); //object literal 
+    let sir = req.session.succesLogin;
+    req.session.succesLogin=null; //dupa ce l-am folosit, i-am dat render, il fac inapoi nul
+    res.render("pagini/index", { ip: req.ip, ceva: 30, altceva: 20, imagini: obGlobal.imagini, succesLogin:sir}); //object literal 
     //obGlobal.imagini = vector
+   
 });
 
 
@@ -252,14 +255,16 @@ app.post("/login", function (req, res) {
                     let parolaCriptata=Utilizator.criptareParola(obparam.parola);
 
                     //aici verificam daca utilizatorul are acceasi parola cu cea criptata
-                    if(u.parola==parolaCriptata){ //daca parolele(cea introdusa la login cu cea la inregistrare) sunt egale vreau sa imi salvez utilizatorul in request session
+                    if(u.parola==parolaCriptata && u.confirmat_mail){ //daca parolele(cea introdusa la login cu cea la inregistrare) sunt egale vreau sa imi salvez utilizatorul in request session + && u.confirmat_mail care verifica daca e confirmat mail-ul
                         obparam.req.session.utilizator = u; //l-am salvat pe utilizator in sesiune
+                        obparam.req.session.succesLogin="Felicitari! Te-ai logat!";
                         obparam.res.redirect("/index");
                         //obparam.res.redirect("/login");
+                        obparam.req.session.succesLogin="Felicitari! Te-ai logat!";
                     }
                     //daca nu se logheaza bine trimit mesajul asta de eroare si nu salvez nimic
                     else{
-                        obparam.res.render("pagini/index", {eroareLogin:"Date logare incorecte!"})
+                        obparam.res.render("pagini/index", {eroareLogin:"Date logare incorecte sau nu ati confirmat mail-ul!", imagini:obGlobal.imagini})
                     }
                 })
     })
