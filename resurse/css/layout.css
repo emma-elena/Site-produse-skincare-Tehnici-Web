@@ -246,9 +246,6 @@ tr:hover {
 
 
 
-.yt {
-    display: flex;
-}
 
 
 
@@ -271,6 +268,9 @@ tr:hover {
     background-color: var(--culoare-pagina);
 }
 
+.yt {
+    display: flex;
+}
 
 
 

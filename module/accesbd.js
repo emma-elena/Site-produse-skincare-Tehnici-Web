@@ -62,6 +62,26 @@ class AccesBD {
         this.client.query(comanda, callback)
     }
 
+
+    //functia asta nu mai primeste callback-ul pentru ca acum pot sa o astept cu await si pot sa il procesez pe loc pentru ca e asincrona si nu mai e necesar callback; daca vreau callback apelez functia scrisa mai sus
+    async selectAsync({tabel="",campuri=[],conditiiAnd=[]} = {}){
+        let conditieWhere="";
+        if(conditiiAnd.length>0)
+            conditieWhere=`where ${conditiiAnd.join(" and ")}`;
+        
+        let comanda=`select ${campuri.join(",")} from ${tabel} ${conditieWhere}`;
+        console.error("selectAsync:",comanda);
+        try{
+            let rez=await this.client.query(comanda);//astept rezultatul query-ului, il pun in rez si selectasync imi afiseaza rezultatul
+            console.log("selectasync: ",rez);
+            return rez;
+        }
+        catch (e){
+            console.log(e);
+            return null;
+        }
+    }
+
     insert({ tabel = "", campuri = [], valori = [] } = {}, callback) {
         if (campuri.length != valori.length)
             throw new Error("Numarul de campuri difera de nr de valori")
