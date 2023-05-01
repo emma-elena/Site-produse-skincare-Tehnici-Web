@@ -113,8 +113,33 @@ class Utilizator{
     }
 
 
+    static async  getUtilizDupaUsernameAsync(username){ //nu ii mai dau parametrii pentru callback si respectiv callback-ul pentru ca pot sa folosesc rezultatul returnat de functie direct in codul apelant daca e functie asincrona
+            if(!username) return null; 
+            try{
+                let rezSelect = await AccesBD.getInstanta(Utilizator.tipConexiune).selectAsync(
+                    {tabel:"utilizatori", 
+                    campuri:["*"], 
+                    conditiiAnd:[`username='${username}'`]
+                });
+                if(rezSelect.rowCount!=0){
+                    return new Utilizator(rezSelect.rows[0])
+                }
+                else {
+                    console.log("getUtilizDupaUsernameAsync: Nu am gasit utilizatorul"); 
+                    return null
+                };
+            }
+            catch(e){
+               console.log(e); 
+               return null;  //daca esueaza functia, nu va returna nimic; esueaza cand select-ul scris de noi are o eroare de sinaxa/ username-ul are o val dubioasa pe care BD nu o intelege
+            }
+
+    }
+
+
     //trimit username ca sa imi creeze acel u, trimit proceseazaUtiliz adica callback ca sa il apelez cu u-ul creat de el si cu eventualii parametrii pe care ii mai pun in obparam
     static getUtilizDupaUsername(username, obparam, proceseazaUtiliz){ //selecteaza doar dupa username utilizatorul din BD si returneaza toate proprietatile, inclusiv parola aia criptata pe care o sa o folosim in mom in care vrem sa verificam ca e acel utilizator
+        if(!username) return null; 
         AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori", 
         campuri:["*"], 
         conditiiAnd:[`username='${username}'`]}, 

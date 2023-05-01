@@ -54,6 +54,14 @@ app.use("/*", function (req, res, next) {
 });
 
 
+// {
+// (function(a){console.log("in functie", a)})(10);
+// //aici am definit o functie si am si apelat-o
+// (async function(){
+// let u = await Utilizator.getUtilizDupaUsernameAsync("abc");
+// console.log("User async: ", u);
+// })()
+// }
 
 
 // instantaBD.select({campuri:["nume","pret"],tabel:"prajituri", conditiiAnd:["pret>10", "pret<20"]}, function(err, rez){
