@@ -307,6 +307,56 @@ app.post("/login", function (req, res) {
 });
 
 
+app.post("/profil", function(req, res){
+    console.log("profil");
+    if (!req.session.utilizator){
+        randeazaEroare(res,403,)
+        res.render("pagini/eroare_generala",{text:"Nu sunteti logat."});
+        return;
+    }
+    var formular= new formidable.IncomingForm();
+ 
+    formular.parse(req,function(err, campuriText, campuriFile){
+       
+        var parolaCriptata=Utilizator.criptareParola(campuriText.parola);
+        AccesBD.getInstanta().update(
+            {tabel:"utilizatori",
+            campuri:["nume","prenume","email","culoare_chat"],
+            valori:[`${campuriText.nume}`,`${campuriText.prenume}`,`${campuriText.email}`,`${campuriText.culoare_chat}`],
+            conditiiAnd:[`parola='${parolaCriptata}'`]
+        },  function(err, rez){
+            if(err){
+                console.log(err);
+                randeazaEroare(res,2);
+                return;
+            }
+            console.log(rez.rowCount);
+            if (rez.rowCount==0){
+                res.render("pagini/profil",{mesaj:"Update-ul nu s-a realizat. Verificati parola introdusa."});
+                return;
+            }
+            else{            
+                //actualizare sesiune
+                console.log("ceva");
+                req.session.utilizator.nume= campuriText.nume;
+                req.session.utilizator.prenume= campuriText.prenume;
+                req.session.utilizator.email= campuriText.email;
+                req.session.utilizator.culoare_chat= campuriText.culoare_chat;
+                res.locals.utilizator=req.session.utilizator;
+            }
+ 
+ 
+            res.render("pagini/profil",{mesaj:"Update-ul s-a realizat cu succes."});
+ 
+        });
+       
+ 
+    });
+});
+
+
+
+
 app.get("/logout", function(req, res){
     req.session.destroy(); //distruge obiectul cu sesiunea, adica cu datele utilizatorului salvate; la fiecare cerere luam utilizatorul din sesiune si il punem in locals 
     res.locals.utilizator=null; //seteaza utilizatorul din locals sa fie nul
