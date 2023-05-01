@@ -5,9 +5,10 @@ const sharp = require("sharp"); //pentru redimensionarea imaginilor din cod
 const ejs = require("ejs");
 const sass = require("sass");
 const { Client } = require("pg");  //{nume de variabila} 
-const formidable = require("formidable");
+const formidable = require("formidable"); //pentru fisiere
+//nu body parser pentru formulare simple cu inputuri gen checkbox, radiobutton, text etc; tot ce e de tip file intra in campuriFisier
 const session = require('express-session');
-
+const path=require('path');
 
 
 
@@ -19,6 +20,16 @@ var instantaBD = AccesBD.getInstanta({ init: "local" });
 var client = instantaBD.getClient();
 
 app = express(); //cream server
+
+
+//creare foldere necesare (populate de aplicatie si utilizator)
+foldere=["temp", "poze_uploadate"]; //lista cu folderele
+for (let folder of foldere){
+    let calefolder=path.join(__dirname,folder);
+    if (!fs.existsSync(calefolder)) //daca nu exista folderul il creaza, dar nu strica codul cu nimic aceasta bucata daca folderul exista deja pt ca nu intra in if
+        fs.mkdirSync(calefolder);
+}
+
 
 
 //apeleaza session pe care il exporta modulul si primeste un obiect cu configuratii si aici ii spun cum sa imi creeze aceasta sesiune
@@ -36,8 +47,9 @@ app.use("/resurse", express.static(__dirname + "/resurse")); //numai caile care 
 //al doilea e folderul 
 
 
-app.use("node_modules", express.static(__dirname + "/node_modules"));
+app.use("node_modules", express.static(__dirname + "/node_modules")); //bootstrap?
 
+app.use("node_uploadate", express.static(__dirname + "/node_uploadate")); //asa l-am facut static
 
 var optiuniPentruMeniu = "ceva!";
 
@@ -197,7 +209,7 @@ app.get(["/produse"], function (req, res) {
 
 
 app.post("/inregistrare", function (req, res) {
-    var username;
+    var username; //variabila definita la nivel de functie
     var formular = new formidable.IncomingForm()
     formular.parse(req, function (err, campuriText, campuriFisier) {//4
         console.log(campuriText);
@@ -238,8 +250,13 @@ app.post("/inregistrare", function (req, res) {
         console.log("fileBegin");
 
         console.log(nume, fisier);
-        //TO DO in folderul poze_uploadate facem folder cu numele utilizatorului
-
+        
+        //in folderul poze_uploadate facem folder cu numele utilizatorului
+        let folderUser = path.join(__dirname, "poze_uploadate", username);
+        console.log(folderUser);
+        if(!fs.existsSync(folderUser))
+            fs.mkdirSync(folderUser);
+        fisier.filepath=path.join(folderUser, fisier.originalFilename)
     })
     formular.on("file", function (nume, fisier) {//3
         console.log("file");
