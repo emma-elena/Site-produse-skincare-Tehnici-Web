@@ -59,12 +59,13 @@ class Utilizator{
         return username!= ""
     } 
 
+    // folosit doar la inregistrare si modificare profil 
     set setareUsername(username){
         if (this.checkUsername(username))
         this.username = username;
         else{
             throw new Error("Username incorect")
-        }
+        }    
     }
 
     //aici practic export functia ca sa o folosesc si in alte locuri
@@ -140,14 +141,18 @@ class Utilizator{
     //trimit username ca sa imi creeze acel u, trimit proceseazaUtiliz adica callback ca sa il apelez cu u-ul creat de el si cu eventualii parametrii pe care ii mai pun in obparam
     static getUtilizDupaUsername(username, obparam, proceseazaUtiliz){ //selecteaza doar dupa username utilizatorul din BD si returneaza toate proprietatile, inclusiv parola aia criptata pe care o sa o folosim in mom in care vrem sa verificam ca e acel utilizator
         if(!username) return null; 
+        let eroare = null;
         AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori", 
         campuri:["*"], 
         conditiiAnd:[`username='${username}'`]}, 
         function(err, rezSelect){ //utilizatorul se creaza aici si se apeleaza mult dupa ce s-a creat functia asta de mai sus cu getUtilizatorDupaUsername
-                if(err || rezSelect.rowCount==0){
+                if(err){ //eroare BD
                     console.error("Utilizator:", err);  
                     console.log("Utilizator", rezSelect.rows.length);
-                throw new Error();
+                    eroare = -2;
+                }
+                else if(rezSelect.rowCount==0){ //nu e vorba de select, eroare ca nu a gasit utilizatorul
+                    eroare = -1;
                 }
                 let u = new Utilizator(rezSelect.rows[0])
                 // ({
@@ -162,7 +167,7 @@ class Utilizator{
                 //     rol:rezSelect.rows[0].rol, 
                 //     culoare_chat:rezSelect.rows[0].culoare_chat,
                 //     poza:rezSelect.rows[0].poza})
-                    proceseazaUtiliz(u, obparam);  
+                    proceseazaUtiliz(u, obparam, eroare);  
         });
     }   
 }

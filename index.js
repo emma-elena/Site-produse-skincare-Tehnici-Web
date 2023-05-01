@@ -49,7 +49,7 @@ app.use("/resurse", express.static(__dirname + "/resurse")); //numai caile care 
 
 app.use("node_modules", express.static(__dirname + "/node_modules")); //bootstrap?
 
-app.use("node_uploadate", express.static(__dirname + "/node_uploadate")); //asa l-am facut static
+app.use("poze_uploadate", express.static(__dirname + "/poze_uploadate")); //asa l-am facut static
 
 var optiuniPentruMeniu = "ceva!";
 
@@ -225,19 +225,30 @@ app.post("/inregistrare", function (req, res) {
 
             utilizNou.parola = campuriText.parola;
             utilizNou.culoare_chat = campuriText.culoare_chat
-            utilizNou.salvareUtilizator();
+            Utilizator.getUtilizDupaUsername(campuriText.username, {}, function(u, parametru, eroareUser){
+                if (eroareUser==-1){ //nu exista username-ul in BD
+                    utilizNou.salvareUtilizator();
+                }
+                else{
+                    eroare+="Acest username exista deja";
+                }
+
+                if (!eroare) {   
+                    res.render("pagini/inregistrare", {raspuns:"Felicitari! Inregistrare cu succes!"});  
+                }
+                else
+                    res.render("pagini/inregistrare", { err: "Eroare: " + eroare });
+                })
+           
         }
         catch (e) {
-            eroare += e.message;
+            console.log(e.message);
+            eroare += "Eroare site. Reveniti mai tarziu";
             console.log(eroare);
+            res.render("pagini/inregistrare", { err: "Eroare: " + eroare })
         }
 
-        if (!eroare) {   
-                res.render("pagini/inregistrare", {raspuns:"Felicitari! Inregistrare cu succes!"});  
 
-        }
-        else
-            res.render("pagini/inregistrare", { err: "Eroare: " + eroare });
     });
     formular.on("field", function (nume, val) {  // 1 
 
