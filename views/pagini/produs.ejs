@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html  lang="ro">
     <head>
+        
         <meta name="keywords" content="skincare, ingrijire, produs, skincare routine"><!--cuvintele cheie ale paginii; majoritatea motoarelor de căutare ignoră keywords -->
         <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate."><!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->  
-         <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
+        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />  
 
-        <title>Skincare Skema - produs</title>
-        <%- include("../fragmente/head.ejs") %>     
+        <title>Pagina produs</title>
+        <%- include("../fragmente/head.ejs") %>   
+
        
     </head>
     <input type="checkbox" class="checkbox" id="checkbox">
@@ -17,11 +19,10 @@
     </label>
     <body>
 
-    <%- include("../fragmente/header") %>
+    <%- include("../fragmente/header.ejs") %>
 
     <main>
         <section>
-            <h2>Pagină produs</h2>
                 <article id="art-produs">
                     <h3><span class="nume"><%- locals.prod.nume %></span></h3>
                     <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
@@ -40,7 +41,7 @@
         </section>
     </main>
 
-    <%- include("../fragmente/footer") %>
+    <%- include("../fragmente/footer.ejs") %>
     <a href="#" class="linktop"><div id="triunghi"></div></a> 
     </body>
 </html>
