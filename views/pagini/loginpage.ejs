@@ -6,7 +6,6 @@
         <!-- <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" /> -->
         <title>Skincare Skema - înregistrare </title>
         <%- include("../fragmente/head") %>     
-        <script type="text/javascript" src=/resurse/js/inregistrare.js></script>
     </head>
     <body>
         <input type="checkbox" class="checkbox" id="checkbox">
@@ -18,20 +17,26 @@
     <%- include("../fragmente/header") %>
     
     <main>
-    <div class="afisaj">
-        <h1>Inregistrare utilizator</h1>
-        <% if(!locals.raspuns) { %>    
-
-			<%-include("../fragmente/formular", {action: "/inregistrare"}) %>
-        <% } %>
-        
-	<% if(locals.raspuns) { %>
-	<%- locals.raspuns+"<br/>"%>
-	<% } %>
-	<% if(locals.err) { %>
-	<%- locals.err %>
-	<% } %>
-    </div>
+        <% if(!locals.utilizator) { %>
+            <form id="form_inreg"  method="post" class="date"  action="/login"  enctype="multipart/form-data">
+                <p>
+                    <label>
+                        Username: <input type="text" name="username" id="inp-username" value="" required pattern="[A-Za-z0-9]+">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Parola: <input id="parl" type="password" required  name="parola" value="">
+                    </label>
+                </p>
+                <p><input class="button" type="submit" value="Logare"></p>
+            </form>
+            <p><%- locals.eroareLogin %></p>
+            <% } else {%>
+  
+            <%- locals.succesLogin %>
+  
+            <% }  %>
 </main>
 
 <footer>

@@ -300,7 +300,7 @@ app.post("/login", function (req, res) {
                     }
                     //daca nu se logheaza bine trimit mesajul asta de eroare si nu salvez nimic
                     else{
-                        obparam.res.render("pagini/index", {eroareLogin:"Date logare incorecte sau nu ati confirmat mail-ul!", imagini:obGlobal.imagini})
+                        obparam.res.render("pagini/loginpage", {eroareLogin:"Date logare incorecte sau nu ati confirmat mail-ul!", imagini:obGlobal.imagini})
                     }
                 })
     })

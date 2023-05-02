@@ -1,5 +1,14 @@
 <header class="c1" id="h1">
     <h1 class="text-center"><span class="fas fa-star fa-fw fa-spin"></span>Skincare Skema</h1>  
+    <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
+                
+      
+     <p>Bine ai revenit<img class="login" src="resurse/imagini/login.png"> <div><%- locals.utilizator.username %></div><a href="/profil">Profil</a> <a href="/logout">Logout</a></p>  <!-- ii facem un buton cu username-ul lui -->
+
+          <% } else {%>
+            <a href="/loginpage"><img class="login" src="resurse/imagini/login.png"><p>Login</p></a>
+    <% } %>
+      
 
     <!-- <p id="watermark"></p>
     <p id="absolut"></p> -->
@@ -59,26 +68,10 @@
 
 
 
-<!-- if(locals.utilizator    adica daca utilizatorul e logat -->
 
 
-              <% if(locals.utilizator && locals.utilizator.rol=="admin") { %>
-                <!-- daca e admin afisez pagina de useri -->
-                <li><a href="/useri">Useri</a></li>
-              <% } %>
-
-              <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
-                
-                <li><div><%- locals.utilizator.username %></div>  <!-- ii facem un buton cu username-ul lui -->
-                      <ul>  <!--  si in buton ii fac un submeniu cu profil si logout-->
-                        <li><a href="/profil">Profil</a></li>
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
-                </li>
-              <% } %>
-              
           </ul>
       </nav>
 
-
+   
     </header>
