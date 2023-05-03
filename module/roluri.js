@@ -1,15 +1,19 @@
 
 const Drepturi=require('./drepturi.js');
 
+// static get tip() e un fel de constanta string care arata tipul de rol
 
+
+
+//rol e clasa de baza
 class Rol{
     static get tip() {return "generic"}
     static get drepturi() {return []}
     constructor (){
-        this.cod=this.constructor.tip;
+        this.cod=this.constructor.tip; //nu e obligatorie aceasta linie
     }
 
-    areDreptul(drept){ //drept trebuie sa fie tot Symbol
+    areDreptul(drept){//aici se verifica daca rolul are dreptul dat in paranteza si care va fi simbolul din drepturi; drept trebuie sa fie tot Symbol
         return Rol.drepturi.includes(drept); //pentru ca e admin
     }
 }
@@ -17,14 +21,17 @@ class Rol{
 class RolAdmin extends Rol{
     
     static get tip() {return "admin"}
-    constructor (cod_rol){
-        super()
+    constructor (){
+        super() //super constructorul clasei de baza, aici apelez constructorul din rol, si dupa pot sa pun o propr doar a acestui rol, nu si a clasei de baza
     }
 
-    areDreptul(){
+    areDreptul(){ 
         return true; //pentru ca e admin
     }
 }
+
+
+//aici nu am mai definit functia areDreptul pentru ca este tot cea din Rol
 
 class RolModerator extends Rol{
     
@@ -33,7 +40,7 @@ class RolModerator extends Rol{
         Drepturi.vizualizareUtilizatori,
         Drepturi.stergereUtilizatori
     ] }
-    constructor (cod_rol){
+    constructor (){
         super()
     }
 }
@@ -43,13 +50,26 @@ class RolClient extends Rol{
     static get drepturi() { return [
         Drepturi.cumparareProduse
     ] }
-    constructor (cod_rol){
+    constructor (){
         super()
     }
 }
 
 
 
+class RolFactory{
+    //imi ofera obiectele de tip rol in functie de val din enum (comun etc.) 
+    static creeazaRol(tip){ //ii transmit un tip de clasa derivata
+        switch(tip){
+            //imi returneaza pe banda obiect de acel tip
+            case RolAdmin.tip: return new RolAdmin();
+            case RolModerator.tip: return new RolModerator();
+            case RolClient.tip: return new RolClient();
+        }
+    }
+}
+
 module.exports={
+    RolFactory:RolFactory,
     RolAdmin:RolAdmin
 }

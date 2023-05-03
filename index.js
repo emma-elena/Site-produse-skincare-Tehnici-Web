@@ -15,6 +15,7 @@ const path=require('path');
 const { Utilizator } = require("./module/utilizator.js")
 const AccesBD = require("./module/accesbd.js");
 const utilizator = require("./module/utilizator.js");
+const Drepturi = require("./module/drepturi.js");
 
 var instantaBD = AccesBD.getInstanta({ init: "local" });
 var client = instantaBD.getClient();
@@ -57,9 +58,23 @@ var optiuniPentruMeniu = "ceva!";
 //    /* se aplica pentru orice query
 app.use("/*", function (req, res, next) {
     res.locals.optiuniMeniu = optiuniPentruMeniu;
-
+    res.locals.Drepturi=Drepturi;
     //aici in res.locals.utilizator il pun pe ala din sesiune => acum o sa se transmita catre toate paginile
-    res.locals.utilizator=req.session.utilizator;
+    
+    
+    
+    //din sesiune ia utilizatorul si ii pun obiectul asociat intr-o propr noua a requestului req.utilizator
+    if(req.session.utilizator){ //utilizator logat, creez un camp utilizator care chiar e obiectul utilizator, nu doar proprietatile lui salvate in session; il setez si in locals ca sa am acces la el pe toate paginile
+        req.utilizator=res.locals.utilizator=new Utilizator(req.session.utilizator); //o sa fie chiar un obiect de tip utilizator
+        
+        // console.log("req.utilizator:", req.utilizator);
+        // console.log("Locals:", res.locals.utilizator);
+        // console.log("Rol", req.utilizator.rol);
+        // console.log("!!!!!!!!", req.utilizator.areDreptul(Drepturi.vizualizareUtilizatori));
+    }
+    // console.log("+++++", req.session.utilizator);
+
+
 
 
     next(); //trece mai departe cu res.locals imbogatit mai sus
@@ -174,6 +189,7 @@ function renderError(res, identificator, titlu, text, imagine) {
 
 app.get(["/", "/index", "/home", "/login"], function (req, res) {
     console.log("ceva");
+    console.log(req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse));
     //res.sendFile(__dirname+ "/index.html");
     //res.write("nu stiu");
     //res.end();
@@ -294,7 +310,7 @@ app.post("/login", function (req, res) {
                     //aici verificam daca utilizatorul are acceasi parola cu cea criptata
                     if(u.parola==parolaCriptata && u.confirmat_mail){ //daca parolele(cea introdusa la login cu cea la inregistrare) sunt egale vreau sa imi salvez utilizatorul in request session + && u.confirmat_mail care verifica daca e confirmat mail-ul
                         //
-                        u.poza=u.poza?path.join("poze_uploadate",u.username,u.poza):"";
+                        u.poza=u.poza?path.join("poze_uploadate",u.username,u.poza):"/resurse/imagini/login.png";
                         
                         obparam.req.session.utilizator = u; //l-am salvat pe utilizator in sesiune
                         obparam.req.session.succesLogin="Felicitari! Te-ai logat!";
@@ -359,6 +375,43 @@ app.post("/profil", function(req, res){
  
     });
 });
+
+// Admistrare utilizatori
+app.get("/useri", function(req, res){
+   
+
+
+    //req?.utilizator?  daca utilizatorul curent din request utilizator, apoi verific daca are metoda areDreptul si dupa verific daca o pot apela cu dreptul vizualizareUtilizatori
+    if(req?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){
+        AccesBD.getInstanta().select({tabel:"utilizatori", campuri:["*"]}, function(err, rezQuery){ //selectez pe toata lumea
+            console.log(err);
+            res.render("pagini/useri", {useri: rezQuery.rows}); //apoi randez cu userii din rezQuery
+        });
+    }
+    else{
+        randeazaEroare(res, 403);
+    }
+});
+
+
+app.post("/sterge_utiliz", function(req, res){
+    if(req?.utilizator?.areDreptul?.(Drepturi.stergereUtilizatori)){ //verific daca are dreptul sa stearga utilizatori si abia dupa preiau datele din formular; daca foloseste postman sa intre altfel ii va da eroare 403
+        var formular= new formidable.IncomingForm();
+
+
+        formular.parse(req,function(err, campuriText, campuriFile){
+           
+                AccesBD.getInstanta().delete({tabel:"utilizatori", conditiiAnd:[`id=${campuriText.id_utiliz}`]}, function(err, rezQuery){
+                console.log(err);
+                res.redirect("/useri");
+            });
+        });
+    }else{
+        randeazaEroare(res,403);
+    }
+})
+
+
 
 
 

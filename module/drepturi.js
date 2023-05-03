@@ -11,7 +11,9 @@
 
 
 
- //obiect cu proprietati, astea sunt drepturile pe care pot sa le aiba utilizatorii; daca vreau sa fac ceva anume, trebuie sa am acel drept de mai jos
+//obiect cu proprietati, astea sunt drepturile pe care pot sa le aiba utilizatorii; daca vreau sa fac ceva anume, trebuie sa am acel drept de mai jos
+//symbol = un fel de unique; valoarea(cea din Symbol) o accesam decat din proprietate; daca scriem in consola Symbol("abc")==Symbol("abc") da fals
+
 
 /**
  * @name module.exports.Drepturi

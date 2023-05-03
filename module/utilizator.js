@@ -2,6 +2,8 @@ const AccesBD=require('./accesbd.js');
 const crypto=require("crypto");
 const nodemailer=require("nodemailer");
 const parole = require('./parole.js');
+const {RolFactory} = require('./roluri.js');
+
 
 class Utilizator{
     static tipConexiune="local";
@@ -38,6 +40,11 @@ class Utilizator{
         // this.rol=rol; //TO DO clasa Rol
         // this.culoare_chat=culoare_chat;
         // this.poza=poza;
+
+
+        if(this.rol)
+            this.rol=this.rol.cod? RolFactory.creeazaRol(this.rol.cod):  RolFactory.creeazaRol(this.rol);
+        console.log(this.rol);
 
         this.#eroare="";
     }
@@ -170,6 +177,11 @@ class Utilizator{
                     proceseazaUtiliz(u, obparam, eroare);  
         });
     }   
+
+//verific daca are dreptul (completari 1 2:56:00)
+    areDreptul(drept){
+        return this.rol.areDreptul(drept);
+    }
 }
 
 //getUtilizDupaUsername apeleaza o metoda select, in AccesBD este cu un client.query care este async, nu este sincrona functia pentru ca ea are apelul asta catre baza de date si eu nu pot sa returnez utilizatorul pt ca in primul rand il calculez intr-o alta functie
