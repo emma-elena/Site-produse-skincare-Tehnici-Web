@@ -78,7 +78,7 @@ class Utilizator{
         let utiliz=this;
         let token=parole.genereazaToken(100);
 
-        AccesBD.getInstanta(Utilizator.tipConexiune).insert({tabel:Utilizator.tabel,campuri:["username","nume","prenume","parola","email","culoare_chat","cod"],valori:[`'${this.username}'`,`'${this.nume}'`,`'${this.prenume}'`,`'${parolaCriptata}'`,`'${this.email}'`,`'${this.culoare_chat}'`,`'${token}'`]}, function(err, rez){
+        AccesBD.getInstanta(Utilizator.tipConexiune).insert({tabel:Utilizator.tabel,campuri:["username","nume","prenume","parola","email","culoare_chat","cod","poza"],valori:[`'${this.username}'`,`'${this.nume}'`,`'${this.prenume}'`,`'${parolaCriptata}'`,`'${this.email}'`,`'${this.culoare_chat}'`,`'${token}'`,`'${this.poza}'`]}, function(err, rez){
             if(err) 
                 console.log(err);
                 

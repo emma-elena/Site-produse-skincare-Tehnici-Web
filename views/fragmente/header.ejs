@@ -3,7 +3,7 @@
     <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
                 
       
-     <p>Bine ai revenit<img class="login" src="resurse/imagini/login.png"> <div><%- locals.utilizator.username %></div><a href="/profil">Profil</a> <a href="/logout">Logout</a></p>  <!-- ii facem un buton cu username-ul lui -->
+     <p>Bine ai revenit <div><%- locals.utilizator.username %></div><a href="/profil">Profil</a> <a href="/logout">Logout</a></p>  <!-- ii facem un buton cu username-ul lui -->
 
           <% } else {%>
             <a href="/loginpage"><img class="login" src="resurse/imagini/login.png"><p>Login</p></a>

@@ -212,19 +212,20 @@ app.post("/inregistrare", function (req, res) {
     var username; //variabila definita la nivel de functie
     var formular = new formidable.IncomingForm()
     formular.parse(req, function (err, campuriText, campuriFisier) {//4
-        console.log(campuriText);
-
+        console.log("Inregistrare: ", campuriText);
+        console.log(campuriFisier);
         var eroare = "";
 
         var utilizNou = new Utilizator();
         try {
             utilizNou.setareNume = campuriText.nume;
             utilizNou.setareUsername = campuriText.username;
-            utilizNou.email = campuriText.email
-            utilizNou.prenume = campuriText.prenume
+            utilizNou.email = campuriText.email;
+            utilizNou.prenume = campuriText.prenume;
 
             utilizNou.parola = campuriText.parola;
-            utilizNou.culoare_chat = campuriText.culoare_chat
+            utilizNou.culoare_chat = campuriText.culoare_chat;
+            utilizNou.poza= campuriFisier.poza.originalFilename;
             Utilizator.getUtilizDupaUsername(campuriText.username, {}, function(u, parametru, eroareUser){
                 if (eroareUser==-1){ //nu exista username-ul in BD
                     utilizNou.salvareUtilizator();
@@ -292,6 +293,9 @@ app.post("/login", function (req, res) {
 
                     //aici verificam daca utilizatorul are acceasi parola cu cea criptata
                     if(u.parola==parolaCriptata && u.confirmat_mail){ //daca parolele(cea introdusa la login cu cea la inregistrare) sunt egale vreau sa imi salvez utilizatorul in request session + && u.confirmat_mail care verifica daca e confirmat mail-ul
+                        //
+                        u.poza=u.poza?path.join("poze_uploadate",u.username,u.poza):"";
+                        
                         obparam.req.session.utilizator = u; //l-am salvat pe utilizator in sesiune
                         obparam.req.session.succesLogin="Felicitari! Te-ai logat!";
                         obparam.res.redirect("/index");
@@ -314,6 +318,8 @@ app.post("/profil", function(req, res){
         res.render("pagini/eroare_generala",{text:"Nu sunteti logat."});
         return;
     }
+
+    
     var formular= new formidable.IncomingForm();
  
     formular.parse(req,function(err, campuriText, campuriFile){
