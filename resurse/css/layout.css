@@ -1,6 +1,6 @@
 body {
     --culoare-background: #d2f1f7;
-    --culoare-sectiuni: #a7d2da;
+    --culoare-sectiuni:  rgba(96, 210, 252, 0.3);;
     --c1: #aceaf3;
     --c2: #465a5d;
     --culoare-footer-si-header: #558892;
@@ -10,6 +10,7 @@ body {
     --culoare-border-linktop: grey;
     --culoare-background-butoane-iframe: lightblue;
     background-color: var(--culoare-pagina);
+    
 }
 .dark {
     --culoare-background: #293031;
