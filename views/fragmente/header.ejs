@@ -3,8 +3,8 @@
     
     <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
                  
-     <p>Bine ai revenit <div><%- locals.utilizator.username %></div>
-      <a href="/profil">Profil</a> 
+     <p>Bine ai revenit 
+      <a href="/profil"><div><%- locals.utilizator.username %></div></a> 
       <a href="/logout">Logout</a></p>  <!-- ii facem un buton cu username-ul lui -->
 
       <% }if (locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){%>
