@@ -14,7 +14,7 @@ body {
 }
 .dark {
     --culoare-background: #293031;
-    --culoare-sectiuni: #1f292b;
+    --culoare-sectiuni:  rgba(21, 40, 48, 0.5);;
     --c1: #243638;
     --c2: #80b5bb;
     --culoare-footer-si-header: #213538;

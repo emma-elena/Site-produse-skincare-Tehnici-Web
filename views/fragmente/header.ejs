@@ -7,13 +7,16 @@
       <a href="/profil"><div><%- locals.utilizator.username %></div></a> 
       <a href="/logout">Logout</a></p>  <!-- ii facem un buton cu username-ul lui -->
 
-      <% }if (locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){%>
+      <% } else {%>
+        <a href="/loginpage"><img class="login" src="resurse/imagini/login.png"><p>Login</p></a>
+
+        <% } %>
+
+    <%if (locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){%>
               <li><a href="/useri">Useri</a></li>
               <!-- <li><a href="/grafice">Grafice</a></li> -->
               <li><a href="/comenzi">Comenzi</a></li> <!--aici intervine mongo,salvam facturile in mongo-->
 
-          <% } else {%>
-            <a href="/loginpage"><img class="login" src="resurse/imagini/login.png"><p>Login</p></a>
     <% } %>
       
 
