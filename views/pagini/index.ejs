@@ -43,8 +43,14 @@
           importanta <b>ingrijirii</b> pielii, a corpului, dar mai ales a propriei persoane.
         </p>
 
-
-    
+    <p>Useri online:</p>
+      <ol>
+        <% for(let u of locals.useriOnline){ %>
+            <li>
+              <%- u.username %>(<%- u.nume %><%- u.prenume %>) 
+            </li>
+        <%}%>
+      </ol>
 
 
         <!-- <figure style="width: 15%;">

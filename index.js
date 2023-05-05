@@ -96,7 +96,7 @@ app.all("/*", function(req, res, next){
            console.log(err);
        }
    )
-    next();
+    next(); //il trimite mai departe la app.get-ul care s-ar potrivi cu cerera utilizatorului
 });
 
 
@@ -232,9 +232,18 @@ app.get(["/", "/index", "/home", "/login"], function (req, res) {
     //res.end();
     let sir = req.session.succesLogin;
     req.session.succesLogin=null; //dupa ce l-am folosit, i-am dat render, il fac inapoi nul
-    res.render("pagini/index", { ip: req.ip, ceva: 30, altceva: 20, imagini: obGlobal.imagini, succesLogin:sir}); //object literal 
-    //obGlobal.imagini = vector
+
    
+   client.query("select username, nume, prenume from utilizatori where id in (select distinct user_id from accesari where now()-data_accesare <= interval '15 minutes')",   //face conversia din minute in milisecunde el singur
+    function(err, rez){ //rez nu e setat daca e setata eroarea
+        let useriOnline=[]; 
+        if(!err && res.rowCount!=0) //res.rowCount!=0 adica vine ceva din baza de date, am niste inregistrari
+            useriOnline=rez.rows; //punem acele inregistrari; ma asigur ca e tot timpul vector
+
+            //randam pagina dupa ce primim un rezultat de la client.query
+        res.render("pagini/index", { ip: req.ip, ceva: 30, altceva: 20, imagini: obGlobal.imagini, succesLogin:sir, useriOnline:useriOnline}); //object literal 
+    });   
+    //obGlobal.imagini = vector
 });
 
 
