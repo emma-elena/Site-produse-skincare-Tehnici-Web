@@ -81,6 +81,43 @@ app.use("/*", function (req, res, next) {
 });
 
 
+//app.get daca avem /ceva, e doar /ceva
+//app.use ca sa mearga inclusiv pentru accesari de tip post, poate vreau sa retin cand da sumbit unui formular de ex, app.get numai pentru accesari de tip get; putem sa avem mai multe /
+//app.all la fel ca app.use, doar ca app.use nu vede tot url
+app.all("/*", function(req, res, next){
+    //verific daca exista utilizatorul si daca da, ii preiau id-ul
+    let id_utiliz=req?.session?.utilizator?.id;
+    id_utiliz=id_utiliz?id_utiliz:null; //daca e ceva in el, ramane chiar el
+    AccesBD.getInstanta().insert({//inserez in tabel detaliile, data_accesare nu apare aici pentru ca are setat default timpul curent iar id e serial, cu auto-increment
+       tabel:"accesari",
+       campuri:["ip", "user_id", "pagina"],
+       valori:[`'${getIp(req)}'`, `${id_utiliz}`, `'${req.url}'`]
+       }, function(err, rezQuery){
+           console.log(err);
+       }
+   )
+    next();
+});
+
+
+//verific x-forwarded-for; pentru cine am forwardat mesajul
+function getIp(req){//pentru Heroku/Render
+    var ip = req.headers["x-forwarded-for"];//ip-ul userului pentru care este forwardat mesajul
+    if (ip){
+        let vect=ip.split(","); //split pentru ca e posibil sa fi trecut prin mai multe dispozitive care au facut forward
+        return vect[vect.length-1]; //din tot, noi luam ultimul ip
+    }
+    else if (req.ip){ //aici daca nu obtin ip-ul de mai sus
+        return req.ip;
+    }
+    else{
+     return req.connection.remoteAddress; //pot sa iau si de aici, din aceasta propr dar e foarte putin probabil. Asa ne asiguram ca indiferent de versiunea Node, suntem asigurati
+    }
+}
+
+
+
+
 // {
 // (function(a){console.log("in functie", a)})(10);
 // //aici am definit o functie si am si apelat-o
@@ -389,7 +426,7 @@ app.get("/useri", function(req, res){
         });
     }
     else{
-        randeazaEroare(res, 403);
+        renderError(res, 403);
     }
 });
 
@@ -407,7 +444,7 @@ app.post("/sterge_utiliz", function(req, res){
             });
         });
     }else{
-        randeazaEroare(res,403);
+        renderError(res,403);
     }
 })
 
