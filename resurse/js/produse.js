@@ -1,5 +1,79 @@
 window.addEventListener("load", function(){
+    //    incarc datele din cosul virtual, preluarea din localStorage, ca si cum as avea iteme in cosul virtual
+
+
+    //preluare date cos virtual (din local storage)
+    //in localStorage vom memora cosul virtual ca o lista de id-uri separate prin virgula
+    //am produsul 3,1,10,4,1 (nu am voie de doua ori 1) cand selectez l-am adaugat, cand debifez l-am sters, nu am de doua ori un produs
     
+    //In localStorage   "cos_virtual":"3,1,10,4"
+    //                      cheia       valoarea
+
+    //pentru cantitate, in localStorage in loc sa memoram string-ul "3,1,10,4" care arata ca am produsul cu id-ul 3, dar nu stiu de cate ori, 
+    //pot sa memorez cu un alt separator    "3|2" asta arata 2 bucati de produsul 3,  "3|2,5|1,1|7"
+
+
+    let iduriProduse=localStorage.getItem("cos_virtual");
+
+    //daca am ceva in iduriProduse, nu e null, getItem a returnat ceva, atunci facem split (ce era inainte string devine vector)
+    iduriProduse=iduriProduse?iduriProduse.split(","):[];     //["3", "1", "10", "4"]
+ 
+    //vreau sa trec prin fiecare checkbox corespunzator unui produs din cosul virtual pt ca as vrea sa se pastreze datele, produsele selectate   
+    for(let idp of iduriProduse){
+        let ch = document.querySelector(`[value='${idp}'].select-cos`);
+        if(ch){
+            ch.checked=true; //daca exista checkbox-ul atunci il bifam
+        }
+        else{
+            console.log("Id cos virtual inexistent:", idp);
+        }
+    }
+
+
+
+
+
+//adaugare date in cos virtual (din localStorage)
+  //daca avem clasa select-cos pe mai multe elemente nu mai merge sa facem asa cu getElementsByClassName, facem cu un querySelectorAll, scriem asa ca sa nu depinda de tipul de input(checkbox)
+    let checkboxuri = document.getElementsByClassName("select-cos");
+
+    //let creeaza o instanta de fiecare data cand face o noua iteratie a for-ului
+    for(let ch of checkboxuri){ 
+        //ce se intampla la schimbarea unui astfel de checkbox
+        ch.onchange=function(){
+            //  bifat/nebifat
+            //trebuie sa obtin vector de produse ca sa adaug sau sa sterg 
+
+            let iduriProduse=localStorage.getItem("cos_virtual");
+            iduriProduse=iduriProduse?iduriProduse.split(","):[];
+
+            //verific daca in urma schimbarii starii checkbox-ului e bifat sau nu
+            if(this.checked){ //daca e bifat vreau sa adaug in vectorul de produse si produsul curent
+                iduriProduse.push(this.value);  //push adauga la final id-ul elementului
+            }
+            else{
+                //sterg produsul dupa ce i-am gasit pozitia
+                let poz=iduriProduse.indexOf(this.value);
+
+                //daca pozitia e -1 inseamna ca nu a gasit valoarea in vectorul de id-uri
+                if(poz != -1){ //daca chiar l-a gasit atunci ma apuc sa il sterg
+                     iduriProduse.splice(poz,1); //splice pentru a sterge si pentru a adauga elemente
+                            //pozitia de la care sterge elementul apoi cate elemente sa stearga, e un sg id pe care vreau sa il sterg; al treilea parametru imi arata ce sa pun in loc, dar in cazul asta nu e nevoie
+                    }
+            }
+
+            //setez cosul virtual cu noua valoare din iduriProduse
+            localStorage.setItem("cos_virtual", iduriProduse.join(","));    
+            //o sa apara stringul cu tot cu [] si nu vreau sa le pastreze, pentru a evita sa mai fac un subsir care stere prima [, apoi ultima ]
+            //din vector fac sir, fac cu opusul lui split care e join si ia toate elem din iduriProduse si concateneaza intre ele cu ,
+        }
+    }
+
+
+
+ 
+
+
     document.getElementById("inp-pret").onchange=function(){
         document.getElementById("infoRange").innerHTML = `(${this.value}) lei`
     }
