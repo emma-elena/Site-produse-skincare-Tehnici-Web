@@ -100,6 +100,23 @@ app.all("/*", function(req, res, next){
 });
 
 
+
+function stergeAccesariVechi(){
+    AccesBD.getInstanta().delete({ tabel : "accesari", 
+    conditiiAnd : [" now()-data_accesare >= interval '15 minutes'"]}, 
+    function(err, rez) {//la delete rezultatul spune cate randuri a sters si nu ne intereseaza
+        console.log(err);
+    })
+}
+
+
+//apelam aceasta functie cand pornim serverul si stergem accesarile vechi
+stergeAccesariVechi();
+
+//la fiecare 15 minute sa repetam procedeul
+setInterval(stergeAccesariVechi, 15*60*1000);
+
+
 //verific x-forwarded-for; pentru cine am forwardat mesajul
 function getIp(req){//pentru Heroku/Render
     var ip = req.headers["x-forwarded-for"];//ip-ul userului pentru care este forwardat mesajul
