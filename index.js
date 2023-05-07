@@ -22,6 +22,9 @@ var client = instantaBD.getClient();
 
 app = express(); //cream server
 
+//tratez proprietatea body din cadrul fetch-ului si il pun sa il vada ca pe un obiect, nu ca pe un string cu express.json
+app.use(["/produse_cos","/cumpara"],express.json({limit:'2mb'}));//obligatoriu de setat pt request body de tip json
+
 
 //creare foldere necesare (populate de aplicatie si utilizator)
 foldere=["temp", "poze_uploadate"]; //lista cu folderele
@@ -526,6 +529,29 @@ app.get(["/produs/:id"], function (req, res) {
         else
             res.render("pagini/produs", { prod: rez.rows[0] });
     });
+});
+
+
+//Cos virtual
+
+//- pentru a primi date pentru produsele din cosul virtual:
+app.post("/produse_cos",function(req, res){
+    console.log(req.body);//ce era in fetch
+    if(req.body.ids_prod.length!=0){
+        //TO DO : cerere catre AccesBD astfel incat query-ul sa fi `select nume, descriere, pret, gramaj, imagine from produse where id in (lista de id-uri)`
+        AccesBD.getInstanta().select({tabel:"produse", campuri:"nume,descriere,pret,gramaj,imagine".split(","), conditiiAnd:[`id in (${req.body.ids_prod})`]},
+        function(err,rez){
+            if(err)
+                res.send([]);
+            else
+                res.send(rez.rows);
+        });
+    }
+    else{
+        res.send([]);
+    }
+
+
 });
 
 
