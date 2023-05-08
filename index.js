@@ -10,6 +10,8 @@ const formidable = require("formidable"); //pentru fisiere
 const session = require('express-session');
 const path=require('path');
 const QRCode = require('qrcode');
+const puppeteer=require('puppeteer');
+const mongodb=require('mongodb');
 
 
 
@@ -57,6 +59,39 @@ app.use("node_modules", express.static(__dirname + "/node_modules")); //bootstra
 app.use("poze_uploadate", express.static(__dirname + "/poze_uploadate")); //asa l-am facut static
 
 var optiuniPentruMeniu = "ceva!";
+
+
+
+
+obGlobal = {
+    erori: null,
+    imagini: null,
+    optiuniPentruMeniu: null,
+
+    //ca sa imi creez calea pe bucatele
+    protocol:"http",
+    numeDomeniu:"localhost:8080",
+
+
+    clientMongo:mongodb.MongoClient,
+    bdMongo:null
+
+}
+
+
+
+
+var url = "mongodb://localhost:27017";//pentru versiuni mai vechi de Node
+var url = "mongodb://0.0.0.0:27017";
+
+
+obGlobal.clientMongo.connect(url, function(err, bd) {  //ma conectez la url-ul dat 
+    if (err) console.log(err);
+    else{
+        obGlobal.bdMongo = bd.db("site"); //setez baza de date curenta
+    }
+});
+
 
 
 //    /* se aplica pentru orice query
@@ -149,7 +184,7 @@ function getIp(req){//pentru Heroku/Render
 // }
 
 
-// instantaBD.select({campuri:["nume","pret"],tabel:"prajituri", conditiiAnd:["pret>10", "pret<20"]}, function(err, rez){
+// instantaBD.select({campuri:["nume","pret"],tabel:"produse", conditiiAnd:["pret>10", "pret<20"]}, function(err, rez){
 
 //     console.log("====================================");
 //     if(err)
@@ -177,15 +212,7 @@ client.connect();
 //         console.log(rez);
 // });
 */
-obGlobal = {
-    erori: null,
-    imagini: null,
-    optiuniPentruMeniu: null,
 
-    //ca sa imi creez calea pe bucatele
-    protocol:"http",
-    numeDomeniu:"localhost:8080"
-}
 
 
 function createImages() {
@@ -312,8 +339,87 @@ client.query("select id from produse", function(err, rez){
 
  
 
+// app.post("/cumpara", function (req, res){
+//     if(req?.session?.utilizator && req?.session?.utilizator?.areDreptul(Drepturi.cumparareProduse)){ 
+
+//     }
+// });
+
+app.post("/cumpara",function(req, res){
+    console.log(req.body);
+    console.log("Utilizator:", req?.utilizator);
+    console.log("Utilizator:", req?.utilizator?.rol?.areDreptul?.(Drepturi.cumparareProduse));
+    console.log("Drept:", req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse));
+    if (req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse)){ //verific daca e utilizator logat si daca are dreptul de a cumpara si daca are generez factura, salvez in Mongo
+        AccesBD.getInstanta().select({
+            tabel:"produse",
+            campuri:["*"],
+            conditiiAnd:[`id in (${req.body.ids_prod})`]
+        }, function(err, rez){
+            if(!err  && rez.rowCount>0){
+                console.log("produse:", rez.rows);
+
+                //obtin factura
+                let rezFactura= ejs.render(fs.readFileSync("./views/pagini/factura.ejs").toString("utf-8"),{
+                    protocol: obGlobal.protocol, 
+                    domeniu: obGlobal.numeDomeniu,
+                    utilizator: req.session.utilizator,
+                    produse: rez.rows
+                });
+                console.log(rezFactura);
+                let numeFis=`./temp/factura${(new Date()).getTime()}.pdf`;
+                genereazaPdf(rezFactura, numeFis, function (numeFis){
+                    mesajText=`Stimate ${req.session.utilizator.username} aveti mai jos rezFactura.`;
+                    mesajHTML=`<h2>Stimate ${req.session.utilizator.username},</h2> aveti mai jos rezFactura.`;
+                    req.utilizator.trimiteMail("Factura", mesajText,mesajHTML,[{
+                        filename:"factura.pdf",
+                        content: fs.readFileSync(numeFis)
+                    }] );
+                    res.send("Totul e bine!");
+                });
+                rez.rows.forEach(function (elem){ elem.cantitate=1});
+                let jsonFactura= {
+                    data: new Date(),
+                    username: req.session.utilizator.username,
+                    produse:rez.rows
+                }
+
+                //inseram factura in mongo
+                if(obGlobal.bdMongo){
+                    obGlobal.bdMongo.collection("facturi").insertOne(jsonFactura, function (err, rezmongo){
+                        if (err) console.log(err)
+                        else console.log ("Am inserat factura in mongodb");
+
+                        obGlobal.bdMongo.collection("facturi").find({}).toArray(
+                            function (err, rezInserare){
+                                if (err) console.log(err)
+                                else console.log (rezInserare);
+                        })
+                    })
+                }
+            }
+        })
+    }
+    else{
+        res.send("Nu puteti cumpara daca nu sunteti logat sau nu aveti dreptul!");
+    }
+    
+});
 
 
+
+async function genereazaPdf(stringHTML,numeFis, callback) {
+    const chrome = await puppeteer.launch();
+    const document = await chrome.newPage();  //pentru engine am apelat metoda newPage care creeaza o fereastra noua pentru care am obtinut o referinta (acest document)
+    console.log("inainte load")
+    await document.setContent(stringHTML, {waitUntil:"load"});
+    
+    console.log("dupa load")
+    await document.pdf({path: numeFis, format: 'A4'});
+    await chrome.close();
+    if(callback)
+        callback(numeFis);
+}
 
 
 
