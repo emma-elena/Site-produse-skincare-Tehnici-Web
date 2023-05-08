@@ -9,6 +9,7 @@ const formidable = require("formidable"); //pentru fisiere
 //nu body parser pentru formulare simple cu inputuri gen checkbox, radiobutton, text etc; tot ce e de tip file intra in campuriFisier
 const session = require('express-session');
 const path=require('path');
+const QRCode = require('qrcode');
 
 
 
@@ -179,7 +180,11 @@ client.connect();
 obGlobal = {
     erori: null,
     imagini: null,
-    optiuniPentruMeniu: null
+    optiuniPentruMeniu: null,
+
+    //ca sa imi creez calea pe bucatele
+    protocol:"http",
+    numeDomeniu:"localhost:8080"
 }
 
 
@@ -287,6 +292,28 @@ app.get(["/produse"], function (req, res) {
         });
     });
 });
+
+
+
+
+
+
+cale_qr="./resurse/imagini/qrcode"; //care relativa pentru qrcode in resurse/imagini
+if (fs.existsSync(cale_qr))//daca exista calea catre qrcode 
+  fs.rmSync(cale_qr, {force:true, recursive:true});  //o sterg pt ca vreau sa regenerez imaginile pt ca poate intre timp am sters/adaugat niste produse; faca asa ca sa nu scriu mai mult sa verific daca am adaugat un produs nou sau l-am sters
+fs.mkdirSync(cale_qr);//creez sincron din nou folderul
+client.query("select id from produse", function(err, rez){
+    for(let prod of rez.rows){
+        let cale_prod=obGlobal.protocol+obGlobal.numeDomeniu+"/produs/"+prod.id;  //ii creez calea catre pagina produsului unic
+        //console.log(cale_prod);
+        QRCode.toFile(cale_qr+"/"+prod.id+".png",cale_prod); //toFile care primeste calea paginii respective(linkul http/https) si il transforma in imagine QR
+    }
+});
+
+ 
+
+
+
 
 
 

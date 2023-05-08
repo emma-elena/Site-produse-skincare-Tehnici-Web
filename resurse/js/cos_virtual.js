@@ -78,7 +78,7 @@ window.addEventListener("load",function(){
 						b:"abc"
 					})
 				})
-				.then(function(rasp){ console.log(rasp); return rasp.text()})
+				.then(function(rasp){ console.log(rasp); return rasp.text()})    //raspunsul poate sa fie ok, produsele au fost achizitionate sau avem eroare
 				.then(function(raspunsText) {
 			
 					console.log(raspunsText);
@@ -86,8 +86,8 @@ window.addEventListener("load",function(){
 						localStorage.removeItem("cos_virtual")
 						let p=document.createElement("p");
 						p.innerHTML=raspunsText;
-						document.getElementsByTagName("main")[0].innerHTML="";
-						document.getElementsByTagName("main")[0].appendChild(p)
+						document.getElementsByTagName("main")[0].innerHTML=""; //main golit din pagina de cos virtual, adica practic ce aveam in cosul virtual in pagina se duce dupa ce am cumparat
+						document.getElementsByTagName("main")[0].appendChild(p) //si apare raspunsul 
 					}
 				}).catch(function(err){console.log(err)});
 			}
