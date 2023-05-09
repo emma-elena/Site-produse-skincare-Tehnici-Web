@@ -14,7 +14,7 @@ class Rol{
     }
 
     areDreptul(drept){//aici se verifica daca rolul are dreptul dat in paranteza si care va fi simbolul din drepturi; drept trebuie sa fie tot Symbol
-        return Rol.drepturi.includes(drept); //pentru ca e admin
+        return this.constructor.drepturi.includes(drept); //pentru ca e admin
     }
 }
 

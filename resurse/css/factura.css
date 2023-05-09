@@ -1,0 +1,10 @@
+p{
+font-weight:bold;
+text-decoration:underline;
+}
+
+/* putem genera EJS chiar si cu fisiere externe */
+			p::before{
+				content:"1234";
+				color:blue;
+			}

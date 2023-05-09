@@ -69,7 +69,7 @@ obGlobal = {
     optiuniPentruMeniu: null,
 
     //ca sa imi creez calea pe bucatele
-    protocol:"http",
+    protocol:"http://",
     numeDomeniu:"localhost:8080",
 
 
