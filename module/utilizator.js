@@ -51,7 +51,7 @@ class Utilizator{
 
     checkName(nume){ //returneaza un boolean
         //ma intai verifica daca e nenul
-        return nume!= ""
+        return nume!= "" && nume.match(new RegExp("^[A-Z][a-z]+$"));
     }
 
     set setareNume(nume){
@@ -63,7 +63,9 @@ class Utilizator{
     }
 
     checkUsername(username){ 
-        return username!= ""
+        return username!= "" && username.match(new RegExp("^[A-Za-z0-9]+$")); // ^[A-Za-z0-9#_./]+$  ii mai permit sa puna ./ in username ca sa vedem cum poate schimba utilizatorul fisiere pe site
+                                                                              // daca il lasam sa puna caractere de cale in username,  sa verificam sa nu fie cu ../; atentie cum ne acem caile
+                                                                              // daca ceva din numele utiizatorului, username intra in calea lui trb sa verificam sa nu fie cu ../ ca ne trezim cu poze pe site aiurea sau mai rele
     } 
 
     // folosit doar la inregistrare si modificare profil 
