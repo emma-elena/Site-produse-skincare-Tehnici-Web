@@ -151,7 +151,7 @@ class Utilizator{
         let eroare = null;
         AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori", 
         campuri:["*"], 
-        conditiiAnd:[`username='${username}'`]}, 
+        conditiiAnd:[`username=$1`]}, 
         function(err, rezSelect){ //utilizatorul se creaza aici si se apeleaza mult dupa ce s-a creat functia asta de mai sus cu getUtilizatorDupaUsername
                 if(err){ //eroare BD
                     console.error("Utilizator:", err);  
@@ -175,7 +175,7 @@ class Utilizator{
                 //     culoare_chat:rezSelect.rows[0].culoare_chat,
                 //     poza:rezSelect.rows[0].poza})
                     proceseazaUtiliz(u, obparam, eroare);  
-        });
+        }, [username]);
     }   
 
 //verific daca are dreptul (completari 1 2:56:00)

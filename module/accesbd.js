@@ -52,14 +52,14 @@ class AccesBD {
         return this.#instanta;
     }
 
-    select({ tabel = "", campuri = [], conditiiAnd = [] } = {}, callback) {
+    select({ tabel = "", campuri = [], conditiiAnd = [] } = {}, callback, parametriQuery=[]) {
         let conditieWhere = "";
         if (conditiiAnd.length > 0)
             conditieWhere = `where ${conditiiAnd.join(" and ")}`;
 
         let comanda = `select ${campuri.join(",")} from ${tabel} ${conditieWhere}`;
         console.error(comanda);
-        this.client.query(comanda, callback)
+        this.client.query(comanda, parametriQuery, callback)
     }
 
 
@@ -91,7 +91,7 @@ class AccesBD {
         this.client.query(comanda, callback)
     }
 
-    update({ tabel = "", campuri = [], valori = [], conditiiAnd = [] } = {}, callback) {
+    update({ tabel = "", campuri = [], valori = [], conditiiAnd = [] } = {}, callback, parametriQuery) {
         if (campuri.length != valori.length)
             throw new Error("Numarul de campuri difera de nr de valori")
         let campuriActualizate = [];
@@ -103,6 +103,21 @@ class AccesBD {
         let comanda = `update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
         console.log(comanda);
         this.client.query(comanda, callback) //aici apelez normal cu client query, clientul fiind ala de SQL din AccesBD(unde definim la inceput database, user, password etc)
+    }
+
+    
+    updateParametrizat({tabel="",campuri=[],valori=[], conditiiAnd=[]} = {}, callback, parametriQuery){
+        if(campuri.length!=valori.length)
+            throw new Error("Numarul de campuri difera de nr de valori")
+        let campuriActualizate=[];
+        for(let i=0;i<campuri.length;i++)
+            campuriActualizate.push(`${campuri[i]}=$${i+1}`);
+        let conditieWhere="";
+        if(conditiiAnd.length>0)
+            conditieWhere=`where ${conditiiAnd.join(" and ")}`;
+        let comanda=`update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111",comanda);
+        this.client.query(comanda,valori, callback)
     }
 
     delete({ tabel = "", conditiiAnd = [] } = {}, callback) {
