@@ -13,6 +13,7 @@ const QRCode = require('qrcode');
 const puppeteer=require('puppeteer');
 const mongodb=require('mongodb');
 
+const helmet=require('helmet');
 
 
 const { Utilizator } = require("./module/utilizator.js")
@@ -46,6 +47,10 @@ app.use(session({ // aici se creeaza proprietatea session a requestului (pot fol
     resave: true,
     saveUninitialized: false
   }));
+
+
+app.use(helmet.frameguard());  //acum site-ul nu se va mai putea deschide in iframe
+
 
 app.set("view engine", "ejs"); //ca sa putem folosi ejs, ejs pentru template, restul de pagini ca sa nu facem copy-paste pentru meniu
 console.log("Cale proiect: ", __dirname);  //__dirname este folderul proiectului
