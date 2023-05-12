@@ -123,20 +123,93 @@ app.use("/*", function (req, res, next) {
 //app.get daca avem /ceva, e doar /ceva
 //app.use ca sa mearga inclusiv pentru accesari de tip post, poate vreau sa retin cand da sumbit unui formular de ex, app.get numai pentru accesari de tip get; putem sa avem mai multe /
 //app.all la fel ca app.use, doar ca app.use nu vede tot url
-app.all("/*", function(req, res, next){
-    //verific daca exista utilizatorul si daca da, ii preiau id-ul
-    let id_utiliz=req?.session?.utilizator?.id;
-    id_utiliz=id_utiliz?id_utiliz:null; //daca e ceva in el, ramane chiar el
-    AccesBD.getInstanta().insert({//inserez in tabel detaliile, data_accesare nu apare aici pentru ca are setat default timpul curent iar id e serial, cu auto-increment
-       tabel:"accesari",
-       campuri:["ip", "user_id", "pagina"],
-       valori:[`'${getIp(req)}'`, `${id_utiliz}`, `'${req.url}'`]
-       }, function(err, rezQuery){
-           console.log(err);
-       }
-   )
-    next(); //il trimite mai departe la app.get-ul care s-ar potrivi cu cerera utilizatorului
-});
+
+
+//UPDATE, nu mai inseram in BD decat in anumite situatii pt ca chinuie BD (atacuri DOS)
+
+// app.all("/*", function(req, res, next){
+//     //verific daca exista utilizatorul si daca da, ii preiau id-ul
+//     let id_utiliz=req?.session?.utilizator?.id;
+//     id_utiliz=id_utiliz?id_utiliz:null; //daca e ceva in el, ramane chiar el
+//     AccesBD.getInstanta().insert({//inserez in tabel detaliile, data_accesare nu apare aici pentru ca are setat default timpul curent iar id e serial, cu auto-increment
+//        tabel:"accesari",
+//        campuri:["ip", "user_id", "pagina"],
+//        valori:[`'${getIp(req)}'`, `${id_utiliz}`, `'${req.url}'`]
+//        }, function(err, rezQuery){
+//            console.log(err);
+//        }
+//    )
+//     next(); //il trimite mai departe la app.get-ul care s-ar potrivi cu cerera utilizatorului
+// });
+
+
+
+//facem asa
+
+
+//obiect cu ipurile active
+//ip-uri active= cele care au facut o cerere de curand
+//cheia e de forma ip|url iar valoarea e un obiect de forma {nr:numar_accesari, data:data_ultimei accesari}
+
+var ipuri_active={}; //user activ in momentul respectiv
+
+
+app.all("/*",function(req,res,next){ //all pt toate tipurile de cereri
+    let ipReq=getIp(req); //obtin ip-ul 
+    let ip_gasit=ipuri_active[ipReq+"|"+req.url]; //il folosesc ip-ul si il pun concatenat(cu |) cu pagina pe care o cere ca sa vad de unde e pb
+    //[ipReq+"|"+req.url]; asta va fi cheia intr-un dictionar ipuri_active(numele proprietatii)
+    
+    timp_curent=new Date();
+    if(ip_gasit){ //verific daca aceasta cerere este in timpul limita pe care l-am impus 
+    
+
+        //ip_gasit obiect cu doua propr: data ultimei accesari a acelei pagini si de cate ori a accesat acea pagina in intervalul de 10 secunde
+        if( (timp_curent-ip_gasit.data)< 10000) {//diferenta e in milisecunde; verific daca ultima accesare a fost pana in 10 secunde
+            if (ip_gasit.nr>15){//mai mult de 10 cereri 
+                res.send("<h1>Prea multe cereri intr-un interval scurt. Ia te rog sa fii cuminte, da?!</h1>");
+                ip_gasit.data=timp_curent
+                return;
+            }
+            else{  //nu am depasit numarul de cereri maxim
+                
+                ip_gasit.data=timp_curent; //setez data ultimei cereri
+                ip_gasit.nr++; //cresc numarul de cereri
+            }
+        }
+        else{ //daca nu a mai accesat pagina mea de 10 secunde, consider ca e un user normal
+            //console.log("Resetez: ", req.ip+"|"+req.url, timp_curent-ip_gasit.data)
+            ip_gasit.data=timp_curent; //setez din nou timpul curent, timpul cererii 
+            ip_gasit.nr=1;//a trecut suficient timp de la ultima cerere; resetez
+        }
+    }
+
+
+    //altfel ii fac o noua inregistrare
+    else{
+        ipuri_active[ipReq+"|"+req.url]={nr:1, data:timp_curent}; //cu numar de accesari 1
+        //console.log("am adaugat ", req.ip+"|"+req.url);
+        //console.log(ipuri_active);        
+
+    }
+
+    //aici inseram
+    let comanda_param= `insert into accesari(ip, user_id, pagina) values ($1::text, $2,  $3::text)`;
+    //console.log(comanda);
+    if (ipReq){
+        var id_utiliz=req.session.utilizator?req.session.utilizator.id:null;
+        //console.log("id_utiliz", id_utiliz);
+        client.query(comanda_param, [ipReq, id_utiliz, req.url], function(err, rez){
+            if(err) console.log(err);
+        });
+    }
+    next();   
+}); 
+
+
+
+
+
+
 
 
 
