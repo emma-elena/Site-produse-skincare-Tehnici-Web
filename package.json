@@ -14,6 +14,7 @@
     "qrcode": "^1.5.3",
     "sass": "^1.58.0",
     "sharp": "^0.31.3",
+    "xml-js": "^1.6.11",
     "xmljs": "^0.3.2"
   },
   "name": "skincare-skema",

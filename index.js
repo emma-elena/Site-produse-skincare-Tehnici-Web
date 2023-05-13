@@ -14,7 +14,7 @@ const puppeteer=require('puppeteer');
 const mongodb=require('mongodb');
 
 const helmet=require('helmet');
-//const xmljs=require('xmljs');
+const xmljs=require('xml-js');
 
 
 const { Utilizator } = require("./module/utilizator.js")
