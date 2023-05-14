@@ -43,6 +43,7 @@ window.addEventListener("load",function(){
 				var h2=document.createElement("h2");
 				h2.innerHTML=prod.nume;
 				article.appendChild(h2);
+				
 				let imagine=document.createElement("img");
 				imagine.src="/resurse/imagini/produse/"+prod.imagine;
 				article.appendChild(imagine);

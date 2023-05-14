@@ -8,8 +8,8 @@
 		<script src="<%- locals.protocol%><%- locals.domeniu %>/resurse/js/factura.js"></script>
 	</head>
 	<body>
-		<h1>Factură Dulcelind</h1>
-		<p>Stimate domn <%-locals.utilizator.nume %>, aveți aici lista de produse achiziționate.</p> 
+		<h1>Factură</h1>
+		<p>Stimate domn/doamna <%-locals.utilizator.nume %>, aveți aici lista produselor achiziționate.</p> 
 		<div id="container-tabel">
 			<table id="tabl">
 				<thead>
@@ -34,9 +34,7 @@
 					<% } %>
 				</tbody>
 				<tfoot>
-					<tr>
-						<td colspan="3">Total: <%- suma %></td>
-					</tr>
+						<p>Total de plata: <%- suma %><p>
 				</tfoot>
 			</table>
 		</div>
