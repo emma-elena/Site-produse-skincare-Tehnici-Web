@@ -3,27 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>Factură</title>
-		<style>
-			body{
-				counter-reset: cnt;
-			}
-			#tabl{
-				border-collapse:collapse;
-			}
-			tr{
-				counter-increment: cnt;
-			}
-
-			#tabl td, #tabl th{
-				border:1px solid black;
-			}
-
-			p{color:grey};
-			#container-tabel::after{
-				content:"Numar produse" counter(cnt);
-				display: block;
-			}
-		</style>
+		
 		<link rel="stylesheet" href="<%- locals.protocol%><%- locals.domeniu %>/resurse/css/factura.css" type="text/css">
 		<script src="<%- locals.protocol%><%- locals.domeniu %>/resurse/js/factura.js"></script>
 	</head>

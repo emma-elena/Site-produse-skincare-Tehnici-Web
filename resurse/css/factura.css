@@ -1,10 +1,41 @@
-p{
-font-weight:bold;
-text-decoration:underline;
+/* p {
+	font-weight: bold;
+	text-decoration: underline;
 }
 
 /* putem genera EJS chiar si cu fisiere externe */
-			p::before{
-				content:"1234";
-				color:blue;
-			}
+
+/*
+p::before {
+	content: "1234";
+	color: blue;
+} 
+*/
+
+body {
+	counter-reset: cnt;
+}
+
+#tabl {
+	border-collapse: collapse;
+}
+
+tr {
+	counter-increment: cnt;
+}
+
+#tabl td,
+#tabl th {
+	border: 1px solid black;
+}
+
+p {
+	color: grey
+}
+
+;
+
+#container-tabel::after {
+	content: "Numar produse" counter(cnt);
+	display: block;
+}
