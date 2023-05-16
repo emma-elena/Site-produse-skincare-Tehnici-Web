@@ -62,7 +62,7 @@ app.use("/resurse", express.static(__dirname + "/resurse")); //numai caile care 
 
 app.use("node_modules", express.static(__dirname + "/node_modules")); //bootstrap?
 
-app.use("poze_uploadate", express.static(__dirname + "/poze_uploadate")); //asa l-am facut static
+app.use("/poze_uploadate", express.static(__dirname + "/poze_uploadate")); //asa l-am facut static
 
 var optiuniPentruMeniu = "ceva!";
 
