@@ -87,16 +87,31 @@ obGlobal = {
 
 
 
-var url = "mongodb://localhost:27017";//pentru versiuni mai vechi de Node
-var url = "mongodb://0.0.0.0:27017";
-
-
+//var url = "mongodb://localhost:27017";//pentru versiuni mai vechi de Node
+var url = "mongodb://127.0.0.1:27017";
+//var url = "mongodb://0.0.0.0:27017";
+//console.log("=====================================================================");
+const config = {
+    connectTimeoutMS: 1000,
+    useUnifiedTopology: true,
+    socketTimeoutMS: 1000
+    }
 obGlobal.clientMongo.connect(url, function (err, bd) {  //ma conectez la url-ul dat 
-    if (err) console.log(err);
+    if (err) 
+        console.log("Eroare: ",err);
     else {
+        console.log("Conexiune Mongo !!!!!!!!!!!!!!!!!!!!!!!!!!!");
         obGlobal.bdMongo = bd.db("site"); //setez baza de date curenta
+        
     }
 });
+
+// setTimeout(function(){
+//     obGlobal.bdMongo.collection("facturi").find({}).toArray(function (err, res){
+//         console.log(err);
+//         console.log(res);
+//     });
+// }, 1000);
 
 
 
