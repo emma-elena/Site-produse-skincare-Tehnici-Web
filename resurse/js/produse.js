@@ -79,10 +79,17 @@ window.addEventListener("load", function(){
     }
 
 
+    document.getElementById("inp-pret-max").onchange=function(){
+        document.getElementById("infoRangeMax").innerHTML = `(${this.value}) lei`
+    }
+
+
     document.getElementById("filtrare").onclick = function(){
         conditieValidare = true;
 
         var inputPret = document.getElementById("inp-pret").value;
+
+        var inputPretMax = document.getElementById("inp-pret-max").value;
 
         //selectam input-ul dupa id, vrem valoarea din el, continutul input-ului il accesam cu value
         var inputNume = document.getElementById("inp-nume").value.toLowerCase().trim();
@@ -105,7 +112,7 @@ window.addEventListener("load", function(){
         //iteram prin ele
         for (let produs of produse){
             //facem produsul invizibil
-            var conditieNume = false, conditieCategorie = false, conditiePret = false;
+            var conditieNume = false, conditieCategorie = false, conditiePret = false, conditiePretMax = false;
             
             produs.style.display = "none";
 
@@ -114,6 +121,10 @@ window.addEventListener("load", function(){
 
             if(pret>inputPret){
                 conditiePret = true;
+            }
+
+            if(pret <= inputPretMax){
+                conditiePretMax = true;
             }
 
             //obtinem numele din produs
@@ -133,7 +144,7 @@ window.addEventListener("load", function(){
             }
 
 
-            if(conditieNume && conditieCategorie && conditiePret){
+            if(conditieNume && conditieCategorie && conditiePret && conditiePretMax){
                 produs.style.display = "block";
             }
         }   
