@@ -1,12 +1,17 @@
-h2{
+h3{
     padding:0.4rem;
+    text-align: center;
+    size: 2em;
 }
 #art-produs{
     margin:0 auto;
     width:70%;
     max-width:700px;
     background-color: var(--cl-light-t);
-    box-shadow: 0px 0px 10px 5px grey;
+    border-radius: 25px;
+    box-shadow: 
+    inset #059c8e 0 0 0 2px,
+    inset #0cab9c 0 0 0 5px;
     padding:0.4rem;
 }
 
