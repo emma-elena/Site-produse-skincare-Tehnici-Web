@@ -1,6 +1,7 @@
 p,
-figure {
-  margin: 0;
+figure,
+section {
+  margin: 5px;
   padding: 5px;
 }
 

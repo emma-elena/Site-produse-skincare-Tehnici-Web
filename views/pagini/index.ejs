@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html lang="ro">
-  <head>
-    
-   <title>Pagina principala a site-ului</title>
-   
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-       
-    <meta name="keywords" content="skincare, ingrijire, produs, skincare routine"><!--cuvintele cheie ale paginii; majoritatea motoarelor de căutare ignoră keywords -->
-    <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate."><!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->  
-    <%- include("../fragmente/head.ejs") %>
+
+<head>
+
+  <title>Pagina principala a site-ului</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <meta name="keywords" content="skincare, ingrijire, produs, skincare routine">
+  <!--cuvintele cheie ale paginii; majoritatea motoarelor de căutare ignoră keywords -->
+  <meta name="description" content="Ingrijire. Lifestyle. Produse de calitate.">
+  <!-- descrierea paginii, adesea apare sub link când sunt afișate rezultatele căutării -->
+  <%- include("../fragmente/head.ejs") %>
     <!-- <video id="video-background" src="resurse/video/river.mp4" autoplay loop playsinline muted></video> 
     <link rel="stylesheet" type="text/css" href="resurse/scss/background.css"> -->
-   
-  </head>
 
-  <input type="checkbox" class="checkbox" id="checkbox">
-  <label for="checkbox" class="checkbox-label">
-    <i class="fas fa-moon"></i>
-    <i class="fas fa-sun"></i>
-    <span class="ball"></span>
-  </label>
+</head>
 
-  <body>
-   
-   <%- include("../fragmente/header.ejs") %>
+<input type="checkbox" class="checkbox" id="checkbox">
+<label for="checkbox" class="checkbox-label">
+  <i class="fas fa-moon"></i>
+  <i class="fas fa-sun"></i>
+  <span class="ball"></span>
+</label>
+
+<body>
+  <%- include("../fragmente/header.ejs") %>
     <main>
       <div id="grid-pagina">
-      <section id="despre">
-        <h2><span class="fas fa-regular fa-heart"></span></i>Despre noi</h2>
-        <%
-
-        %>
-        <!--
+        <section id="despre">
+          <h2><span class="fas fa-regular fa-heart"></span></i>Despre noi</h2>
+          <% %>
+            <!--
         <p>Ip: <%-locals.ip%></p>
         -->
-        <!-- <p>De la index.js : <%-locals.ceva%> + <%-locals.altceva%> = <%-locals.ceva + locals.altceva%> </p>-->
-        <p>
-          Subiectul de <b>skincare</b> este foarte dezbatut in ultimii ani, iar scopul nostru, pe langa
-          livrarea celor mai bune <b>produse</b> pentru clientii nostri, este sa aducem la cunostinta 
-          importanta <b>ingrijirii</b> pielii, a corpului, dar mai ales a propriei persoane.
-        </p>
+            <!-- <p>De la index.js : <%-locals.ceva%> + <%-locals.altceva%> = <%-locals.ceva + locals.altceva%> </p>-->
+            <p>
+              Subiectul de <b>skincare</b> este foarte dezbatut in ultimii ani, iar scopul nostru, pe langa
+              livrarea celor mai bune <b>produse</b> pentru clientii nostri, este sa aducem la cunostinta
+              importanta <b>ingrijirii</b> pielii, a corpului, dar mai ales a propriei persoane.
+            </p>
 
-    <p>Useri online:</p>
-      <ol>
-        <% for(let u of locals.useriOnline){ %>
-            <li>
-              <%- u.username %>(<%- u.nume %><%- u.prenume %>) 
-            </li>
-        <%}%>
-      </ol>
+            <p>Useri online:</p>
+            <ol>
+              <% for(let u of locals.useriOnline){ %>
+                <li>
+                  <%- u.username %>(<%- u.nume %><%- u.prenume %>)
+                </li>
+                <%}%>
+            </ol>
 
 
-        <!-- <figure style="width: 15%;">
+            <!-- <figure style="width: 15%;">
           <picture>
               <source srcset="resurse/imagini/skincare-image.png" media="(max-width:700px)">
               <source srcset="resurse/imagini/skincare-image-products.png" media="(max-width:1500px)">
@@ -62,7 +62,7 @@
           <figcaption style="text-align: center; color:green">Skincare</figcaption>
       </figure> -->
 
-      <!-- <div class="mathml">
+            <!-- <div class="mathml">
       <math>
         <mrow>
            <mi>cleanser</mi>
@@ -79,46 +79,52 @@
      </math>
     </div> -->
 
-      <!-- <section id="promotii">
+            <!-- <section id="promotii">
         <h2>Promotii</h2>
           <p>
            
           </p>
   
         </section>
-        
-      </section> -->
-
-      <section id="recomandari">
-        <h3>Recomadari</h3>
-      <p>Mai jos aveti recenzie pentru cele mai bune SPF-uri din ultimii ani, <b>produsul</b> esential unei <b>rutine de skincare</b></p>
-      <br>
-
-
-      <container class="yt">
-        <iframe name="ifr-video"  width="560" height="315" src="https://www.youtube.com/embed/ubz7_PbJAM0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      
-        <div class="taburi-iframe">
-          <a target="ifr-video" href="https://www.youtube.com/embed/ubz7_PbJAM0">Best sunscreens of 2020</a> 
-          <a target="ifr-video" href="https://www.youtube.com/embed/oUem-LYnKf4">Best sunscreens of 2021</a> 
-          <a target="ifr-video" href="https://www.youtube.com/embed/AUiMA1LnoPE">Best sunscreens of 2022</a><br>
-        </div>
-
-      </container>
-    <p>Aici aveti un mic ghid de formarea unei rutine: 
-          <a href="SkinCareRoutine.pdf" download="file.pdf">
-            <b>download</b>
-          </a>
-    </p>
-
-  <p>
-    Iar aici aveti un link catre Skincare Bible, o carte relevanta, pentru toti: 
-  
-  <a href="https://www.amazon.co.uk/Skincare-Bible-No-Nonsense-Guide-Great/dp/0241309107" target="_blank">Catre Amazon!</a>
-</p>
+         -->
         </section>
 
-      <!-- <section id="orar">
+        <section id="recomandari">
+          <h3>Recomadari</h3>
+          <p>Mai jos aveti recenzie pentru cele mai bune SPF-uri din ultimii ani, <b>produsul</b> esential unei
+            <b>rutine de skincare</b>
+          </p>
+          <br>
+
+
+          <container class="yt">
+            <iframe name="ifr-video" width="560" height="315" src="https://www.youtube.com/embed/ubz7_PbJAM0"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+
+            <div class="taburi-iframe">
+              <a target="ifr-video" href="https://www.youtube.com/embed/ubz7_PbJAM0">Best sunscreens of 2020</a>
+              <a target="ifr-video" href="https://www.youtube.com/embed/oUem-LYnKf4">Best sunscreens of 2021</a>
+              <a target="ifr-video" href="https://www.youtube.com/embed/AUiMA1LnoPE">Best sunscreens of 2022</a><br>
+            </div>
+
+          </container>
+          <p>Aici aveti un mic ghid de formarea unei rutine:
+            <a href="SkinCareRoutine.pdf" download="file.pdf">
+              <b>download</b>
+            </a>
+          </p>
+
+          <p>
+            Iar aici aveti un link catre Skincare Bible, o carte relevanta, pentru toti:
+
+            <a href="https://www.amazon.co.uk/Skincare-Bible-No-Nonsense-Guide-Great/dp/0241309107"
+              target="_blank">Catre Amazon!</a>
+          </p>
+        </section>
+
+        <!-- <section id="orar">
         <h2>Orar</h2>
         <div id="tabel-orar">
         <table id="tab-orar">
@@ -195,7 +201,7 @@
 
       </section> -->
 
-      <!-- <section id="anunturi">
+        <!-- <section id="anunturi">
         <h2>Anunturi</h2>
          <strong>La minim 2 produse cumparate, primiti o mostra gratuita!</strong>
          <p>Transport gratuit la comenzi de minim  100 lei</p>
@@ -204,18 +210,18 @@
       </section> -->
 
 
-      
-      <%- include("../fragmente/galerie-statica.ejs") %>
-        
-
-       <section id="placeholder5">
-        <a href="/quiz">
-          <h2>Quiz</h2>
-          <p>Afla-ti tipul de ten pentru a avea grija de el corespunzator!</p>
-        </a> 
+        <section id="galerie-statica">
+          <%- include("../fragmente/galerie-statica.ejs") %>
         </section>
 
-      <!--<section id="placeholder6">
+        <section id="quiz">
+          <a href="/quiz">
+            <h2>Quiz</h2>
+            <p>Afla-ti tipul de ten pentru a avea grija de el corespunzator!</p>
+          </a>
+        </section>
+
+        <!--<section id="placeholder6">
         <h2>Placeholder6</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ut pellentesque odio. 
           Phasellus eu arcu sit amet nulla facilisis mollis. 
@@ -231,11 +237,12 @@
       </div>
     </main>
 
-        
+
     <%- include("../fragmente/footer.ejs") %>
 
-    <a href="#" class="linktop"><div id="triunghi"></div></a> 
-    
-  </body>
-  
-</html> 
+      <a href="#" class="linktop">
+        <div id="triunghi"></div>
+      </a>
+</body>
+
+</html>

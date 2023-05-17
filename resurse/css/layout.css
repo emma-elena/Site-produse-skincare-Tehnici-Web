@@ -48,10 +48,11 @@ footer {
                          "despre despre despre despre"
                          "recomandari  recomandari recomandari recomandari"
                          "recomandari  recomandari recomandari recomandari"
-                         "placeholder5 placeholder5 placeholder5 placeholder5"
-                         "placeholder5 placeholder5 placeholder5 placeholder5"
                          "galerie-statica galerie-statica galerie-statica galerie-statica"
                          "galerie-statica galerie-statica galerie-statica galerie-statica"
+                         "quiz quiz quiz quiz"
+                         "quiz quiz quiz quiz"
+                         
     ;
 
 }
@@ -64,8 +65,8 @@ footer {
 #recomandari {
     grid-area: recomandari;
 }
-#placeholder5 {
-    grid-area: placeholder5;
+#quiz {
+    grid-area: quiz;
 }
 #galerie-statica {
     grid-area: galerie-statica;
@@ -91,8 +92,8 @@ footer {
                              "despre despre"
                              "recomandari recomandari"
                              "recomandari recomandari"
-                             "placeholder5 placeholder5"
-                             "placeholder5 placeholder5"
+                             "quiz quiz"
+                             "quiz quiz"
                              "galerie-statica galerie-statica"
         ;
 
