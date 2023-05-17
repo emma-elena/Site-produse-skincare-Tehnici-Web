@@ -82,6 +82,8 @@ window.addEventListener("load", function(){
     document.getElementById("filtrare").onclick = function(){
         conditieValidare = true;
 
+        var inputPret = document.getElementById("inp-pret").value;
+
         //selectam input-ul dupa id, vrem valoarea din el, continutul input-ului il accesam cu value
         var inputNume = document.getElementById("inp-nume").value.toLowerCase().trim();
         
@@ -103,9 +105,16 @@ window.addEventListener("load", function(){
         //iteram prin ele
         for (let produs of produse){
             //facem produsul invizibil
-            var conditieNume = false, conditieCategorie = false; 
+            var conditieNume = false, conditieCategorie = false, conditiePret = false;
+            
             produs.style.display = "none";
 
+
+            let pret = parseFloat(produs.getElementsByClassName("val-pret")[0].innerHTML);
+
+            if(pret>inputPret){
+                conditiePret = true;
+            }
 
             //obtinem numele din produs
             let nume = produs.getElementsByClassName("val-nume")[0].innerHTML.toLowerCase().trim();
@@ -124,7 +133,7 @@ window.addEventListener("load", function(){
             }
 
 
-            if(conditieNume && conditieCategorie){
+            if(conditieNume && conditieCategorie && conditiePret){
                 produs.style.display = "block";
             }
         }   
