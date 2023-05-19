@@ -1,6 +1,12 @@
 <header class="c1" id="h1">
+  <div class="video-container">
+    <video autoplay loop playsinline muted>
+      <source src="/resurse/video/river.mp4"  type="video/mp4">
+    </video>
+  </div>
+
   <a href="/"><h1 class="text-center">Skincare Skema</h1></a>
-    
+  
     <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
                  
      <p>Bine ai revenit 
@@ -18,7 +24,6 @@
               <li><a href="/comenzi">Comenzi</a></li> <!--aici intervine mongo,salvam facturile in mongo-->
 
     <% } %>
-      
 
     <!-- <p id="watermark"></p>
     <p id="absolut"></p> -->
