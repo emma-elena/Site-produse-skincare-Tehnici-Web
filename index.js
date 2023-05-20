@@ -455,6 +455,15 @@ app.post("/cumpara", function (req, res) {
             if (!err && rez.rowCount > 0) {
                 console.log("produse:", rez.rows);
 
+                rez.rows.forEach(function (produs) {
+                    const updateQuery = `UPDATE produse SET stoc = stoc - 1 WHERE id = ${produs.id}`;
+                    client.query(updateQuery, function (err, rezultat) {
+                      if (err) {
+                        console.log("Eroare la actualizarea stocului:", err);
+                      }
+                    });
+                  });
+
                 //obtin factura
                 let rezFactura = ejs.render(fs.readFileSync("./views/pagini/factura.ejs").toString("utf-8"), {
                     protocol: obGlobal.protocol,
