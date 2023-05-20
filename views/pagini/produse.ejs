@@ -67,10 +67,15 @@
                         <figure id="poza">
                             <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>"  alt="[imagine <%- prod.nume %>]" /></a>
                         </figure>
-                        <label class="selecteaza-cos">
-                            Selectează:<br/>
-                            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                        </label>
+                        <% if (prod.stoc > 0) { %>
+                            <label class="selecteaza-cos">
+                              Selectează:<br/>
+                              <input type="checkbox" class="select-cos" value="<%- prod.id %>" autocomplete="off">
+                            </label>
+                          <% } else { %>
+                            <p>Ne pare rau, produsul nu mai este pe stoc.</p>
+                          <% } %>
+                          
                     </article>
                 <% }%>
             </div>
