@@ -97,6 +97,7 @@ window.addEventListener("load",function(){
 	}
 	else{
 		document.getElementsByTagName("main")[0].innerHTML="<p>Nu aveti nimic in cos!</p>";
+		document.getElementsByTagName("main")[0].innerHTML="<h1 style='text-align: center'>Nu aveti nimic in cos!</h1>";
 	}
 	
 	

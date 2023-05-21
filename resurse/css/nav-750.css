@@ -1,13 +1,22 @@
 #hamburger{
         display: block;
         height: var(--inaltime-meniu);
+
     }  
 
 #hamburger img{
     height: 100%;
     width: auto;
+    float: right;
 }
 
+nav{
+    background-color: transparent;
+    float: right;
+    width: 250px;
+}
+
+  
 
 ul.meniu{
     display: none;
@@ -34,13 +43,13 @@ ul.meniu ul li{
  }
 
  
-
-@keyframes animatie-meniu {
-    0%{
-   transform: scaleX(0);
+ @keyframes animatie-meniu {
+    0% {
+      transform: translateX(100%);
     }
-
-    100%{
-        transform: scaleX(1);
+  
+    100% {
+      transform: translateX(0);
     }
-} 
+  }
+  

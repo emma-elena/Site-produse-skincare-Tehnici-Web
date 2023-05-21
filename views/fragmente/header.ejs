@@ -4,37 +4,13 @@
       <source src="/resurse/video/river.mp4"  type="video/mp4">
     </video>
   </div>
-
-  <a href="/"><h1 class="text-center">Skincare Skema</h1></a>
-
-  <div class="login"> 
-  
-    <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
-                 
-     <p>Bine ai revenit 
-      <a href="/profil"><div><%- locals.utilizator.username %></div></a> 
-      <a href="/logout">Logout</a></p>  <!-- ii facem un buton cu username-ul lui -->
-
-      <% } else {%>
-        <a href="/loginpage"><img class="login" src="/resurse/imagini/login.png"><p>Login</p></a>
-
-        <% } %>
-
-    <%if (locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){%>
-              <li><a href="/useri">Useri</a></li>
-              <!-- <li><a href="/grafice">Grafice</a></li> -->
-              <li><a href="/comenzi">Comenzi</a></li> <!--aici intervine mongo,salvam facturile in mongo-->
-
-    <% } %>
-  </div>
-    <!-- <p id="watermark"></p>
-    <p id="absolut"></p> -->
-    <!-- <button id="tema"><span class="fas fa-regular fa-sun"></span><span class="fas fa-regular fa-moon"></span></button> -->
-   
-   
-
-  
-      <nav> 
+  <input type="checkbox" class="checkbox" id="checkbox">
+<label for="checkbox" class="checkbox-label">
+  <i class="fas fa-moon"></i>
+  <i class="fas fa-sun"></i>
+  <span class="ball"></span>
+</label>
+  <nav> 
         <label id="hamburger" for="ch-menu">
            <img src="/resurse/imagini/Hamburger_icon_alb.png" alt="menu"> 
           <!-- <div class="container">
@@ -87,4 +63,44 @@
               <li><div><a href="/cos-virtual">Cosul tau</a></div></li>
           </ul>
       </nav>  
+
+      <h1 class="text-center"> 
+        <a href="/">
+          <p>SKINCARE SKEMA</p>
+          <p>Stil de viata. Simplitate</p>
+          <a href="/produse">
+            <p>Produse de calitate</p>
+          </a>
+        </a>
+
+       
+      </h1>
+  <div class="login"> 
+  
+    <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
+                 
+     <p>Bine ai revenit 
+      <a href="/profil"><div><%- locals.utilizator.username %></div></a> 
+      <a href="/logout">Logout</a></p>  <!-- ii facem un buton cu username-ul lui -->
+
+      <% } else {%>
+        <a href="/loginpage"><img class="login" src="/resurse/imagini/login.png"><p>Login</p></a>
+
+        <% } %>
+
+    <%if (locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){%>
+              <li><a href="/useri">Useri</a></li>
+              <!-- <li><a href="/grafice">Grafice</a></li> -->
+              <li><a href="/comenzi">Comenzi</a></li> <!--aici intervine mongo,salvam facturile in mongo-->
+
+    <% } %>
+  </div>
+    <!-- <p id="watermark"></p>
+    <p id="absolut"></p> -->
+    <!-- <button id="tema"><span class="fas fa-regular fa-sun"></span><span class="fas fa-regular fa-moon"></span></button> -->
+   
+   
+
+  
+      
     </header>

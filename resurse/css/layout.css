@@ -1,6 +1,6 @@
 body {
     --culoare-background: #d2f1f7;
-    --culoare-sectiuni:  rgba(43, 140, 175, 0.696);;
+    --culoare-sectiuni:  rgba(43, 140, 175, 0.696);
     --c1: #aceaf3;
     --c2: #465a5d;
     --culoare-footer-si-header: #558892;
@@ -32,7 +32,6 @@ html {
     transition: all 0.3s linear;  
 }
 header {
-    font-family: 'Tahoma', sans-serif;
     background-color: var(--culoare-footer-si-header);
 }
 main {
@@ -376,7 +375,8 @@ tr:hover {
 /* Light/Dark mode */
 
 .checkbox {
-    opacity: 0;   
+    opacity: 0;  
+    margin-top: 20px;
   }
   
   .checkbox-label {

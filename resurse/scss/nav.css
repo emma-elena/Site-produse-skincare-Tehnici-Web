@@ -1,29 +1,36 @@
 body {
-  --inaltime-meniu:25px;
-  --latime-buton:200px;
-  --culoare-meniu: #6AE2F7;
+  --inaltime-meniu:40px;
+  --latime-buton:250px;
+  --culoare-meniu:  rgba(106,226,247, 0.5);
   --culoare-meniu-selectat: #567175;
-  --latime-bord-meniu:1px ;
+  --latime-bord-meniu:0px ;
+  --culoare-text: black;
 }
 
 nav {
   height: var(--inaltime-meniu);
   background-color: var(--culoare-meniu);
   overflow: visible;
-  position: sticky;
+  position:sticky;
   width: auto;
   top: 0;
   z-index: 9998;
+  margin-left: 300px;
+}
+
+.dark {
+  --culoare-meniu: rgba(67, 144, 157, 0.5);
+  --culoare-meniu-selectat: #567175;
+  --culoare-text: rgb(219, 219, 219);
 }
 
 ul.meniu > li, ul.meniu ul li {
   height: var(--inaltime-meniu);
-  border: var(--latime-bord-meniu) solid black;
   width: var(--latime-buton);
 }
 
 ul.meniu div, ul.meniu a {
-  color: black;
+  color: var(--culoare-text);
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
@@ -57,7 +64,7 @@ ul.meniu li div {
   transition: font-size 0.3s linear;
 }
 ul.meniu li div:hover {
-  font-size: 24px;
+  font-size: 20px;
 }
 ul.meniu li > a{
   display: block;
