@@ -5,6 +5,10 @@ section {
   padding: 0px;
 }
 
+p{
+  margin: 10px;
+}
+
 
 body{
   margin: 0px;
@@ -29,10 +33,13 @@ h1{
 }
 
 html{
-  font-size: 18px;
+  font-size: 22px;
 }
 
-
+footer{
+  margin: 0px;
+  padding: 0px;
+}
 
 
 ul[role='list'],

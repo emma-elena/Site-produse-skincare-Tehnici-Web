@@ -1,6 +1,6 @@
 body {
     --culoare-background: #d2f1f7;
-    --culoare-sectiuni:  rgba(43, 140, 175, 0.696);
+    --culoare-sectiuni:  rgba(192, 236, 252, 0.696);
     --c1: #aceaf3;
     --c2: #465a5d;
     --culoare-footer-si-header: #558892;
@@ -60,9 +60,12 @@ footer {
 }
 #despre {
     grid-area: despre;
+    height: 100vh;
+
 }
 #recomandari {
-    grid-area: recomandari;
+    grid-area: recomandari;   
+    height: 100vh;
 }
 #quiz {
     grid-area: quiz;
@@ -72,7 +75,9 @@ footer {
 }
 
 
-
+.text-centrat{
+    text-align: center;
+}
 
 
 /* Aspect pagina in functie de dimensiune */
