@@ -10,6 +10,8 @@ body {
     --culoare-border-linktop: grey;
     --culoare-background-butoane-iframe: lightblue;
     background-color: var(--culoare-pagina);
+    --frunze: url(/resurse/imagini/fundal/frunze-light.jpg);
+    --apa: url(/resurse/imagini/fundal/apa-light.jpg);
     
 }
 .dark {
@@ -25,6 +27,8 @@ body {
     --culoare-background-butoane-iframe: rgb(49, 61, 65);
     background-color: var(--culoare-pagina);
     color:white;
+    --frunze: url(/resurse/imagini/fundal/frunze-dark.jpg);
+    --apa: url(/resurse/imagini/fundal/apa-dark.jpg);
   }
 html {
     scroll-behavior: smooth;
@@ -62,21 +66,32 @@ footer {
     grid-area: despre;
     height: 100vh;
     background-color: #f0f0f0; /* Set the background color */
-    background-image: url(/resurse/imagini/frunze.jpg);
+    background-image: var(--frunze);
     background-repeat: no-repeat; /* Specify if the image should repeat */
     background-size: cover; /* Specify how the background image should be sized */
 }
 #recomandari {
     grid-area: recomandari;   
     height: 100vh;
+    background-image: var(--apa);
+    background-repeat: no-repeat; /* Specify if the image should repeat */
+    background-size: cover; /* Specify how the background image should be sized */
 }
 #quiz {
     grid-area: quiz;
 }
 #galerie-statica {
     grid-area: galerie-statica;
+    background-image: var(--frunze);
+    background-repeat: no-repeat; /* Specify if the image should repeat */
+    background-size: cover; /* Specify how the background image should be sized */
 }
-
+.text-center {
+    text-align: center;
+    margin-left:  200px;
+    margin-right:  200px;
+    margin-top: 100px;
+  }
 
 .text-centrat{
     text-align: center;
@@ -105,7 +120,12 @@ footer {
         ;
 
     }
-
+    .text-center {
+        text-align: center;
+        margin-left:  100px;
+        margin-right:  100px;
+        margin-top: 50px;
+      }
     #acasa {
         display: none;
     }
@@ -145,6 +165,18 @@ footer {
         margin-left: auto;
         margin-right: auto;
     }
+
+    .text-center {
+        text-align: center;
+      }
+
+      .text-center {
+        text-align: center;
+        margin-left:  10px;
+        margin-right:  10px;
+        margin-top: 5px;
+      }
+      
 }
 
 
@@ -265,7 +297,7 @@ tr:hover {
     text-align: right;
     display: block;
     width: 100px;
-    height: 60px;
+    height: 80px;
     border: 2px solid var(--culoare-border);
     background-color: var(--culoare-background-butoane-iframe);
     border-top-right-radius: 10px;
@@ -275,10 +307,13 @@ tr:hover {
 .taburi-iframe a:hover {
     width: 150px;
     background-color: var(--culoare-pagina);
+    
 }
 
 .yt {
     display: flex;
+    text-align: center;
+    margin-left: 30px;
 }
 
 
@@ -424,10 +459,7 @@ tr:hover {
     align-items: center;
   }
 
-  .text-center {
-    text-align: center;
-    
-  }
+
   
 
   .login{
