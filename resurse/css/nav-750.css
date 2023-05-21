@@ -16,7 +16,9 @@ nav{
     width: 250px;
 }
 
-  
+ul.meniu li {
+    background-color: rgba(106, 226, 247, 0.844);
+  }
 
 ul.meniu{
     display: none;
