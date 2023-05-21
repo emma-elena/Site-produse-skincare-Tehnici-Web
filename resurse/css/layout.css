@@ -61,7 +61,10 @@ footer {
 #despre {
     grid-area: despre;
     height: 100vh;
-
+    background-color: #f0f0f0; /* Set the background color */
+    background-image: url(/resurse/imagini/frunze.jpg);
+    background-repeat: no-repeat; /* Specify if the image should repeat */
+    background-size: cover; /* Specify how the background image should be sized */
 }
 #recomandari {
     grid-area: recomandari;   
@@ -423,6 +426,7 @@ tr:hover {
 
   .text-center {
     text-align: center;
+    
   }
   
 
