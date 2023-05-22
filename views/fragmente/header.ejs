@@ -11,21 +11,21 @@
 <div class="nav"> 
   <ul class="menu">      
       <% if(locals.utilizator) { %> <!-- daca e logat si atat-->
-        <li>   <div>Contul tau</div>  
+        <li><div>Contul tau</div>  
             <ul>
-            <li><a href="/profil"><div><%- locals.utilizator.username %></div></a> </li>
-            <li><a href="/logout">Logout</a></li>  <!-- ii facem un buton cu username-ul lui -->
+            <li><a href="/profil#sectiune"><div><%- locals.utilizator.username %></div></a> </li>
+            <li><a href="/logout#logout">Logout</a></li>  <!-- ii facem un buton cu username-ul lui -->
         
             <% } else {%>
-              <a href="/loginpage">
+              <a href="/loginpage#login-page">
                 <img class="login" src="/resurse/imagini/login.png">Login
               </a>
         
               <% } %>
         
           <%if (locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){%>
-            <li><a href="/useri-online">Useri online</a></li>
-                    <li><a href="/useri">Useri</a></li>
+            <!-- <li><a href="/useri-online">Useri online</a></li> -->
+                    <li><a href="/useri#sectiune-useri">Useri</a></li>
                     <!-- <li><a href="/grafice">Grafice</a></li> -->
                     <li><a href="/comenzi">Comenzi</a></li> <!--aici intervine mongo,salvam facturile in mongo-->
               </ul>
@@ -63,28 +63,28 @@
 
               <li><div>Produse</div>
                 <ul>
-                  <li><a href="/produse">Toate</a></li>         
-                  <li><a href="/produse?tip=apa micelara">Apa micelara</a></li>
-                  <li><a href="/produse?tip=gel curatare">Gel de curatare</a></li>
-                  <li><a href="/produse?tip=toner">Toner</a></li>
-                  <li><a href="/produse?tip=exfoliant">Exfoliant</a></li>
-                  <li><a href="/produse?tip=crema ochi">Crema de ochi</a></li>
-                  <li><a href="/produse?tip=ser">Ser</a></li>
-                  <li><a href="/produse?tip=eye patch">Eye patch</a></li>
-                  <li><a href="/produse?tip=crema">Crema de fata</a></li>
-                  <li><a href="/produse?tip=masca faciala">Masca faciala</a></li>
-                  <li><a href="/produse?tip=spf">SPF</a></li>
+                  <li><a href="/produse#produse">Toate</a></li>         
+                  <li><a href="/produse?tip=apa micelara#produse">Apa micelara</a></li>
+                  <li><a href="/produse?tip=gel curatare#produse">Gel de curatare</a></li>
+                  <li><a href="/produse?tip=toner#produse">Toner</a></li>
+                  <li><a href="/produse?tip=exfoliant#produse">Exfoliant</a></li>
+                  <li><a href="/produse?tip=crema ochi#produse">Crema de ochi</a></li>
+                  <li><a href="/produse?tip=ser#produse">Ser</a></li>
+                  <li><a href="/produse?tip=eye patch#produse">Eye patch</a></li>
+                  <li><a href="/produse?tip=crema#produse">Crema de fata</a></li>
+                  <li><a href="/produse?tip=masca faciala#produse">Masca faciala</a></li>
+                  <li><a href="/produse?tip=spf#produse">SPF</a></li>
                   
                 </ul>
               </li> 
 
-              <li><div><a href="/inregistrare">Inregistrare</a></div></li>
+              <li><div><a href="/inregistrare#inregistrare">Inregistrare</a></div></li>
 
-              <li><div><a href="/tipurideten">Tipuri de ten</a></div></li>
+              <li><div><a href="/tipurideten#tipuri-de-ten">Tipuri de ten</a></div></li>
 
-              <li><div><a href="/quiz">Quiz</a></div></li>
+              <li><div><a href="/quiz#pagina-quiz">Quiz</a></div></li>
 
-              <li><div><a href="/cos-virtual"><span class="fas fa-regular fa-shopping-cart"></span></a></div></li>
+              <li><div><a href="/cos-virtual#cos-virtual"><span class="fas fa-regular fa-shopping-cart"></span></a></div></li>
           </ul>
       </nav>  
 

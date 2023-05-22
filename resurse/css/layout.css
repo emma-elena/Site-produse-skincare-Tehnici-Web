@@ -105,7 +105,33 @@ footer {
     text-align: center;
 }
 
-
+#sectiune{
+    grid-area: sectiune;
+}
+#sectiune-useri{
+    grid-area: sectiune-useri;
+}
+#produse{
+    grid-area: produse;
+}
+#logout{
+    grid-area: logout;
+}
+#login-page{
+    grid-area: login-page;
+}
+#cos-virtual{
+    grid-area: cos-virtual;
+}
+#inregistrare{
+    grid-area: inregistrare;
+}
+#tipuri-de-ten{
+    grid-area: tipuri-de-ten;
+}
+#pagina-quiz{
+    grid-area: quiz;
+}
 /* Aspect pagina in functie de dimensiune */
 
 @media screen and (min-width:1201px) {
