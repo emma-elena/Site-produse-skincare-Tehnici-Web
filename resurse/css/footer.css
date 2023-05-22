@@ -11,6 +11,7 @@ h2{
 }
 
 #grid-footer {
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
@@ -20,3 +21,7 @@ a:link { text-decoration: none;
 
 a:visited, a:active { text-decoration: none; 
                       color: inherit;}
+
+footer{
+    margin:0px;
+}

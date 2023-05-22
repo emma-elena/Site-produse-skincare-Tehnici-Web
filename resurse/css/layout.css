@@ -12,6 +12,7 @@ body {
     background-color: var(--culoare-pagina);
     --frunze: url(/resurse/imagini/fundal/frunze-light.jpg);
     --apa: url(/resurse/imagini/fundal/apa-light.jpg);
+    --frunza: url(/resurse/imagini/fundal/frunza-light.jpg);
     
 }
 .dark {
@@ -29,6 +30,7 @@ body {
     color:white;
     --frunze: url(/resurse/imagini/fundal/frunze-dark.jpg);
     --apa: url(/resurse/imagini/fundal/apa-dark.jpg);
+    
   }
 html {
     scroll-behavior: smooth;
@@ -79,12 +81,17 @@ footer {
 }
 #quiz {
     grid-area: quiz;
-}
-#galerie-statica {
-    grid-area: galerie-statica;
+    height: 100vh;
+    background-color: #f0f0f0; /* Set the background color */
     background-image: var(--frunze);
     background-repeat: no-repeat; /* Specify if the image should repeat */
     background-size: cover; /* Specify how the background image should be sized */
+}
+#galerie-statica {
+    grid-area: galerie-statica;
+    background-image: var(--frunza);
+    background-repeat: repeat; /* Specify if the image should repeat */
+    background-size:contain;
 }
 .text-center {
     text-align: center;
@@ -469,4 +476,9 @@ tr:hover {
 
   .afisaj{
     text-align: center;
+}
+
+h3{
+    text-align: center;
+    margin: 0;
 }
