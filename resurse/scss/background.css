@@ -13,6 +13,8 @@ header {
   overflow: hidden;
 }
 
+
+
 video {
   z-index: -1;
   width: 100%;
@@ -30,6 +32,142 @@ h1 {
   padding-top: 50px; /* Adjust the padding as needed */
 }
 
-.login{
+
+
+
+
+body {
+  --inaltime-menu:40px;
+  --latime-buton:250px;
+  --culoare-menu:  rgba(106,226,247, 0.5);
+  --culoare-menu-selectat: #567175;
+  --latime-bord-menu:0px ;
+  --culoare-text: black;
+}
+
+.nav {
+  height: var(--inaltime-menu);
+  background-color: var(--culoare-menu);
+  overflow: visible;
   position: relative;
+  float: left;
+  width: auto;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+}
+
+.dark {
+  --culoare-menu: rgba(67, 144, 157, 0.5);
+  --culoare-menu-selectat: #567175;
+  --culoare-text: rgb(219, 219, 219);
+}
+
+ul.menu > li, ul.menu ul li {
+  height: var(--inaltime-menu);
+  width: var(--latime-buton);
+}
+
+ul.menu div, ul.menu a {
+  color: var(--culoare-text);
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+ul.menu {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+ul.menu ul {
+  list-style-type: none;
+  z-index: 10px; /*z-index nu se aplica pe elemente pozitionate static*/
+  position: relative;
+  left: -1px;
+  padding: 0;
+  margin: 0;
+  transform: scale(0.5, 0);
+  display: none;
+}
+ul.menu li {
+  cursor: pointer;
+  background-color: var(--culoare-menu);
+  transition: all 0.3s linear;
+}
+ul.menu li:hover {
+  display: block;
+}
+ul.menu li div {
+  transition: font-size 0.3s linear;
+}
+ul.menu li div:hover {
+  font-size: 20px;
+}
+ul.menu li > a{
+  display: block;
+  width: 100%;
+  position: relative;
+}
+ul.menu li > a::before{
+  display: block;
+  position: absolute;
+  left : 0;
+  top: 0;
+  width: 10px;
+  height: 0;
+  content: " ";
+  opacity: 0;
+  transition: all 0.3s linear;
+  background-image: linear-gradient(to right, rgb(47, 168, 199), rgb(197, 231, 235));
+}
+ul.menu li > a:hover::before{
+  opacity: 1;        
+  height: var(--inaltime-menu);
+}
+ul.menu li > a::after{
+  display: block;
+  position: absolute;
+  right : 0;
+  top: 0;
+  width: 10px;
+  height: 0;
+  content: " ";
+  opacity: 0;
+  transition: all 0.3s linear;
+  background-image: linear-gradient(to right, rgb(197, 231, 235), rgb(47, 168, 199));
+}
+ul.menu li > a:hover::after{
+  opacity: 1;        
+  height: var(--inaltime-menu);
+}
+ul.menu li:hover ul {
+  animation-name: animatie_submenu;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  transform: scale(1, 0);
+  transform-origin: 50% 0;
+  opacity: 0;
+  display: block;
+}
+ul.menu > li {
+  overflow: hidden; /*overflow: se ocupa de ce iese din continutul elementului*/
+  line-height: var(--inaltime-menu); /*impinge ce e jos in overflow*/
+  vertical-align: middle; /*aliniez la mijlocul liniei de text, acesta este doar pe linia de text*/
+  text-align: center;
+}
+ul.menu > li:hover {
+  overflow: visible;
+}
+@keyframes animatie_submenu {
+  50% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
 }

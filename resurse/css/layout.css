@@ -433,7 +433,8 @@ tr:hover {
   .checkbox-label {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
+    margin-top: 200px;
     z-index: 9999;
     background-color: #111;
     width: 50px;
