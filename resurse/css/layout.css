@@ -13,7 +13,11 @@ body {
     --frunze: url(/resurse/imagini/fundal/frunze-light.jpg);
     --apa: url(/resurse/imagini/fundal/apa-light.jpg);
     --frunza: url(/resurse/imagini/fundal/frunza-light.jpg);
-    
+
+    --fundal:url(/resurse/imagini/fundal/fundal.jpg);
+    background-image: var(--fundal);
+    background-repeat: repeat; /* Specify if the image should repeat */
+    background-size:contain; /* Specify how the background image should be sized */
 }
 .dark {
     --culoare-background: #293031;
@@ -30,7 +34,7 @@ body {
     color:white;
     --frunze: url(/resurse/imagini/fundal/frunze-dark.jpg);
     --apa: url(/resurse/imagini/fundal/apa-dark.jpg);
-    
+   
   }
 html {
     scroll-behavior: smooth;
@@ -40,9 +44,9 @@ html {
 header {
     background-color: var(--culoare-footer-si-header);
 }
-main {
+/* main {
     background-color: var(--culoare-sectiuni);
-}
+} */
 footer {
     background-color: var(--culoare-footer-si-header);
 }
