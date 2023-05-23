@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+	<head>
+		<meta name="description" content="Cofetaria Dulcelind - Logout">
+        <meta name="keywords" content="cofetarie, Dulcelind, logout">
+		<title>Contact</title>
+		<%- include("../fragmente/head") %>
+		<link rel="stylesheet" type="text/css" href="/resurse/css/contact.css" />
+	</head>
+	<body>
+			<%- include("../fragmente/header") %>
+		<main>
+			<h2>Pagina dedicata forumului, pentru discutii intre clienti sau cei curiosi</h2>
+            <form method="post" action="/contact">
+                <label><br/>
+                    <textarea cols="30" rows="5" name="mesaj" placeholder="Scrieți un mesaj"></textarea>
+                </label><br/>
+                <input class="button" type="submit" value="Trimite">
+            </form>
+
+			<section>
+				<h3 style="text-align: left;">Mesaje:</h3>
+				<% if (locals.mesaje) {
+					var mesajeSort=locals.mesaje.sort(function(a,b) {return (new Date(b.attributes.data)).getTime()-(new Date(a.attributes.data)).getTime()})
+					
+					for (let msg of mesajeSort) { 
+						let dt=new Date(msg.attributes.data);
+						%>
+						<article class="mesaj-c">
+							<h3><span class="username"><%= msg.attributes.username%></span></h3>
+							<p><%= msg.elements[0].text %></p>
+							<p><small><time datetime="<%= dt.getUTCDate() %>"><%= dt.toLocaleString('ro-RO', {
+														weekday: 'long', 
+														day: 'numeric',
+														year: 'numeric', 
+														month: 'long', 
+														hour: 'numeric',
+														minute: 'numeric', 
+														second: 'numeric',
+													}) %></time></small>
+							</p>
+						</article>
+					<% } %>
+				<% } %>
+			</section>
+		</main>
+		
+		<%- include("../fragmente/footer") %>
+		
+	</body>
+</html>

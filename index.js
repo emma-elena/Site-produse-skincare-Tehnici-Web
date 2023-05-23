@@ -26,7 +26,7 @@ var instantaBD = AccesBD.getInstanta({ init: "local" });
 var client = instantaBD.getClient();
 
 app = express(); //cream server
-
+app.use(["/contact"], express.urlencoded({extended:true}));
 //tratez proprietatea body din cadrul fetch-ului si il pun sa il vada ca pe un obiect, nu ca pe un string cu express.json
 app.use(["/produse_cos", "/cumpara"], express.json({ limit: '2mb' }));//obligatoriu de setat pt request body de tip json
 
@@ -765,6 +765,98 @@ app.post("/sterge_utiliz", function (req, res) {
     }
 })
 
+
+
+
+caleXMLMesaje="resurse/xml/contact.xml";
+headerXML=`<?xml version="1.0" encoding="utf-8"?>`;
+function creeazaXMlContactDacaNuExista(){
+    if (!fs.existsSync(caleXMLMesaje)){
+        let initXML={
+            "declaration":{
+                "attributes":{
+                    "version": "1.0",
+                    "encoding": "utf-8"
+                }
+            },
+            "elements": [
+                {
+                    "type": "element",
+                    "name":"contact",
+                    "elements": [
+                        {
+                            "type": "element",
+                            "name":"mesaje",
+                            "elements":[]                            
+                        }
+                    ]
+                }
+            ]
+        }
+        let sirXml=xmljs.js2xml(initXML,{compact:false, spaces:4});//obtin sirul xml (cu taguri)
+        console.log(sirXml);
+        fs.writeFileSync(caleXMLMesaje,sirXml);
+        return false; //l-a creat
+    }
+    return true; //nu l-a creat acum
+}
+
+
+function parseazaMesaje(){
+    let existaInainte=creeazaXMlContactDacaNuExista();
+    let mesajeXml=[];
+    let obJson;
+    if (existaInainte){
+        let sirXML=fs.readFileSync(caleXMLMesaje, 'utf8');
+        obJson=xmljs.xml2js(sirXML,{compact:false, spaces:4});
+        
+
+        let elementMesaje=obJson.elements[0].elements.find(function(el){
+                return el.name=="mesaje"
+            });
+        let vectElementeMesaj=elementMesaje.elements?elementMesaje.elements:[];// conditie ? val_true: val_false
+        console.log("Mesaje: ",obJson.elements[0].elements.find(function(el){
+            return el.name=="mesaje"
+        }))
+        let mesajeXml=vectElementeMesaj.filter(function(el){return el.name=="mesaj"});
+        return [obJson, elementMesaje,mesajeXml];
+    }
+    return [obJson,[],[]];
+}
+
+
+app.get("/contact", function(req, res){
+    let obJson, elementMesaje, mesajeXml;
+    [obJson, elementMesaje, mesajeXml] =parseazaMesaje();
+
+    res.render("pagini/contact",{ utilizator:req.session.utilizator, mesaje:mesajeXml})
+});
+
+app.post("/contact", function(req, res){
+    let obJson, elementMesaje, mesajeXml;
+    [obJson, elementMesaje, mesajeXml] =parseazaMesaje();
+        
+    let u= req.session.utilizator?req.session.utilizator.username:"anonim";
+    let mesajNou={
+        type:"element", 
+        name:"mesaj", 
+        attributes:{
+            username:u, 
+            data:new Date()
+        },
+        elements:[{type:"text", "text":req.body.mesaj}]
+    };
+    if(elementMesaje.elements)
+        elementMesaje.elements.push(mesajNou);
+    else 
+        elementMesaje.elements=[mesajNou];
+    console.log(elementMesaje.elements);
+    let sirXml=xmljs.js2xml(obJson,{compact:false, spaces:4});
+    console.log("XML: ",sirXml);
+    fs.writeFileSync("resurse/xml/contact.xml",sirXml);
+    
+    res.render("pagini/contact",{ utilizator:req.session.utilizator, mesaje:elementMesaje.elements})
+});
 
 
 
