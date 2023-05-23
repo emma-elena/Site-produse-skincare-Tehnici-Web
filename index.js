@@ -26,7 +26,7 @@ var instantaBD = AccesBD.getInstanta({ init: "local" });
 var client = instantaBD.getClient();
 
 app = express(); //cream server
-app.use(["/contact"], express.urlencoded({extended:true}));
+app.use(["/forum"], express.urlencoded({extended:true}));
 //tratez proprietatea body din cadrul fetch-ului si il pun sa il vada ca pe un obiect, nu ca pe un string cu express.json
 app.use(["/produse_cos", "/cumpara"], express.json({ limit: '2mb' }));//obligatoriu de setat pt request body de tip json
 
@@ -768,9 +768,9 @@ app.post("/sterge_utiliz", function (req, res) {
 
 
 
-caleXMLMesaje="resurse/xml/contact.xml";
+caleXMLMesaje="resurse/xml/forum.xml";
 headerXML=`<?xml version="1.0" encoding="utf-8"?>`;
-function creeazaXMlContactDacaNuExista(){
+function creeazaXMlforumDacaNuExista(){
     if (!fs.existsSync(caleXMLMesaje)){
         let initXML={
             "declaration":{
@@ -782,7 +782,7 @@ function creeazaXMlContactDacaNuExista(){
             "elements": [
                 {
                     "type": "element",
-                    "name":"contact",
+                    "name":"forum",
                     "elements": [
                         {
                             "type": "element",
@@ -803,7 +803,7 @@ function creeazaXMlContactDacaNuExista(){
 
 
 function parseazaMesaje(){
-    let existaInainte=creeazaXMlContactDacaNuExista();
+    let existaInainte=creeazaXMlforumDacaNuExista();
     let mesajeXml=[];
     let obJson;
     if (existaInainte){
@@ -825,14 +825,14 @@ function parseazaMesaje(){
 }
 
 
-app.get("/contact", function(req, res){
+app.get("/forum", function(req, res){
     let obJson, elementMesaje, mesajeXml;
     [obJson, elementMesaje, mesajeXml] =parseazaMesaje();
 
-    res.render("pagini/contact",{ utilizator:req.session.utilizator, mesaje:mesajeXml})
+    res.render("pagini/forum",{ utilizator:req.session.utilizator, mesaje:mesajeXml})
 });
 
-app.post("/contact", function(req, res){
+app.post("/forum", function(req, res){
     let obJson, elementMesaje, mesajeXml;
     [obJson, elementMesaje, mesajeXml] =parseazaMesaje();
         
@@ -853,9 +853,9 @@ app.post("/contact", function(req, res){
     console.log(elementMesaje.elements);
     let sirXml=xmljs.js2xml(obJson,{compact:false, spaces:4});
     console.log("XML: ",sirXml);
-    fs.writeFileSync("resurse/xml/contact.xml",sirXml);
+    fs.writeFileSync("resurse/xml/forum.xml",sirXml);
     
-    res.render("pagini/contact",{ utilizator:req.session.utilizator, mesaje:elementMesaje.elements})
+    res.render("pagini/forum",{ utilizator:req.session.utilizator, mesaje:elementMesaje.elements})
 });
 
 
