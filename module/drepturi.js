@@ -6,7 +6,7 @@
  @property {Symbol} stergereUtilizatori Dreptul de a sterge un utilizator
  @property {Symbol} cumparareProduse Dreptul de a cumpara
 
- @property {Symbol} vizualizareGrafice Dreptul de a vizualiza graficele de vanzari
+ @property {Symbol} stergeMesaj 
  */
 
 
@@ -23,7 +23,7 @@ const Drepturi = {
 	vizualizareUtilizatori: Symbol("vizualizareUtilizatori"),
 	stergereUtilizatori: Symbol("stergereUtilizatori"),
 	cumparareProduse: Symbol("cumparareProduse"),
-	vizualizareGrafice: Symbol("vizualizareGrafice")
+	stergeMesaj: Symbol("stergeMesaj")
 }
 
 module.exports=Drepturi;
