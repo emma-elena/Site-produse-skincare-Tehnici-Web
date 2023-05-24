@@ -39,6 +39,7 @@ class RolModerator extends Rol{
     static get drepturi() { return [
         Drepturi.vizualizareUtilizatori,
         Drepturi.stergereUtilizatori,
+        Drepturi.vizualizareForum,
         Drepturi.stergeMesaj
     ] }
     constructor (){
@@ -49,7 +50,8 @@ class RolModerator extends Rol{
 class RolClient extends Rol{
     static get tip() {return "comun"}
     static get drepturi() { return [
-        Drepturi.cumparareProduse
+        Drepturi.cumparareProduse,
+        Drepturi.vizualizareForum
     ] }
     constructor (){
         super()

@@ -187,7 +187,7 @@ app.all("/*", function (req, res, next) { //all pt toate tipurile de cereri
         //ip_gasit obiect cu doua propr: data ultimei accesari a acelei pagini si de cate ori a accesat acea pagina in intervalul de 10 secunde
         if ((timp_curent - ip_gasit.data) < 10000) {//diferenta e in milisecunde; verific daca ultima accesare a fost pana in 10 secunde
             if (ip_gasit.nr > 15) {//mai mult de 10 cereri 
-                res.send("<h1>Prea multe cereri intr-un interval scurt. Ia te rog sa fii cuminte, da?!</h1>");
+                res.send("<h1>Foarte multe cereri intr-un interval de timp prea scurt!</h1>");
                 ip_gasit.data = timp_curent
                 return;
             }
@@ -826,10 +826,14 @@ function parseazaMesaje(){
 
 
 app.get("/forum", function(req, res){
+    if (req?.utilizator?.areDreptul?.(Drepturi.vizualizareForum)) {
     let obJson, elementMesaje, mesajeXml;
     [obJson, elementMesaje, mesajeXml] =parseazaMesaje();
 
     res.render("pagini/forum",{ utilizator:req.session.utilizator, mesaje:mesajeXml})
+    } else {
+        renderError(res, 4);
+    }
 });
 
 app.post("/forum", function(req, res){
@@ -855,7 +859,8 @@ app.post("/forum", function(req, res){
     console.log("XML: ",sirXml);
     fs.writeFileSync("resurse/xml/forum.xml",sirXml);
     
-    res.render("pagini/forum",{ utilizator:req.session.utilizator, mesaje:elementMesaje.elements})
+    res.render("pagini/forum",{ utilizator:req.session.utilizator, mesaje:elementMesaje.elements})  
+    
 });
 
 

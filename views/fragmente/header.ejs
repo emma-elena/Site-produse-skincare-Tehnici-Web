@@ -84,8 +84,12 @@
 
               <li><div><a href="/quiz#pagina-quiz">Quiz</a></div></li>
 
+              <%if (locals?.utilizator?.areDreptul?.(Drepturi.vizualizareForum)){%>
               <li><div><a href="/forum#forum">Forum</a></div></li>
-
+              <% } else {%>
+                <li><div><a href="/forum#forum">Forum</a></div></li>
+          
+                <% } %>
               <li><div><a href="/cos-virtual#cos-virtual"><span class="fas fa-regular fa-shopping-cart"></span></a></div></li>
           </ul>
       </nav>  
