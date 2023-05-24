@@ -92,7 +92,7 @@ main{
 
 .selecteaza-cos{
     display: inline-block;
-    background-color: var(--culoare-mov);
+    background-color: rgba(0, 128, 0, 0.534);
     position:absolute;
     bottom:0.5rem;
     right:0.5rem;
