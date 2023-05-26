@@ -143,6 +143,9 @@ footer {
 #forum{
     grid-area: forum;
 }
+#pagina-favorite{
+    grid-area: pagina-favorite;
+}
 /* Aspect pagina in functie de dimensiune */
 
 @media screen and (min-width:1201px) {

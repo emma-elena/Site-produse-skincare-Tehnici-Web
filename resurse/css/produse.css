@@ -103,7 +103,25 @@ main{
 }
 
 .selecteaza-cos:hover{
-    background-color: var(--cl-marcare);
+    background-color: rgba(103, 192, 103, 0.534);
+    
+    border:1px solid  var(--culoare-mov);
+}
+
+
+.selecteaza-favorite{
+    display: inline-block;
+    background-color: rgba(233, 45, 155, 0.534);
+    position:relative;
+    bottom:0.5rem;
+    left:0.5rem;
+    border-radius: 0.5rem;
+    padding:0.3rem;
+    border:1px solid transparent;
+}
+
+.selecteaza-favorite:hover{
+    background-color: rgba(200, 96, 157, 0.534);
     
     border:1px solid  var(--culoare-mov);
 }

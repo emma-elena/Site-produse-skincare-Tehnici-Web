@@ -20,9 +20,9 @@ window.addEventListener("load", function(){
  
     //vreau sa trec prin fiecare checkbox corespunzator unui produs din cosul virtual pt ca as vrea sa se pastreze datele, produsele selectate   
     for(let idp of iduriProduse){
-        let ch = document.querySelector(`[value='${idp}'].select-cos`);
-        if(ch){
-            ch.checked=true; //daca exista checkbox-ul atunci il bifam
+        let chk = document.querySelector(`[value='${idp}'].select-cos`);
+        if(chk){
+            chk.checked=true; //daca exista checkbox-ul atunci il bifam
         }
         else{
             console.log("Id cos virtual inexistent:", idp);
@@ -38,9 +38,9 @@ window.addEventListener("load", function(){
     let checkboxuri = document.getElementsByClassName("select-cos");
 
     //let creeaza o instanta de fiecare data cand face o noua iteratie a for-ului
-    for(let ch of checkboxuri){ 
+    for(let chk of checkboxuri){ 
         //ce se intampla la schimbarea unui astfel de checkbox
-        ch.onchange=function(){
+        chk.onchange=function(){
             //  bifat/nebifat
             //trebuie sa obtin vector de produse ca sa adaug sau sa sterg 
 
@@ -72,6 +72,92 @@ window.addEventListener("load", function(){
 
 
  
+
+    let idProduseFavorite=localStorage.getItem("pagina_favorite");
+
+    //daca am ceva in iduriProduse, nu e null, getItem a returnat ceva, atunci facem split (ce era inainte string devine vector)
+    idProduseFavorite=idProduseFavorite?idProduseFavorite.split(","):[];     //["3", "1", "10", "4"]
+ 
+    //vreau sa trec prin fiecare checkbox corespunzator unui produs din cosul virtual pt ca as vrea sa se pastreze datele, produsele selectate   
+    for(let id of idProduseFavorite){
+        let ch = document.querySelector(`[value='${id}'].select-favorite`);
+        if(ch){
+            ch.checked=true; //daca exista checkbox-ul atunci il bifam
+        }
+        else{
+            console.log("Id inexistent:", id);
+        }
+    }
+
+
+
+
+
+
+//adaugare date in cos virtual (din localStorage)
+  //daca avem clasa select-cos pe mai multe elemente nu mai merge sa facem asa cu getElementsByClassName, facem cu un querySelectorAll, scriem asa ca sa nu depinda de tipul de input(checkbox)
+  let chboxuri = document.getElementsByClassName("select-favorite");
+
+  //let creeaza o instanta de fiecare data cand face o noua iteratie a for-ului
+  for(let ch of chboxuri){ 
+      //ce se intampla la schimbarea unui astfel de checkbox
+      ch.onchange=function(){
+          //  bifat/nebifat
+          //trebuie sa obtin vector de produse ca sa adaug sau sa sterg 
+
+          let idProduseFavorite=localStorage.getItem("pagina_favorite");
+          idProduseFavorite=idProduseFavorite?idProduseFavorite.split(","):[];
+
+          //verific daca in urma schimbarii starii checkbox-ului e bifat sau nu
+          if(this.checked){ //daca e bifat vreau sa adaug in vectorul de produse si produsul curent
+            idProduseFavorite.push(this.value);  //push adauga la final id-ul elementului
+          }
+          else{
+              //sterg produsul dupa ce i-am gasit pozitia
+              let poz=idProduseFavorite.indexOf(this.value);
+
+              //daca pozitia e -1 inseamna ca nu a gasit valoarea in vectorul de id-uri
+              if(poz != -1){ //daca chiar l-a gasit atunci ma apuc sa il sterg
+                idProduseFavorite.splice(poz,1); //splice pentru a sterge si pentru a adauga elemente
+                          //pozitia de la care sterge elementul apoi cate elemente sa stearga, e un sg id pe care vreau sa il sterg; al treilea parametru imi arata ce sa pun in loc, dar in cazul asta nu e nevoie
+                  }
+          }
+
+          //setez cosul virtual cu noua valoare din iduriProduse
+          localStorage.setItem("pagina_favorite", idProduseFavorite.join(","));    
+          //o sa apara stringul cu tot cu [] si nu vreau sa le pastreze, pentru a evita sa mai fac un subsir care stere prima [, apoi ultima ]
+          //din vector fac sir, fac cu opusul lui split care e join si ia toate elem din iduriProduse si concateneaza intre ele cu ,
+      }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     document.getElementById("inp-pret").onchange=function(){
