@@ -3,7 +3,7 @@ window.addEventListener("load", function () {
   
 	if (prod_sel) {
 	  var vect_ids = prod_sel.split(",");
-	  
+  
 	  fetch("/produse_cos", {
 		method: "POST",
 		headers: { 'Content-Type': 'application/json' },
@@ -20,8 +20,15 @@ window.addEventListener("load", function () {
 		console.log(objson);
   
 		let main = document.getElementsByTagName("main")[0];
+  
+		// Creează un element div pentru borderul separat
+		let borderDiv = document.createElement("div");
+		borderDiv.style.border = "0.5px solid black";
+		borderDiv.style.padding = "10px";
+		borderDiv.style.marginBottom = "10px";
+  
 		let btn = document.getElementById("cumpara");
-		let suma = 0; // Variabila pentru stocarea sumei
+		let sumaProduse = 0; // Variabila pentru stocarea sumei produselor
   
 		for (let prod of objson) {
 		  let article = document.createElement("article");
@@ -39,12 +46,21 @@ window.addEventListener("load", function () {
 		  article.appendChild(descriere);
 		  main.insertBefore(article, btn);
   
-		  suma += parseFloat(prod.pret); // Adăugați prețul la suma totală
+		  sumaProduse += parseFloat(prod.pret); // Adăugați prețul la suma produselor
 		}
   
-		let sumElement = document.createElement("p"); // Creează un element <p> pentru afișarea sumei
-		sumElement.innerHTML = "Suma totală: " + suma.toFixed(2); // Afiseaza suma cu 2 zecimale
-		main.insertBefore(sumElement, btn); // Inserează elementul înaintea butonului de cumpărare
+		let transportCost = 0;
+		if (sumaProduse > 100 && sumaProduse <= 150) {
+		  transportCost = 0;
+		} else if (sumaProduse <= 100) {
+		  transportCost = 10;
+		}
+  
+		let sumElement = document.createElement("p"); // Creează un element <p> pentru afișarea sumei totale
+		let sumaTotala = sumaProduse + transportCost;
+		sumElement.innerHTML = "Total partial: " + sumaProduse.toFixed(2) + " lei<br>Transport: " + transportCost.toFixed(2) + " lei<br>Suma totală: " + sumaTotala.toFixed(2) + " lei"; // Afiseaza sumele cu 2 zecimale
+		borderDiv.appendChild(sumElement); // Adaugă elementul în div-ul pentru border
+		main.insertBefore(borderDiv, btn); // Inserează div-ul înaintea butonului de cumpărare
 	  })
 	  .catch(function (err) { console.log(err) });
   
