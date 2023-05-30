@@ -474,8 +474,8 @@ app.post("/cumpara", function (req, res) {
                 console.log(rezFactura);
                 let numeFis = `./temp/factura${(new Date()).getTime()}.pdf`;
                 genereazaPdf(rezFactura, numeFis, function (numeFis) {
-                    mesajText = `Stimate ${req.session.utilizator.username} aveti mai jos rezFactura.`;
-                    mesajHTML = `<h2>Stimate ${req.session.utilizator.username},</h2> aveti mai jos rezFactura.`;
+                    mesajText = `Stimate ${req.session.utilizator.username} aveti atasat documentul cu datele de facturare.`;
+                    mesajHTML = `<h2>Stimate ${req.session.utilizator.username},</h2> aveti atasat documentul cu datele de facturare.`;
                     req.utilizator.trimiteMail("Factura", mesajText, mesajHTML, [{
                         filename: "factura.pdf",
                         content: fs.readFileSync(numeFis)

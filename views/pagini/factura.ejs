@@ -3,55 +3,90 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>Factură</title>
-		
-		<link rel="stylesheet" href="<%- locals.protocol%><%- locals.domeniu %>/resurse/css/factura.css" type="text/css">
-		<script src="<%- locals.protocol%><%- locals.domeniu %>/resurse/js/factura.js"></script>
+		<style>
+			.container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.emblema {
+				width: 100px;
+				height: auto;
+				margin: 10px;
+			}
+
+			.titlu {
+				margin-bottom: 20px;
+			}
+
+			.produse {
+				margin-bottom: 20px;
+			}
+
+			.suma-totala {
+				margin-top: 20px;
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Factură</h1>
-		<p>Stimate domn/doamna <%-locals.utilizator.nume %>, aveți aici lista produselor achiziționate.</p> 
-		<div id="container-tabel">
-			<table id="tabl">
-				<thead>
-					<tr>
-						<th>Produs</th>
-						<th>Preț</th>
-						<th>QR</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<% 
-					var suma=0;
-					var transportCost = 0; // Define the transportCost variable
-					var sumaTotala = 0; // Define the sumaTotala variable
-					for (let prod of locals.produse) {
-						suma += parseFloat(prod.pret);
-						%>
+		<div class="container">
+			<img src="<%- locals.protocol%><%- locals.domeniu %>/resurse/imagini/emblema.jpg" alt="Emblemă" class="emblema">
+			<h1 class="titlu">Factură</h1>
+			<p>Stimate domn/doamnă <%-locals.utilizator.nume %>, aveți aici lista produselor achiziționate.</p> 
+
+			<div class="produse">
+				<table id="tabl">
+					<thead>
 						<tr>
-							<td><%- prod.nume %></td>
-							<td><%- prod.pret %></td>
-							<td><img src="<%- locals.protocol%><%- locals.domeniu %>/resurse/imagini/qrcode/<%- prod.id %>.png"></td>
+							<th>Produs</th>
+							<th>Preț</th>
 						</tr>
-					<% } %>
-				</tbody>
-				<tfoot>
-					<% // Calculate transportCost and sumaTotala based on the provided logic %>
-					<%
-					if (suma > 100) {
-						transportCost = 0;
-					} else if (suma <= 100) {
-						transportCost = 10;
-					}
+					</thead>
+					
+					<tbody>
+						<% 
+						var suma=0;
+						var transportCost = 0; // Define the transportCost variable
+						var sumaTotala = 0; // Define the sumaTotala variable
+						for (let prod of locals.produse) {
+							suma += parseFloat(prod.pret);
+							%>
+							<tr>
+								<td><%- prod.nume %></td>
+								<td><%- prod.pret %></td>
+							</tr>
+						<% } %>
+					</tbody>
+				</table>
+			</div>
 
-					sumaTotala = suma + transportCost;
-					%>
+			<div class="suma-totala">
+				<% // Calculate transportCost and sumaTotala based on the provided logic %>
+				<%
+				if (suma > 100) {
+					transportCost = 0;
+				} else if (suma <= 100) {
+					transportCost = 10;
+				}
 
-					<p>Total de plata: <%- suma %></p>
-					<p>Transport: <%- transportCost %></p>
-					<p>Suma totală: <%- sumaTotala %></p>
-				</tfoot>
-			</table>
+				sumaTotala = suma + transportCost;
+				%>
+
+				<p>Total de plată: <%- suma %> lei</p>
+				<p>Transport: <%- transportCost %> lei</p>
+				<p>Suma totală: <%- sumaTotala %> lei</p>
+			</div>
+
+			<p>Mulțumim pentru cumpărături!</p>
+
+			<div class="contact">
+				<p>Pentru orice întrebări sau nelămuriri, ne puteți contacta la:</p>
+				<p>Adresă site: skema.skm@gmail.ro</p>
+				<p>Telefon: 0737057469</p>
+			</div>
 		</div>
 	</body>
 </html>
