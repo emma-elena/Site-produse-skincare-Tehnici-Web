@@ -23,18 +23,33 @@
 				<tbody>
 					<% 
 					var suma=0;
+					var transportCost = 0; // Define the transportCost variable
+					var sumaTotala = 0; // Define the sumaTotala variable
 					for (let prod of locals.produse) {
-						suma+=parseFloat(prod.pret);
+						suma += parseFloat(prod.pret);
 						%>
 						<tr>
-							<td><%-  prod.nume %></td>
-							<td><%-  prod.pret %></td>
-							<td><img src="<%- locals.protocol%><%- locals.domeniu %>/resurse/imagini/qrcode/<%-  prod.id %>.png"></td>
+							<td><%- prod.nume %></td>
+							<td><%- prod.pret %></td>
+							<td><img src="<%- locals.protocol%><%- locals.domeniu %>/resurse/imagini/qrcode/<%- prod.id %>.png"></td>
 						</tr>
 					<% } %>
 				</tbody>
 				<tfoot>
-						<p>Total de plata: <%- suma %><p>
+					<% // Calculate transportCost and sumaTotala based on the provided logic %>
+					<%
+					if (suma > 100) {
+						transportCost = 0;
+					} else if (suma <= 100) {
+						transportCost = 10;
+					}
+
+					sumaTotala = suma + transportCost;
+					%>
+
+					<p>Total de plata: <%- suma %></p>
+					<p>Transport: <%- transportCost %></p>
+					<p>Suma totală: <%- sumaTotala %></p>
 				</tfoot>
 			</table>
 		</div>
