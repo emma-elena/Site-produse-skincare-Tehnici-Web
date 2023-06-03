@@ -33,9 +33,35 @@ p {
 	color: grey
 }
 
-;
 
-#container-tabel::after {
+/* 
+.suma-totala::after {
 	content: "Numar produse" counter(cnt);
 	display: block;
+} */
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.emblema {
+	width: 100px;
+	height: auto;
+	margin: 10px;
+}
+
+.titlu {
+	margin-bottom: 20px;
+}
+
+.produse {
+	margin-bottom: 20px;
+}
+
+.suma-totala {
+	margin-top: 20px;
 }
