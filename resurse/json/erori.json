@@ -9,7 +9,7 @@
             "identificator":404,
             "status":true,
             "titlu":"404 - Not found!",
-            "text": "Cererea nu a fost gasita!"
+            "text": "Pagina cautata nu a fost gasita! Verificati in bara de adrese URL-ul. Va multumim!"
         },
         {
             "identificator":403,

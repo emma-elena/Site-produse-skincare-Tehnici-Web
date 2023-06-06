@@ -311,16 +311,16 @@ client.connect();
 
 
 
-function createImages() {
-    var continutFisier = fs.readFileSync(__dirname + "/resurse/json/galerie.json").toString("utf8");   //fs e modulul cu care facem chestii cu fisierul: ex citire, scriere
-    var obiect = JSON.parse(continutFisier);
+function creazaGalerieImagini() {
+    var continutulDinFisier = fs.readFileSync(__dirname + "/resurse/json/galerie.json").toString("utf8");   //fs e modulul cu care facem chestii cu fisierul: ex citire, scriere
+    var obiect = JSON.parse(continutulDinFisier);
     var dim_mediu = 200;
     var dim_mic = 100;
 
     obGlobal.imagini = obiect.imagini;
 
     obGlobal.imagini.forEach(function (elem) {
-        [numeFisier, extensie] = elem.fisier.split(".")  //"briose-frisca.png" -> ["briose-frisca", "png"]
+        [nume, extensieImagine] = elem.fisier.split(".")  //"briose-frisca.png" -> ["briose-frisca", "png"]
 
         if (!fs.existsSync(obiect.cale_galerie + "/mediu/")) {
             fs.mkdirSync(obiect.cale_galerie + "/mediu/");
@@ -330,28 +330,28 @@ function createImages() {
             fs.mkdirSync(obiect.cale_galerie + "/mic/");
         }
 
-        elem.fisier_mediu = obiect.cale_galerie + "/mediu/" + numeFisier + ".webp";
-        elem.fisier_mic = obiect.cale_galerie + "/mic/" + numeFisier + ".webp";
+        elem.fisier_mediu = obiect.cale_galerie + "/mediu/" + nume + ".webp";
+        elem.fisier_mic = obiect.cale_galerie + "/mic/" + nume + ".webp";
         elem.fisier = obiect.cale_galerie + "/" + elem.fisier;
         sharp(__dirname + "/" + elem.fisier).resize(dim_mediu).toFile(__dirname + "/" + elem.fisier_mediu);
         sharp(__dirname + "/" + elem.fisier).resize(dim_mic).toFile(__dirname + "/" + elem.fisier_mic);
     });
     console.log(obGlobal.imagini);
 }
-createImages();
+creazaGalerieImagini();
 
 
 
 //citeste json si intoarce toate erorile intr-un obiect ca sa le putem folosi
-function createErrors() {
-    var continutFisier = fs.readFileSync(__dirname + "/resurse/json/erori.json").toString("utf8");  //readFileSync, ReadFile nu returneaza un string, ci un buffer de octeti, deci la final trebuie sa punem toString() pentru a transforma incoding in utf8
-    //console.log(continutFisier);
-    obGlobal.erori = JSON.parse(continutFisier);
+function creeazaEroarea() {
+    var continutulDinFisier = fs.readFileSync(__dirname + "/resurse/json/erori.json").toString("utf8");  //readFileSync, ReadFile nu returneaza un string, ci un buffer de octeti, deci la final trebuie sa punem toString() pentru a transforma incoding in utf8
+    //console.log(continutulDinFisier);
+    obGlobal.erori = JSON.parse(continutulDinFisier);
     //console.log(obErori.erori);
 }
-createErrors();
+creeazaEroarea();
 
-function renderError(res, identificator, titlu, text, imagine) {
+function randeazaError(res, identificator, titlu, text, imagine) {
     //in var eroare o sa primesc elementul cu identificatorul cautat
     var eroare = obGlobal.erori.info_erori.find(function (elem) { //in elem intra fiecare obiect din vectorul info_erori din erori.json
         //verificam pentru fiecare element daca e cel din parametru si returnam o valoare booleana, true/false 
@@ -408,7 +408,7 @@ app.get(["/produse"], function (req, res) {
         client.query("select * from  produse where 1=1 " + continuareQuery, function (err, rez) {
             if (err) {
                 console.log(err);
-                renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
+                randeazaError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
             }
             else
                 res.render("pagini/produse", { produse: rez.rows, optiuni: rezCategorie.rows });
@@ -678,7 +678,7 @@ app.post("/login", function (req, res) {
 app.post("/profil", function (req, res) {
     console.log("profil");
     if (!req.session.utilizator) {
-        renderError(res, 403,)
+        randeazaError(res, 403,)
         res.render("pagini/eroare_generala", { text: "Nu sunteti logat." });
         return;
     }
@@ -703,7 +703,7 @@ app.post("/profil", function (req, res) {
             function (err, rez) {
                 if (err) {
                     console.log(err);
-                    renderError(res, 2);
+                    randeazaError(res, 2);
                     return;
                 }
                 console.log(rez.rowCount);
@@ -743,7 +743,7 @@ app.get("/useri", function (req, res) {
         });
     }
     else {
-        renderError(res, 403);
+        randeazaError(res, 403);
     }
 });
 
@@ -761,7 +761,7 @@ app.post("/sterge_utiliz", function (req, res) {
             });
         });
     } else {
-        renderError(res, 403);
+        randeazaError(res, 403);
     }
 })
 
@@ -832,7 +832,7 @@ app.get("/forum", function(req, res){
 
     res.render("pagini/forum",{ utilizator:req.session.utilizator, mesaje:mesajeXml})
     } else {
-        renderError(res, 4);
+        randeazaError(res, 4);
     }
 });
 
@@ -890,7 +890,7 @@ app.get("/cod/:username/:token", function (req, res) {
                 function (err, rezUpdate) {
                     if (err || rezUpdate.rowCount == 0) {
                         console.log("Cod:", err);
-                        renderError(res, 3); //il trimite pe pagina de eroare daca nu e corect
+                        randeazaError(res, 3); //il trimite pe pagina de eroare daca nu e corect
                     }
 
                     else {
@@ -901,7 +901,7 @@ app.get("/cod/:username/:token", function (req, res) {
     }
     catch (e) {
         console.log(e);
-        renderError(res, 2);
+        randeazaError(res, 2);
     }
 });
 
@@ -911,7 +911,7 @@ app.get(["/produs/:id"], function (req, res) {
     client.query("select * from produse where id=" + req.params.id, function (err, rez) {
         if (err) {
             console.log(err);
-            renderError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
+            randeazaError(res, 2); //in caz ca am gresit query-ul sau baza de date nu merge din varii motive, va da aceasta eroare (2 din erori.json)
         }
         else
             res.render("pagini/produs", { prod: rez.rows[0] });
@@ -997,7 +997,7 @@ app.get('/favicon.ico', function (req, res) {
 
 
 app.get("/*.ejs", function (req, res) {
-    renderError(res, 403);
+    randeazaError(res, 403);
 });
 
 
@@ -1009,7 +1009,7 @@ app.get("/*", function (req, res) {
     res.render("pagini" + req.url, function (err, rezRandare) {
         if (err) {
             if (err.message.includes("Failed to lookup view")) {
-                renderError(res, 404);
+                randeazaError(res, 404);
             }
             else {
 
