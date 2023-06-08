@@ -82,7 +82,7 @@ class Utilizator{
        return crypto.scryptSync(parola,Utilizator.parolaCriptare, Utilizator.lungimeCod).toString("hex");
     }
 
-    salvareUtilizator(){
+    salvareDateUtilizatorNou(){
         let parolaCriptata=Utilizator.criptareParola(this.parola);
         let utiliz=this;
         let token=parole.genereazaToken(100);

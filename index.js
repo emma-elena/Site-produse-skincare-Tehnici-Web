@@ -33,7 +33,7 @@ app.use(["/produse_cos", "/produse_favorite", "/cumpara"], express.json({ limit:
 
 //creare foldere necesare (populate de aplicatie si utilizator)
 foldere = ["temp", "poze_uploadate"]; //lista cu folderele
-for (let folder of foldere) {
+for (let folder of foldere){
     let calefolder = path.join(__dirname, folder);
     if (!fs.existsSync(calefolder)) //daca nu exista folderul il creaza, dar nu strica codul cu nimic aceasta bucata daca folderul exista deja pt ca nu intra in if
         fs.mkdirSync(calefolder);
@@ -506,7 +506,7 @@ app.post("/cumpara", function (req, res) {
         })
     }
     else {
-        res.send("Nu puteti cumpara daca nu sunteti logat sau nu aveti dreptul!");
+        res.send("Nu aveti posibilitatea de a achiziționa produsele din cos daca nu sunteti autentificat pe site sau nu aveti dreptul de a face asta!");
     }
 
 });
@@ -548,7 +548,7 @@ app.post("/inregistrare", function (req, res) {
             utilizNou.poza = campuriFisier.poza.originalFilename;
             Utilizator.getUtilizDupaUsername(campuriText.username, {}, function (u, parametru, eroareUser) {
                 if (eroareUser == -1) { //nu exista username-ul in BD
-                    utilizNou.salvareUtilizator();
+                    utilizNou.salvareDateUtilizatorNou();
                 }
                 else {
                     eroare += "Acest username exista deja";
