@@ -39,7 +39,6 @@
 			</div>
 
 			<div class="suma-totala">
-				<% // Calculate transportCost and sumaTotala based on the provided logic %>
 				<%
 				if (suma > 100) {
 					transportCost = 0;
@@ -48,6 +47,10 @@
 				}
 
 				sumaTotala = suma + transportCost;
+				if (sumaTotala > 200) {
+					let discount = sumaTotala * 0.1; 
+					sumaTotala -= discount;
+				}
 				%>
 
 				<p>Total de plată: <%- suma %> lei</p>

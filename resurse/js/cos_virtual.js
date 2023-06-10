@@ -50,7 +50,7 @@ window.addEventListener("load", function () {
 		}
   
 		let transportCost = 0;
-		if (sumaProduse > 100 && sumaProduse <= 150) {
+		if (sumaProduse > 100) {
 		  transportCost = 0;
 		} else if (sumaProduse <= 100) {
 		  transportCost = 10;
@@ -58,6 +58,10 @@ window.addEventListener("load", function () {
   
 		let sumElement = document.createElement("p"); // Creează un element <p> pentru afișarea sumei totale
 		let sumaTotala = sumaProduse + transportCost;
+		if (sumaTotala > 200) {
+			let discount = sumaTotala * 0.1; // Calculează 10% din suma totală
+			sumaTotala -= discount;
+		  }
 		sumElement.innerHTML = "Total partial: " + sumaProduse.toFixed(2) + " lei<br>Transport: " + transportCost.toFixed(2) + " lei<br>Suma totală: " + sumaTotala.toFixed(2) + " lei"; // Afiseaza sumele cu 2 zecimale
 		borderDiv.appendChild(sumElement); // Adaugă elementul în div-ul pentru border
 		main.insertBefore(borderDiv, btn); // Inserează div-ul înaintea butonului de cumpărare
