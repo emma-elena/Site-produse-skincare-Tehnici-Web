@@ -6,13 +6,16 @@ h3{
 #art-produs{
     margin:0 auto;
     width:70%;
-    max-width:700px;
+    height: auto;
     background-color: var(--cl-light-t);
     border-radius: 25px;
     box-shadow: 
     inset #059c8e 0 0 0 2px,
     inset #0cab9c 0 0 0 5px;
     padding:0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #art-produs p{
@@ -35,8 +38,8 @@ h3{
     text-align: center;
 }
 .imag-produs img{
-    width:50%;
-    height:auto;
+    max-width: 100%;
+    height: auto;
 }
 @media screen and (max-width: 700px){
     #art-produs{
@@ -44,3 +47,21 @@ h3{
         width:95%;
     }
 }
+
+.coloana1 {
+    width: 70%;
+}
+
+.coloana2 {
+    width: 30%;
+    text-align: right;
+}
+
+.descriere-container {
+    margin-top: 10px;
+}
+
+/* .imag-produs img {
+    max-width: 100%;
+    height: auto;
+} */
