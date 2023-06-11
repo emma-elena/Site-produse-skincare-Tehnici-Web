@@ -17,20 +17,107 @@
 
     <%- include("../fragmente/head.ejs") %>
   </head>
+
+<style>
+  .box {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 25px;
+    box-shadow: 
+    inset #059c8e 0 0 0 2px,
+    inset #0cab9c 0 0 0 5px;
+}
+
+.box img {
+  width: 300px;
+  height: 300px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width:700px) {
+  .box {
+  display: block;
+}
+
+.box img {
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+}
+}
+</style>
+
   <body>
    <%- include("../fragmente/header.ejs") %>
     <main id="tipuri-de-ten">
-        <p>
-      Aici avem tipuri de ten, informarii despre acestea si tipuri de produse pe care putem sa le folosim.
-        </p>
+<h2>Tipuri de ten</h3>
+          <div class="box">
+            <img src="resurse/imagini/gras.png" alt="Imagine 1">
+            <p>Pielea, cel mai mare organ al corpului uman, diferă de la om la om. De aceea, în funcție de notele ei distinctive, fiecare dintre noi are datoria de a o îngriji ca atare, pentru a arăta cât mai bine o perioadă îndelungată de timp, 
+              dar și pentru a menține sănătatea pielii. 
 
-        <video id="vid" width="420" height="340" controls="controls">
+              Când vine vorba de tenul gras, experții în domeniu din Asociația Academiei Americane de Dermatologie au constatat: „sebumul poate înfunda porii și poate duce 
+              la creșterea frecvenței erupțiilor de acnee”. Totuși, persoanele care au un astfel de ten se bucură de câteva părți bune, printre care se numără faptul că au pielea mai groasă și mai puține riduri. 
+              Toate aceste beneficii se datorează uleiului care ajută la conservarea pielii. 
+            </p>
+          </div>
+          
+          <div class="box">
+            <p>Numit și tipul de ten ”zona T”, se recunoaște ca un ten echilibrat, care prezintă exces de sebum doar în zona T, formată din zona frunții, bărbiei și pomeții. Excesul de sebum apare după mai mult de 3-4 ore de la curățarea tenului. Dacă spre după-amiază ai fruntea, nasul și bărbia mai lucioase, cu o piele ușor uleioasă, iar restul feței nu prezintă modificări, te încadrezi în această categorie.
+
+              Deoarece aspectul și calitățiile pielii diferă în funcție de zonele feței, acest tip de ten necesită o îngrijire diferențiată cu produse specifice fiecărei zone.
+            </p>
+            <img src="resurse/imagini/mixt.png" alt="Imagine 1">
+
+          </div>
+
+          <div class="box">
+            <img src="resurse/imagini/normal.png" alt="Imagine 1">
+            <p>Tenul normal este în general echilibrat, rareori apar coșuri sau puncte negre. Acest ten are o circulație bună, pielea nu este nici prea grasă nici prea uscată, nu prezintă pete sau urme roșii. 
+              Tenul normal reflectă starea de sănătate a organismului iar glandele sebacee secretă atât cât este nevoie. 
+              Acest tip de ten se întâlnește la copii înainte de pubertate și uneori și după 20 de ani – la persoanele cu un organism perfect sănătos.
+              Aspectul pielii este neted, ferm, cu pori foarte puțin vizibili, are o granulație fină, iar ridurile nu sunt vizibile. Pielea este suplă, catifelată, elastică. Deși nu necesită, în aparență, atenție acordată, 
+              odată cu înaintarea în vârstă pielea își pierde din atribute și caracteristici și trebuie îngrijit corespunzător. Recomandăm demachierea atât dimineața cât și seara, folosind produse ușoare și cu ingrediente naturale, 
+              sau o loțiune tonică fără alcool (ingredient despre care se stie că usucă tenul).
+              
+              
+            </p>
+          </div>
+
+          <div class="box">
+            <p>Uneori aspru, tern, rigid, un ten uscat este lipsit de elasticitate, are tendința de ridare, iritare sau chiar descuamare. Este caracterizat prin hipofuncția glandelor sebacee. 
+              Insuficiența de apă determină și pierderea de apă din straturile superioare ale pielii, ceea ce face să apară și o deshidratare superficială. În cazul unui ten uscat, vizitele la dermatolog trebuie să fie periodice, 
+              iar îngrijirea pielii trebuie să fie realizată doar cu produse special create pentru tenul uscat. Produsele create pentru ten uscat conțin o cantitate mai mare de umectanți, care contribuie la fortificarea barierei naturale scăzând pierderile de apă trans epidermale. 
+              Procesul prin care umectanții acționează este cât se poate de simplu: molecula de umectant are proprietatea de a atrage apă din orice altă substanță care se află în apropierea sa (pe scurt, extrag direct umezeala din aer în piele).
+              Cei mai populari umectanți sunt Aloe Vera, mierea de albine, glicerina, pro-vitamina B5, lactat de sodiu,
+             acidul hialuronic. Acidul hialuronic este un umectant fantastic, deținând până la 1000 de ori volumul său de umiditate, împiedicând evaporarea apei din piele.
+            </p>
+            <img src="resurse/imagini/uscat.png" alt="Imagine 1">
+
+          </div>
+
+          <div class="box">
+            <img src="resurse/imagini/sensitiv.png" alt="Imagine 1">
+            <p>Tenul sensibil este o afecțiune a pielii care poate fi caracterizată prin simptome precum roșeață, iritație, senzație de arsură, uscăciune, mâncărime sau senzație de strângere a pielii. 
+              Acest tip de ten poate fi cauzat de o varietate de factori, cum ar fi expunerea la agenți iritanți, utilizarea produselor cosmetice dure sau sensibilitatea crescută a pielii.
+              Oamenii cu ten sensibil trebuie să acorde o atenție specială îngrijirii pielii și să utilizeze produse care sunt formulate special pentru a ajuta la calmarea și hidratarea pielii.
+               În caz contrar, aceștia riscă să agraveze simptomele 
+              și să provoace apariția unor probleme de sănătate ale pielii, cum ar fi eczema sau dermatita.
+            </p>
+          </div>
+          
+        <!-- <video id="vid" width="420" height="340" controls="controls">
           <source src="resurse/video/videoclip.mp4" type="video/mp4">
           <source src="resurse/video/videoclip.ogv" type="video/ogv">
           <track default src="resurse/video/tracks/captions-video-ro.vtt" kind="captions" srclang="ro" label="romana"/>
           <track  src="resurse/video/tracks/captions-video-en.vtt" kind="captions" srclang="en" label="engleza" />
-         </video>
+         </video> -->
 
+
+         <p>Vreti sa aflati ce tip de ten aveti? Completati chestionarul<a href="/quiz"> <b style="color: green;">aici!</b></a></p>
          <a href="#" class="linktop"><div id="triunghi"></div></a> 
     </main>
 
