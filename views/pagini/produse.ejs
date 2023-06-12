@@ -7,12 +7,44 @@
         <title>Skincare Skema - produse</title>
         
         <script type="text/javascript" src=/resurse/js/produse.js></script>
+        
         <%- include("../fragmente/head") %>  
+        <style>
+            #myMessage {
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              padding: 20px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 18px;
+            }
+          </style>
+
+        <script>
+            window.addEventListener("DOMContentLoaded", function() {
+              var messageElement = document.createElement("div");
+              messageElement.id = "myMessage";
+              messageElement.textContent = "La comenzile cu valoarea peste 100 de lei aveti transport gratuit, iar la cele peste 200 de lei aveti automat o reducere de 10%! Shopping placut!";
+        
+              document.body.appendChild(messageElement);
+        
+              setTimeout(function() {
+                messageElement.style.display = "none";
+              }, 10000);
+            });
+          </script>
     </head>
     <body>
     <%- include("../fragmente/header") %>
-
+    <!-- <script>
+        window.onload = function(){
+            alert("Textul alertei aici");
+        }
+        </script> -->
     <main>
+        
         <label> Nume: <input type="text" id="inp-nume"></label>
         <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
         
@@ -28,7 +60,7 @@
                 <% } %>
             </select>
         </label>
-    
+        <button class="butonReduceri" onclick="showTermsModal()">Reduceri</button>
         <div class="button-grid"> 
             <button class="button" id="filtrare">Filtreaza</button> 
             <button class="button" id="resetare">Reseteaza</button><br/>
@@ -81,7 +113,7 @@
 
         <a href="#" class="linktop"><div id="triunghi"></div></a> 
     </main>
-
+    
     <%- include("../fragmente/footer") %>
     
     </body>
