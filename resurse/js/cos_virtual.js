@@ -32,23 +32,20 @@ window.addEventListener("load", function () {
 		let sumaProduse = 0; // Variabila pentru stocarea sumei produselor
   
 		for (let prod of objson) {
-		  let article = document.createElement("article");
-		  article.classList.add("cos-virtual");
-		  var h2 = document.createElement("p");
-		  h2.innerHTML = prod.nume;
-		  article.appendChild(h2);
-  
-		//   let imagine = document.createElement("img");
-		//   imagine.src = "/resurse/imagini/produse/" + prod.imagine;
-		//   article.appendChild(imagine);
-  
-		  let descriere = document.createElement("p");
-		  descriere.innerHTML = prod.descriere + " <b>Pret:</b>" + prod.pret;
-		  article.appendChild(descriere);
-		  main.insertBefore(article, btn);
-  
-		  sumaProduse += parseFloat(prod.pret); // Adăugați prețul la suma produselor
-		}
+			let article = document.createElement("article");
+			article.classList.add("cos-virtual");
+		  
+			// Element pentru nume produs și preț
+			var p = document.createElement("p");
+			p.innerHTML =  prod.nume + " | <b>Pret:</b> " + prod.pret + " lei";
+			article.appendChild(p);
+		  
+			main.insertBefore(article, btn);
+		  
+			sumaProduse += parseFloat(prod.pret); // Adăugați prețul la suma produselor
+		  }
+		  
+		  
   
 		let transportCost = 0;
 		if (sumaProduse > 100) {
