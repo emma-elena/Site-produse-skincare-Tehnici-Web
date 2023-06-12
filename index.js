@@ -474,13 +474,39 @@ app.post("/cumpara", function (req, res) {
                 console.log(rezFactura);
                 let numeFis = `./temp/factura${(new Date()).getTime()}.pdf`;
                 genereazaPdf(rezFactura, numeFis, function (numeFis) {
-                    mesajText = `Stimate ${req.session.utilizator.username} aveti atasat documentul cu datele de facturare.`;
-                    mesajHTML = `<h2>Stimate ${req.session.utilizator.username},</h2> aveti atasat documentul cu datele de facturare.`;
+                    let mesajText = `Dragă ${req.session.utilizator.username}, aveti mai jos datele de facturare.\n
+                    \nDatele dumneavoastra de facturare:
+                    \nNume: ${req.body.nume}
+                    \nPrenume: ${req.body.prenume}
+                    \nOras: ${req.body.oras}
+                    \nStrada: ${req.body.strada}
+                    \nNumarul strazii: ${req.body.numarulStrada}
+                    \nBloc: ${req.body.bloc || '-'}
+                    \nScara: ${req.body.scara || '-'}
+                    \nEtaj: ${req.body.etaj || '-'}
+                    \nApartament: ${req.body.apartament || '-'}
+                    \nNumar de telefon: ${req.body.nrtel}
+                    \nInformatii suplimentare: ${req.body.suplimentare || '-'}`;
+                    
+                    let mesajHTML = `<h2>Dragă ${req.session.utilizator.username}, aveti mai jos datele de facturare.</h2><br>
+                    <br>Datele dumneavoastra sunt:
+                    <br>Nume: ${req.body.nume}
+                    <br>Prenume: ${req.body.prenume}
+                    <br>Oras: ${req.body.oras}
+                    <br>Strada: ${req.body.strada}
+                    <br>Numarul strazii: ${req.body.numarulStrada}
+                    <br>Bloc: ${req.body.bloc || '-'}
+                    <br>Scara: ${req.body.scara || '-'}
+                    <br>Etaj: ${req.body.etaj || '-'}
+                    <br>Apartament: ${req.body.apartament || '-'}
+                    <br>Numar de telefon: ${req.body.nrtel}
+                    <br>Informatii suplimentare: ${req.body.suplimentare || '-'}`;
+
                     req.utilizator.trimiteMail("Factura", mesajText, mesajHTML, [{
-                        filename: "factura.pdf",
+                        filename: "facturaCumparaturi.pdf",
                         content: fs.readFileSync(numeFis)
                     }]);
-                    res.send("Totul e bine!");
+                    res.send("Totul a functionat bine!");
                 });
                 rez.rows.forEach(function (elem) { elem.cantitate = 1 });
                 let jsonFactura = {

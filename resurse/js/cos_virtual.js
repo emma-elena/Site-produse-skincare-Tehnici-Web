@@ -68,8 +68,24 @@ window.addEventListener("load", function () {
 	  })
 	  .catch(function (err) { console.log(err) });
   
+	  
+
 	  document.getElementById("cumpara").onclick = function () {
 		prod_sel = localStorage.getItem("cos_virtual");
+		var nume = document.getElementById("nume").value;
+	    var prenume = document.getElementById("prenume").value;
+	    var oras = document.getElementById("oras").value;
+		var strada = document.getElementById("strada").value;
+		var numarulStrada = document.getElementById("numarulStrada").value;
+		var bloc = document.getElementById("bloc").value;
+		var scara = document.getElementById("scara").value;
+		var etaj = document.getElementById("etaj").value;
+		var apartament = document.getElementById("apartament").value;
+		var nrtel = document.getElementById("nrtel").value;
+		var suplimentare = document.getElementById("suplimentare").value;
+
+
+
 		if (prod_sel) {
 		  var vect_ids = prod_sel.split(",");
 		  fetch("/cumpara", {
@@ -78,9 +94,19 @@ window.addEventListener("load", function () {
 			mode: 'cors',
 			cache: 'default',
 			body: JSON.stringify({
-			  ids_prod: vect_ids,
-			  a: 10,
-			  b: "abc"
+				nume: nume,
+			    prenume: prenume,
+			    oras: oras,
+				strada: strada,
+				numarulStrada: numarulStrada,
+				bloc: bloc,
+				scara: scara,
+				etaj: etaj,
+				apartament: apartament,
+				nrtel: nrtel,
+				suplimentare: suplimentare,
+			    ids_prod: vect_ids
+			  
 			})
 		  })
 		  .then(function (rasp) { console.log(rasp); return rasp.text() })

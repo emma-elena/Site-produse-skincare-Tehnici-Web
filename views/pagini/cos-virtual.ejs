@@ -12,10 +12,47 @@
     <%- include("../fragmente/header") %>
 
     <main id="cos-virtual">
-        
+        <form id="formular-cumparare">
+            <label for="nume">Nume:</label>
+            <input type="text" id="nume" name="nume" required>
+          
+            <label for="prenume">Prenume:</label>
+            <input type="text" id="prenume" name="prenume" required>
+          
+            <label for="oras">Oraș:</label>
+            <input type="text" id="oras" name="oras" required>
+
+            <label for="strada">Strada:</label>
+            <input type="text" id="strada" name="strada" required>
+
+            <label for="numarulStrada">Numarul:</label>
+            <input type="number" id="numarulStrada" name="numarulStrada" required>
+
+            <label for="bloc">Bloc:</label>
+            <input type="text" id="bloc" name="bloc">
+
+            <label for="scara">Scara:</label>
+            <input type="number" id="scara" name="scara" value="ex:3">
+
+            <label for="etaj">Etaj:</label>
+            <input type="number" id="etaj" name="etaj" value="ex:5">
+
+            <label for="apartament">Apartament:</label>
+            <input type="number" id="apartament" name="apartament" value="ex:7">
+
+            <label for="nrtel">Numarul de telefon:</label>
+            <input type="tel" id="nrtel" name="nrtel" required>
+
+            <label for="suplimentare">Informatii suplimentare:</label>
+            <input type="text" id="suplimentare" name="suplimentare" >
+        </form>  
+          
+          
+          
         <button id="cumpara" class="button">
             Cumpara
-        </button>        
+        </button> 
+        
         <a href="#" class="linktop"><div id="triunghi"></div></a> 
     </main>
 
