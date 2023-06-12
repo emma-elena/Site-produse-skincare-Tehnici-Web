@@ -16,25 +16,40 @@
               left: 50%;
               transform: translate(-50%, -50%);
               padding: 20px;
+              background-color:rgba(110, 216, 255, 0.444);
               border: 1px solid #ccc;
               border-radius: 5px;
-              font-size: 18px;
+              font-size: 22px;
+              font-weight: bold;
             }
+
+            #closeButton {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                padding: 5px 10px;
+                background-color: transparent;
+                color: rgb(249, 119, 119);
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+    }
           </style>
 
-        <script>
-            window.addEventListener("DOMContentLoaded", function() {
-              var messageElement = document.createElement("div");
-              messageElement.id = "myMessage";
-              messageElement.textContent = "La comenzile cu valoarea peste 100 de lei aveti transport gratuit, iar la cele peste 200 de lei aveti automat o reducere de 10%! Shopping placut!";
-        
-              document.body.appendChild(messageElement);
-        
-              setTimeout(function() {
-                messageElement.style.display = "none";
-              }, 10000);
-            });
-          </script>
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+      var messageElement = document.createElement("div");
+      messageElement.id = "myMessage";
+      messageElement.innerHTML = "La comenzile cu valoarea peste 100 de lei aveti transport gratuit, iar la cele peste 200 de lei aveti automat o reducere de 10%! Shopping placut! <button id='closeButton'>X</button>";
+
+      document.body.appendChild(messageElement);
+
+      var closeButton = document.getElementById("closeButton");
+      closeButton.addEventListener("click", function() {
+        messageElement.style.display = "none";
+      });
+    });
+  </script>
     </head>
     <body>
     <%- include("../fragmente/header") %>
