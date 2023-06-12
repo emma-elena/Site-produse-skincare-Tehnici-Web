@@ -23,9 +23,10 @@ window.addEventListener("load", function () {
   
 		// Creează un element div pentru borderul separat
 		let borderDiv = document.createElement("div");
+		borderDiv.style.display = "inline-block"; 
 		borderDiv.style.border = "0.5px solid black";
 		borderDiv.style.padding = "10px";
-		borderDiv.style.marginBottom = "10px";
+		borderDiv.style.margin = "10px";
   
 		let btn = document.getElementById("cumpara");
 		let sumaProduse = 0; // Variabila pentru stocarea sumei produselor
@@ -33,13 +34,13 @@ window.addEventListener("load", function () {
 		for (let prod of objson) {
 		  let article = document.createElement("article");
 		  article.classList.add("cos-virtual");
-		  var h2 = document.createElement("h2");
+		  var h2 = document.createElement("p");
 		  h2.innerHTML = prod.nume;
 		  article.appendChild(h2);
   
-		  let imagine = document.createElement("img");
-		  imagine.src = "/resurse/imagini/produse/" + prod.imagine;
-		  article.appendChild(imagine);
+		//   let imagine = document.createElement("img");
+		//   imagine.src = "/resurse/imagini/produse/" + prod.imagine;
+		//   article.appendChild(imagine);
   
 		  let descriere = document.createElement("p");
 		  descriere.innerHTML = prod.descriere + " <b>Pret:</b>" + prod.pret;

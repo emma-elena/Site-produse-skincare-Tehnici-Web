@@ -1,0 +1,61 @@
+#formular-cumparare {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100px;
+
+}
+
+#camp {
+    display: inherit;
+}
+
+label {
+    margin-right: 3px;
+}
+
+label[for]:after {
+    content: "*";
+    color: red;
+}
+
+@media screen and (max-width:1200px) {
+    #formular-cumparare {
+        grid-template-columns: 1fr 1fr;
+
+    }
+}
+
+@media screen and (max-width:700px) {
+    #formular-cumparare {
+        display: block;
+    }
+}
+
+#formular-cumparare {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100px;
+
+}
+
+#camp {
+    display: inherit;
+}
+
+label {
+    margin-right: 3px;
+}
+
+label[for]:after {
+    content: "*";
+    color: red;
+}
+
+
+@media screen and (max-width:700px) {
+    #formular-cumparare {
+        display: block;
+    }
+}
