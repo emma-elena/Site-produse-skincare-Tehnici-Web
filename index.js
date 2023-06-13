@@ -514,18 +514,41 @@ app.post("/cumpara", function (req, res) {
                     username: req.session.utilizator.username,
                     produse: rez.rows
                 }
-
+                let dateFacturare = {
+                    nume: req.body.nume,
+                    prenume: req.body.prenume,
+                    oras: req.body.oras,
+                    strada: req.body.strada,
+                    numarulStrada: req.body.numarulStrada,
+                    bloc: req.body.bloc || '-',
+                    scara: req.body.scara || '-',
+                    etaj: req.body.etaj || '-',
+                    apartament: req.body.apartament || '-',
+                    nrtel: req.body.nrtel,
+                    suplimentare: req.body.suplimentare || '-'
+                  };
                 //inseram factura in mongo
                 if (obGlobal.bdMongo) {
-                    obGlobal.bdMongo.collection("facturi").insertOne(jsonFactura, function (err, rezmongo) {
-                        if (err) console.log(err)
-                        else console.log("Am inserat factura in mongodb");
+                    obGlobal.bdMongo.collection("facturi").insertOne({
+                        data: new Date(),
+                        username: req.session.utilizator.username,
+                        produse: rez.rows,
+                        dateFacturare: dateFacturare
+                    }, function (err, rezmongo) {
+                        if (err) {
+                            console.log(err)
+                        }else {
+                            console.log("Am inserat factura in mongodb");
 
                         obGlobal.bdMongo.collection("facturi").find({}).toArray(
                             function (err, rezInserare) {
-                                if (err) console.log(err)
-                                else console.log(rezInserare);
-                            })
+                                if (err) {
+                                    console.log(err)
+                                } else {
+                                     console.log(rezInserare);
+                                    }
+                            });
+                        }
                     })
                 }
             }
